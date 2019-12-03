@@ -2,12 +2,39 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>devopsix</groupId>
     <artifactId>hamcrest-mail</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Hamcrest javax.mail Matchers</name>
+    
+    <name>Hamcrest Mail</name>
+    <url>https://github.com/devopsix/hamcrest-mail</url>
+    <description>Hamcrest javax.mail matchers for Java</description>
+    
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
+    <scm>
+        <connection>scm:git:git@github.com:devopsix/hamcrest-mail.git</connection>
+        <developerConnection>scm:git:git@github.com:devopsix/hamcrest-mail.git</developerConnection>
+        <url>https://github.com/devopsix/hamcrest-mail</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>devopsix</id>
+            <name>Dirk Weinhardt</name>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -40,7 +67,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -61,5 +88,17 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}</directory>
+                <targetPath>META-INF</targetPath>
+                <includes>
+                    <include>LICENSE.txt</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>
