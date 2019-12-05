@@ -45,7 +45,7 @@ import com.icegreen.greenmail.junit.GreenMailRule;
 
 /**
  * This class demonstrates how the Hamcrest Mail Matchers can be used together
- * with GreenMail for verifying headers of an email sent by an application.
+ * with GreenMail for verifying an email sent by an application.
  * 
  * GreenMail is an email server for testing purposes.
  * 
