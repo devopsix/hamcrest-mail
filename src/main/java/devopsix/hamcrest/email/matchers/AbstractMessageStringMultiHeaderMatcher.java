@@ -14,7 +14,6 @@ class AbstractMessageStringMultiHeaderMatcher extends AbstractMessageMultiHeader
 
     @Override
     protected Condition<Iterable<String>> values(Message message, Description mismatch) {
-        // TODO Auto-generated method stub
         return headerValues(message, mismatch);
     }
 }
