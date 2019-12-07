@@ -5,12 +5,13 @@
 
     <groupId>io.github.devopsix</groupId>
     <artifactId>hamcrest-mail</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+
     <name>Hamcrest Mail</name>
     <url>https://github.com/devopsix/hamcrest-mail</url>
     <description>Hamcrest javax.mail Matchers for Java</description>
-    
+
     <licenses>
         <license>
             <name>MIT</name>
@@ -19,12 +20,6 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:git@github.com:devopsix/hamcrest-mail.git</connection>
-        <developerConnection>scm:git:git@github.com:devopsix/hamcrest-mail.git</developerConnection>
-        <url>https://github.com/devopsix/hamcrest-mail</url>
-    </scm>
-
     <developers>
         <developer>
             <id>devopsix</id>
@@ -32,9 +27,23 @@
             <roles>
                 <role>Developer</role>
             </roles>
+            <timezone>Europe/Berlin</timezone>
         </developer>
     </developers>
-    
+
+    <scm>
+        <connection>scm:git:git@github.com:devopsix/hamcrest-mail.git</connection>
+        <developerConnection>scm:git:ssh://github.com:devopsix/hamcrest-mail.git</developerConnection>
+        <url>https://github.com/devopsix/hamcrest-mail</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -88,7 +97,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <resources>
             <resource>
@@ -100,5 +109,66 @@
             </resource>
         </resources>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
