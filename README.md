@@ -43,6 +43,8 @@ Here are a few examples:
     Assert.assertThat(message, MessageMatchers.hasHeaders("Received", (Matcher)Matchers.hasItems(
             Matchers.containsString("host1"), Matchers.containsString("host2"))));
 
+More example can be found in the [`examples`](examples/) directory.
+
 ## Matchers
 
 * __hasDate__ - Tests the `Date` header against a given date or matcher
