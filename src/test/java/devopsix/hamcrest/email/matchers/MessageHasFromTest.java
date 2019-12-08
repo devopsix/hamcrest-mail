@@ -50,7 +50,7 @@ public class MessageHasFromTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = messageWithfrom("anna@example.com");
         MessageHasFrom matcher = new MessageHasFrom(any(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -58,7 +58,7 @@ public class MessageHasFromTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("From"))).thenReturn(null);
         MessageHasFrom matcher = new MessageHasFrom(nullValue(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     private Message messageWithfrom(String from) throws MessagingException {

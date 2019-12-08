@@ -3,7 +3,7 @@ package devopsix.hamcrest.email.matchers;
 import static javax.mail.Message.RecipientType.BCC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -26,7 +26,7 @@ public class MessageHasBccTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Bcc"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -35,7 +35,7 @@ public class MessageHasBccTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Bcc"))).thenReturn(null);
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -44,7 +44,7 @@ public class MessageHasBccTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Bcc"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -52,7 +52,7 @@ public class MessageHasBccTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = messageWithBcc("anna@example.com");
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -60,7 +60,7 @@ public class MessageHasBccTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Bcc"))).thenReturn(null);
         MessageHasBcc matcher = new MessageHasBcc(nullValue(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     private Message messageWithBcc(String bcc) throws MessagingException {

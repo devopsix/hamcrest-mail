@@ -4,7 +4,7 @@ import static java.time.OffsetDateTime.now;
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -28,7 +28,7 @@ public class MessageHasDateTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Date"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -37,7 +37,7 @@ public class MessageHasDateTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Date"))).thenReturn(null);
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -46,7 +46,7 @@ public class MessageHasDateTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Date"))).thenReturn(new String[] {now().format(RFC_1123_DATE_TIME), now().format(RFC_1123_DATE_TIME)});
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -55,7 +55,7 @@ public class MessageHasDateTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Date"))).thenReturn(new String[] {"foobar"});
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -63,7 +63,7 @@ public class MessageHasDateTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = messageWithDate();
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -71,7 +71,7 @@ public class MessageHasDateTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Date"))).thenReturn(null);
         MessageHasDate matcher = new MessageHasDate(nullValue(OffsetDateTime.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     private Message messageWithDate() throws MessagingException {

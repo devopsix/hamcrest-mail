@@ -3,7 +3,7 @@ package devopsix.hamcrest.email.matchers;
 import static javax.mail.Message.RecipientType.TO;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -26,7 +26,7 @@ public class MessageHasToTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("To"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasTo matcher = new MessageHasTo(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -35,7 +35,7 @@ public class MessageHasToTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("To"))).thenReturn(null);
         MessageHasTo matcher = new MessageHasTo(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -44,7 +44,7 @@ public class MessageHasToTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("To"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasTo matcher = new MessageHasTo(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -52,7 +52,7 @@ public class MessageHasToTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = messageWithTo("anna@example.com");
         MessageHasTo matcher = new MessageHasTo(any(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -60,7 +60,7 @@ public class MessageHasToTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("To"))).thenReturn(null);
         MessageHasTo matcher = new MessageHasTo(nullValue(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     private Message messageWithTo(String to) throws MessagingException {

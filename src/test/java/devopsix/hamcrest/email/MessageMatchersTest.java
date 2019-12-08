@@ -90,63 +90,63 @@ public class MessageMatchersTest {
     public void hasDateOffsetDateTimeWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasDate(any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasDateOffsetDateTimeWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasDate(SENT_DATE);
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasFromWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasFrom(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasFromWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasFrom("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasSenderWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasSender(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasSenderWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasSender("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasReplyToWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasReplyTo(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasReplyToWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasReplyTo("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasToWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasTo(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -160,70 +160,70 @@ public class MessageMatchersTest {
     public void hasCcWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasCc(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasCcWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasCc("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasBccWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasBcc(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasSubjectWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasSubject(any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasSubjectWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasSubject("Message from Joe");
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasHeaderWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasHeaderWithValueShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasHeadersWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasHeaders("Received", hasItems(any(String.class), any(String.class)));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasDateHeaderWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
     public void hasDateHeadersWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -232,7 +232,7 @@ public class MessageMatchersTest {
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", "k=rsa; p=" + publicKey);
         Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
         assertThat(matcher, is(notNullValue()));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     private static OffsetDateTime now() {

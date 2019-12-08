@@ -2,7 +2,7 @@ package devopsix.hamcrest.email.matchers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -25,7 +25,7 @@ public class MessageHasSenderTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Sender"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasSender matcher = new MessageHasSender(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -34,7 +34,7 @@ public class MessageHasSenderTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Sender"))).thenReturn(null);
         MessageHasSender matcher = new MessageHasSender(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -43,7 +43,7 @@ public class MessageHasSenderTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Sender"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasSender matcher = new MessageHasSender(any(String.class));
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
@@ -51,7 +51,7 @@ public class MessageHasSenderTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = messageWithSender("anna@example.com");
         MessageHasSender matcher = new MessageHasSender(any(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -59,7 +59,7 @@ public class MessageHasSenderTest extends MatcherTest {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Sender"))).thenReturn(null);
         MessageHasSender matcher = new MessageHasSender(nullValue(String.class));
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     private Message messageWithSender(String sender) throws MessagingException {

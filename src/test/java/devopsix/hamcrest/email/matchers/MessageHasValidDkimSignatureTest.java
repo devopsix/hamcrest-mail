@@ -5,6 +5,7 @@ import static java.util.Collections.singletonMap;
 import static javax.mail.Message.RecipientType.TO;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -39,7 +40,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         String publicKey = "k=rsa; p=" + base64(keyPair.getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", publicKey);
         Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
-        assertThat(matcher.matches(message), is(true));
+        assertThat(message, matcher);
     }
     
     @Test
@@ -48,7 +49,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         String wrongPublicKey = "k=rsa; p=" + base64(generateKeyPair().getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", wrongPublicKey);
         Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
     }
     
     @Test
@@ -60,7 +61,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         assertThat(matcher.matches(writeAndReread(message)), is(true));
         message.setFrom("evil@example.com");
         message = writeAndReread(message);
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
     }
     
     @Test
@@ -72,7 +73,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         assertThat(matcher.matches(writeAndReread(message)), is(true));
         message.setRecipient(TO, new InternetAddress("evil@example.com"));
         message = writeAndReread(message);
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
     }
     
     @Test
@@ -84,7 +85,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         assertThat(matcher.matches(writeAndReread(message)), is(true));
         message.setSubject("Evil");
         message = writeAndReread(message);
-        assertThat(matcher.matches(message), is(false));
+        assertThat(message, not(matcher));
     }
     
     @Test
