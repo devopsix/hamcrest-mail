@@ -4,6 +4,8 @@ import static devopsix.hamcrest.email.util.HeaderNames.DATE;
 
 import java.time.OffsetDateTime;
 
+import javax.mail.Message;
+
 import org.hamcrest.Matcher;
 
 /**
@@ -12,7 +14,7 @@ import org.hamcrest.Matcher;
  * @author devopsix
  *
  */
-public class MessageHasDate extends AbstractMessageDateHeaderMatcher {
+public class MessageHasDate extends AbstractDateHeaderMatcher<Message> {
     
     public MessageHasDate(Matcher<OffsetDateTime> matcher) {
         super(DATE, matcher);

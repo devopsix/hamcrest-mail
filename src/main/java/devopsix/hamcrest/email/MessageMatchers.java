@@ -7,17 +7,18 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 import javax.mail.Message;
+import javax.mail.Part;
 
 import org.hamcrest.Matcher;
 
 import devopsix.hamcrest.email.matchers.MessageHasBcc;
 import devopsix.hamcrest.email.matchers.MessageHasCc;
 import devopsix.hamcrest.email.matchers.MessageHasDate;
-import devopsix.hamcrest.email.matchers.MessageHasDateHeader;
-import devopsix.hamcrest.email.matchers.MessageHasDateHeaders;
+import devopsix.hamcrest.email.matchers.PartHasDateHeader;
+import devopsix.hamcrest.email.matchers.PartHasDateHeaders;
 import devopsix.hamcrest.email.matchers.MessageHasFrom;
-import devopsix.hamcrest.email.matchers.MessageHasHeader;
-import devopsix.hamcrest.email.matchers.MessageHasHeaders;
+import devopsix.hamcrest.email.matchers.PartHasHeader;
+import devopsix.hamcrest.email.matchers.PartHasHeaders;
 import devopsix.hamcrest.email.matchers.MessageHasReplyTo;
 import devopsix.hamcrest.email.matchers.MessageHasSender;
 import devopsix.hamcrest.email.matchers.MessageHasSubject;
@@ -246,10 +247,10 @@ public final class MessageMatchers {
      * @return A matcher for the header
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
-    public static Matcher<Message> hasHeader(String header, Matcher<String> matcher) {
+    public static Matcher<Part> hasHeader(String header, Matcher<String> matcher) {
         requireNonNull(header);
         requireNonNull(matcher);
-        return new MessageHasHeader(header, matcher);
+        return new PartHasHeader(header, matcher);
     }
     
     /**
@@ -261,10 +262,10 @@ public final class MessageMatchers {
      * @return A matcher for the header
      * @throws NullPointerException when {@code header} is {@code null} or {@code value} is {@code null}
      */
-    public static Matcher<Message> hasHeader(String header, String value) {
+    public static Matcher<Part> hasHeader(String header, String value) {
         requireNonNull(header);
         requireNonNull(value);
-        return new MessageHasHeader(header, equalTo(value));
+        return new PartHasHeader(header, equalTo(value));
     }
     
     /**
@@ -276,10 +277,10 @@ public final class MessageMatchers {
      * @return A matcher for the headers
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
-    public static Matcher<Message> hasHeaders(String header, Matcher<Iterable<String>> matcher) {
+    public static Matcher<Part> hasHeaders(String header, Matcher<Iterable<String>> matcher) {
         requireNonNull(header);
         requireNonNull(matcher);
-        return new MessageHasHeaders(header, matcher);
+        return new PartHasHeaders(header, matcher);
     }
     
     /**
@@ -291,10 +292,10 @@ public final class MessageMatchers {
      * @return A matcher for the header
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
-    public static Matcher<Message> hasDateHeader(String header, Matcher<OffsetDateTime> matcher) {
+    public static Matcher<Part> hasDateHeader(String header, Matcher<OffsetDateTime> matcher) {
         requireNonNull(header);
         requireNonNull(matcher);
-        return new MessageHasDateHeader(header, matcher);
+        return new PartHasDateHeader(header, matcher);
     }
     
     /**
@@ -306,10 +307,10 @@ public final class MessageMatchers {
      * @return A matcher for the headers
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
-    public static Matcher<Message> hasDateHeaders(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
+    public static Matcher<Part> hasDateHeaders(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
         requireNonNull(header);
         requireNonNull(matcher);
-        return new MessageHasDateHeaders(header, matcher);
+        return new PartHasDateHeaders(header, matcher);
     }
     
     /**

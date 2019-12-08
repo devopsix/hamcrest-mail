@@ -1,5 +1,7 @@
 package devopsix.hamcrest.email.matchers;
 
+import javax.mail.Part;
+
 import org.hamcrest.Matcher;
 
 /**
@@ -8,9 +10,9 @@ import org.hamcrest.Matcher;
  * @author devopsix
  *
  */
-public class MessageHasHeaders extends AbstractMessageStringMultiHeaderMatcher {
+public class PartHasHeaders extends AbstractStringMultiHeaderMatcher<Part> {
     
-    public MessageHasHeaders(String header, Matcher<Iterable<String>> matcher) {
+    public PartHasHeaders(String header, Matcher<Iterable<String>> matcher) {
         super(header, matcher);
     }
 }

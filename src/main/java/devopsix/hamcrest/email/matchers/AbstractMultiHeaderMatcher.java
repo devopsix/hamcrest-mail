@@ -8,8 +8,8 @@ import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Part;
 
 import org.hamcrest.Condition;
 import org.hamcrest.Description;
@@ -24,19 +24,19 @@ import devopsix.hamcrest.email.util.HeaderUtils;
  * @author devopsix
  *
  */
-abstract class AbstractMessageMultiHeaderMatcher<T> extends TypeSafeDiagnosingMatcher<Message> {
+abstract class AbstractMultiHeaderMatcher<P extends Part,T> extends TypeSafeDiagnosingMatcher<P> {
     
     private final String header;
     private final Matcher<Iterable<T>> matcher;
     
-    protected AbstractMessageMultiHeaderMatcher(String header, Matcher<Iterable<T>> matcher) {
+    protected AbstractMultiHeaderMatcher(String header, Matcher<Iterable<T>> matcher) {
         this.header = header;
         this.matcher = matcher;
     }
     
     @Override
-    public boolean matchesSafely(Message message, Description mismatch) {
-        return values(message, mismatch).matching(matcher);
+    public boolean matchesSafely(P part, Description mismatch) {
+        return values(part, mismatch).matching(matcher);
     }
     
     @Override
@@ -45,12 +45,12 @@ abstract class AbstractMessageMultiHeaderMatcher<T> extends TypeSafeDiagnosingMa
         matcher.describeTo(description);
     }
     
-    protected abstract Condition<Iterable<T>> values(Message message, Description mismatch);
+    protected abstract Condition<Iterable<T>> values(P part, Description mismatch);
     
-    protected Condition<Iterable<String>> headerValues(Message message, Description mismatch) {
+    protected Condition<Iterable<String>> headerValues(P part, Description mismatch) {
         String[] values = null;
         try {
-            values = message.getHeader(header);
+            values = part.getHeader(header);
         } catch (MessagingException e) {
             mismatch.appendText(format("failed to extract %s headers: ", header) + e.getMessage());
             return notMatched();

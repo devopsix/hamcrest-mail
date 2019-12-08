@@ -2,6 +2,8 @@ package devopsix.hamcrest.email.matchers;
 
 import static devopsix.hamcrest.email.util.HeaderNames.TO;
 
+import javax.mail.Message;
+
 import org.hamcrest.Matcher;
 
 /**
@@ -10,7 +12,7 @@ import org.hamcrest.Matcher;
  * @author devopsix
  *
  */
-public class MessageHasTo extends AbstractMessageStringHeaderMatcher {
+public class MessageHasTo extends AbstractStringHeaderMatcher<Message> {
     
     public MessageHasTo(Matcher<String> matcher) {
         super(TO, matcher);

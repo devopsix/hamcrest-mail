@@ -25,6 +25,7 @@ import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -194,35 +195,35 @@ public class MessageMatchersTest {
     
     @Test
     public void hasHeaderWithMatcherShouldReturnMatcher() throws Exception {
-        Matcher<Message> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
+        Matcher<Part> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
     
     @Test
     public void hasHeaderWithValueShouldReturnMatcher() throws Exception {
-        Matcher<Message> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
+        Matcher<Part> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
     
     @Test
     public void hasHeadersWithMatcherShouldReturnMatcher() throws Exception {
-        Matcher<Message> matcher = MessageMatchers.hasHeaders("Received", hasItems(any(String.class), any(String.class)));
+        Matcher<Part> matcher = MessageMatchers.hasHeaders("Received", hasItems(any(String.class), any(String.class)));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
     
     @Test
     public void hasDateHeaderWithMatcherShouldReturnMatcher() throws Exception {
-        Matcher<Message> matcher = MessageMatchers.hasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        Matcher<Part> matcher = MessageMatchers.hasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
     
     @Test
     public void hasDateHeadersWithMatcherShouldReturnMatcher() throws Exception {
-        Matcher<Message> matcher = MessageMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
+        Matcher<Part> matcher = MessageMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }

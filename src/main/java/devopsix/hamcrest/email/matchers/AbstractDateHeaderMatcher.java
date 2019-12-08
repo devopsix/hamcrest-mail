@@ -8,22 +8,22 @@ import static org.hamcrest.Condition.notMatched;
 
 import java.time.OffsetDateTime;
 
-import javax.mail.Message;
+import javax.mail.Part;
 
 import org.hamcrest.Condition;
 import org.hamcrest.Condition.Step;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-abstract class AbstractMessageDateHeaderMatcher extends AbstractMessageHeaderMatcher<OffsetDateTime> {
+abstract class AbstractDateHeaderMatcher<P extends Part> extends AbstractHeaderMatcher<P,OffsetDateTime> {
 
-    protected AbstractMessageDateHeaderMatcher(String header, Matcher<OffsetDateTime> matcher) {
+    protected AbstractDateHeaderMatcher(String header, Matcher<OffsetDateTime> matcher) {
         super(header, matcher);
     }
 
     @Override
-    protected Condition<OffsetDateTime> value(Message message, Description mismatch) {
-        return headerValue(message, mismatch).and(parseDateTime());
+    protected Condition<OffsetDateTime> value(P part, Description mismatch) {
+        return headerValue(part, mismatch).and(parseDateTime());
     }
     
     private Step<String, OffsetDateTime> parseDateTime() {

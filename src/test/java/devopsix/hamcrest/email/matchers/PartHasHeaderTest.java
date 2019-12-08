@@ -19,13 +19,13 @@ import javax.mail.internet.MimeMessage;
 
 import org.junit.jupiter.api.Test;
 
-public class MessageHasHeaderTest extends MatcherTest {
+public class PartHasHeaderTest extends MatcherTest {
     
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Message-ID"))).thenThrow(new MessagingException("error deocding header"));
-        MessageHasHeader matcher = new MessageHasHeader("Message-ID", any(String.class));
+        PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -34,7 +34,7 @@ public class MessageHasHeaderTest extends MatcherTest {
     public void shouldNotMatchWhenHeaderIsMissing() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Message-ID"))).thenReturn(null);
-        MessageHasHeader matcher = new MessageHasHeader("Message-ID", any(String.class));
+        PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -43,7 +43,7 @@ public class MessageHasHeaderTest extends MatcherTest {
     public void shouldNotMatchWhenHeaderIsPresentTwice() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Message-ID"))).thenReturn(new String[] {"abc123@example.com", "def456@example.com"});
-        MessageHasHeader matcher = new MessageHasHeader("Message-ID", any(String.class));
+        PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -51,7 +51,7 @@ public class MessageHasHeaderTest extends MatcherTest {
     @Test
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = messageWithHeader("Message-ID", "abc123@example.com");
-        MessageHasHeader matcher = new MessageHasHeader("Message-ID", any(String.class));
+        PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, matcher);
     }
     
@@ -59,21 +59,21 @@ public class MessageHasHeaderTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsMissing() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Message-ID"))).thenReturn(null);
-        MessageHasHeader matcher = new MessageHasHeader("Message-ID", nullValue(String.class));
+        PartHasHeader matcher = new PartHasHeader("Message-ID", nullValue(String.class));
         assertThat(message, matcher);
     }
     
     @Test
     public void shouldMatchWhenHeaderWithGermanUmlautsInUtf8IsPresent() throws Exception {
         Message message = messageWithHeader("Some-Header", encodeText("ÄÖÜäüöß", "UTF-8", null));
-        MessageHasHeader matcher = new MessageHasHeader("Some-Header", equalTo("ÄÖÜäüöß"));
+        PartHasHeader matcher = new PartHasHeader("Some-Header", equalTo("ÄÖÜäüöß"));
         assertThat(message, matcher);
     }
     
     @Test
     public void shouldMatchWhenHeaderWithGermanUmlautsInIso88591IsPresent() throws Exception {
         Message message = messageWithHeader("Some-Header", encodeText("ÄÖÜäüöß", "ISO-8859-1", null));
-        MessageHasHeader matcher = new MessageHasHeader("Some-Header", equalTo("ÄÖÜäüöß"));
+        PartHasHeader matcher = new PartHasHeader("Some-Header", equalTo("ÄÖÜäüöß"));
         assertThat(message, matcher);
     }
     

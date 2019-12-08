@@ -2,6 +2,8 @@ package devopsix.hamcrest.email.matchers;
 
 import java.time.OffsetDateTime;
 
+import javax.mail.Part;
+
 import org.hamcrest.Matcher;
 
 /**
@@ -10,9 +12,9 @@ import org.hamcrest.Matcher;
  * @author devopsix
  *
  */
-public class MessageHasDateHeaders extends AbstractMessageDateMultiHeaderMatcher {
+public class PartHasDateHeaders extends AbstractDateMultiHeaderMatcher<Part> {
     
-    public MessageHasDateHeaders(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
+    public PartHasDateHeaders(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
         super(header, matcher);
     }
 }

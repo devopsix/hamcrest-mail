@@ -17,13 +17,13 @@ import javax.mail.MessagingException;
 
 import org.junit.jupiter.api.Test;
 
-public class MessageHasDateHeaderTest extends MatcherTest {
+public class PartHasDateHeaderTest extends MatcherTest {
     
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Resent-Date"))).thenThrow(new MessagingException("error deocding header"));
-        MessageHasDateHeader matcher = new MessageHasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        PartHasDateHeader matcher = new PartHasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -32,7 +32,7 @@ public class MessageHasDateHeaderTest extends MatcherTest {
     public void shouldNotMatchWhenHeaderIsMissing() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Resent-Date"))).thenReturn(null);
-        MessageHasDateHeader matcher = new MessageHasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        PartHasDateHeader matcher = new PartHasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -41,7 +41,7 @@ public class MessageHasDateHeaderTest extends MatcherTest {
     public void shouldNotMatchWhenHeaderIsPresentTwice() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Resent-Date"))).thenReturn(new String[] {now().format(RFC_1123_DATE_TIME), now().format(RFC_1123_DATE_TIME)});
-        MessageHasDateHeader matcher = new MessageHasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        PartHasDateHeader matcher = new PartHasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -50,7 +50,7 @@ public class MessageHasDateHeaderTest extends MatcherTest {
     public void shouldNotMatchWhenHeaderValueIsMalformed() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Resent-Date"))).thenReturn(new String[] {"foobar"});
-        MessageHasDateHeader matcher = new MessageHasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        PartHasDateHeader matcher = new PartHasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -59,7 +59,7 @@ public class MessageHasDateHeaderTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsPresent() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Resent-Date"))).thenReturn(new String[] {now().format(RFC_1123_DATE_TIME)});
-        MessageHasDateHeader matcher = new MessageHasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        PartHasDateHeader matcher = new PartHasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(message, matcher);
     }
     
@@ -67,7 +67,7 @@ public class MessageHasDateHeaderTest extends MatcherTest {
     public void shouldMatchWhenHeaderIsMissing() throws Exception {
         Message message = mock(Message.class);
         when(message.getHeader(eq("Resent-Date"))).thenReturn(null);
-        MessageHasDateHeader matcher = new MessageHasDateHeader("Resent-Date", nullValue(OffsetDateTime.class));
+        PartHasDateHeader matcher = new PartHasDateHeader("Resent-Date", nullValue(OffsetDateTime.class));
         assertThat(message, matcher);
     }
 }

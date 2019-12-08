@@ -10,22 +10,22 @@ import static org.hamcrest.Condition.notMatched;
 
 import java.time.OffsetDateTime;
 
-import javax.mail.Message;
+import javax.mail.Part;
 
 import org.hamcrest.Condition;
 import org.hamcrest.Condition.Step;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-abstract class AbstractMessageDateMultiHeaderMatcher extends AbstractMessageMultiHeaderMatcher<OffsetDateTime> {
+abstract class AbstractDateMultiHeaderMatcher<P extends Part> extends AbstractMultiHeaderMatcher<P,OffsetDateTime> {
 
-    protected AbstractMessageDateMultiHeaderMatcher(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
+    protected AbstractDateMultiHeaderMatcher(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
         super(header, matcher);
     }
 
     @Override
-    protected Condition<Iterable<OffsetDateTime>> values(Message message, Description mismatch) {
-        return headerValues(message, mismatch).and(parseDateTime());
+    protected Condition<Iterable<OffsetDateTime>> values(P part, Description mismatch) {
+        return headerValues(part, mismatch).and(parseDateTime());
     }
     
     private Step<Iterable<String>, Iterable<OffsetDateTime>> parseDateTime() {
