@@ -21,6 +21,7 @@ import devopsix.hamcrest.email.matchers.MessageHasHeaders;
 import devopsix.hamcrest.email.matchers.MessageHasReplyTo;
 import devopsix.hamcrest.email.matchers.MessageHasSender;
 import devopsix.hamcrest.email.matchers.MessageHasSubject;
+import devopsix.hamcrest.email.matchers.MessageHasTextBody;
 import devopsix.hamcrest.email.matchers.MessageHasTo;
 import devopsix.hamcrest.email.matchers.MessageHasValidDkimSignature;
 
@@ -330,5 +331,17 @@ public final class MessageMatchers {
     public static Matcher<Message> hasValidDkimSignature(Map<String, String> publicKeys) {
         requireNonNull(publicKeys);
         return new MessageHasValidDkimSignature(publicKeys);
+    }
+
+    /**
+     * Returns a matcher that matches when the given message has a plain text body
+     * ({@code Content-Type: text/plain}) which matches the given matcher.
+     * 
+     * @param matcher The value matcher
+     * @return A matcher for the text body
+     */
+    public static Matcher<Message> hasTextBody(Matcher<String> matcher) {
+        requireNonNull(matcher);
+        return new MessageHasTextBody(matcher);
     }
 }

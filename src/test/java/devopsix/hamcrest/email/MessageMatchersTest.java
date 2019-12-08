@@ -5,6 +5,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 import static java.util.Collections.singletonMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -231,6 +232,13 @@ public class MessageMatchersTest {
         String publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", "k=rsa; p=" + publicKey);
         Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void hasTextBodyShouldReturnMatcher() throws Exception {
+        Matcher<Message> matcher = MessageMatchers.hasTextBody(equalTo("Lorem ipsum"));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }

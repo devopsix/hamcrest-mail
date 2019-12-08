@@ -11,6 +11,7 @@ import static devopsix.hamcrest.email.MessageMatchers.hasHeaders;
 import static devopsix.hamcrest.email.MessageMatchers.hasReplyTo;
 import static devopsix.hamcrest.email.MessageMatchers.hasSender;
 import static devopsix.hamcrest.email.MessageMatchers.hasSubject;
+import static devopsix.hamcrest.email.MessageMatchers.hasTextBody;
 import static devopsix.hamcrest.email.MessageMatchers.hasTo;
 import static devopsix.hamcrest.email.MessageMatchers.hasValidDkimSignature;
 import static java.time.OffsetDateTime.now;
@@ -190,6 +191,12 @@ public class GreenMailHeaderExampleTest {
         MimeMessage message = getReceivedMessage();
         assertThat(message, hasHeader("DKIM-Signature", emptyOrNullString()));
         assertThat(message, not(hasValidDkimSignature(emptyMap())));
+    }
+    
+    @Test
+    public void messageShouldHaveTextBody() {
+        MimeMessage message = getReceivedMessage();
+        assertThat(message, hasTextBody(containsString("Lorem ipsum")));
     }
     
     private MimeMessage getReceivedMessage() {
