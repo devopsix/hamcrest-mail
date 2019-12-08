@@ -59,5 +59,7 @@ More example can be found in the [`examples`](examples/) directory.
 * __hasHeaders__ - Tests a named header which may occur multiple times against a given matcher
 * __hasDateHeader__ - Tests a named date header against a given date or matcher
 * __hasDateHeaders__ - Tests a named date header which may occur multiple times against a given matcher
+* __hasValidDkimSignature__ - Tests a message for having a valid [DKIM][] signature
 
 [Java Hamcrest]: http://github.com/hamcrest/JavaHamcrest
+[DKIM]: https://tools.ietf.org/html/rfc4871

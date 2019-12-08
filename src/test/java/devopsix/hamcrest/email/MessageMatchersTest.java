@@ -2,14 +2,23 @@ package devopsix.hamcrest.email;
 
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 import static java.time.temporal.ChronoUnit.SECONDS;
+import static java.util.Collections.singletonMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.time.OffsetDateTime;
+import java.util.Base64;
 import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -20,6 +29,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
+import org.apache.james.jdkim.DKIMSigner;
+import org.apache.james.jdkim.exceptions.FailException;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,12 +41,22 @@ public class MessageMatchersTest {
     private static final OffsetDateTime RESENT_DATE = now().plusMinutes(9);
     private static final OffsetDateTime OTHER_DATE1 = now().plusMinutes(17);
     private static final OffsetDateTime OTHER_DATE2 = now().plusMinutes(28);
-    private static final OffsetDateTime RECEIVED_DATE = now().plusMinutes(36);
+    
+    private static final KeyPair keyPair;
+    static {
+        try {
+            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(2048);
+            keyPair = keyGen.generateKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
     private Message message;
     
     @BeforeEach
-    public void createMessage() throws MessagingException {
+    public void createMessage() throws IOException, FailException, MessagingException {
         Session session = Session.getDefaultInstance(new Properties());
         MimeMessage message = new MimeMessage(session);
         message.setSentDate(new Date(SENT_DATE.toInstant().toEpochMilli()));
@@ -48,10 +69,21 @@ public class MessageMatchersTest {
         message.setHeader("Resent-Date", RESENT_DATE.format(RFC_1123_DATE_TIME));
         message.addHeader("Other-Date", OTHER_DATE1.format(RFC_1123_DATE_TIME));
         message.addHeader("Other-Date", OTHER_DATE2.format(RFC_1123_DATE_TIME));
-        message.addHeader("Received", RECEIVED_DATE.format(RFC_1123_DATE_TIME));
+        message.addHeader("Received", "from foo by bar");
         message.setSubject("Message from Joe");
-        message.saveChanges();
-        this.message = message;
+        message.setText("Lorem ipsum");
+        signMessage(message);
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        message.writeTo(buffer);
+        this.message = new MimeMessage(session, new ByteArrayInputStream(buffer.toByteArray()));
+    }
+    
+    private void signMessage(MimeMessage message) throws IOException, FailException, MessagingException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        message.writeTo(buffer);
+        DKIMSigner signer = new DKIMSigner("v=1; a=rsa-sha256; d=example.com; s=foo; h=mime-version:from:date:message-id:subject:to; b=; bh=;", keyPair.getPrivate());
+        String dkimHeader = signer.sign(new ByteArrayInputStream(buffer.toByteArray()));
+        message.setHeader("DKIM-Signature", dkimHeader.substring("DKIM-Signature:".length()).trim());
     }
     
     @Test
@@ -190,6 +222,15 @@ public class MessageMatchersTest {
     @Test
     public void hasDateHeadersWithMatcherShouldReturnMatcher() throws Exception {
         Matcher<Message> matcher = MessageMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(matcher.matches(message), is(true));
+    }
+    
+    @Test
+    public void hasValidDkimSignatureShouldReturnMatcher() throws Exception {
+        String publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
+        Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", "k=rsa; p=" + publicKey);
+        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
         assertThat(matcher, is(notNullValue()));
         assertThat(matcher.matches(message), is(true));
     }

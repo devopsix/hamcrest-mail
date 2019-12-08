@@ -1,106 +1,80 @@
-Received: from DB5EUR01HT064.eop-EUR01.prod.protection.outlook.com
-(2603:10a6:3:1a::41) by HE1PR0401MB2427.eurprd04.prod.outlook.com with HTTPS
-via HE1PR0501CA0031.EURPRD05.PROD.OUTLOOK.COM; Thu, 5 Dec 2019 20:25:13 +0000
-Received: from DB5EUR01FT059.eop-EUR01.prod.protection.outlook.com
-(10.152.4.57) by DB5EUR01HT064.eop-EUR01.prod.protection.outlook.com
-(10.152.4.178) with Microsoft SMTP Server (version=TLS1_2,
-cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2495.18; Thu, 5 Dec
-2019 20:25:12 +0000
-Authentication-Results: spf=pass (sender IP is 209.85.216.48)
-smtp.mailfrom=gmail.com; outlook.com; dkim=pass (signature was verified)
-header.d=gmail.com;outlook.com; dmarc=pass action=none header.from=gmail.com;
-Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
-209.85.216.48 as permitted sender) receiver=protection.outlook.com;
-client-ip=209.85.216.48; helo=mail-pj1-f48.google.com;
-Received: from mail-pj1-f48.google.com (209.85.216.48) by
-DB5EUR01FT059.mail.protection.outlook.com (10.152.4.164) with Microsoft SMTP
-Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-15.20.2495.18 via Frontend Transport; Thu, 5 Dec 2019 20:25:12 +0000
-X-IncomingTopHeaderMarker:
-OriginalChecksum:85D8FC17668F9BD9297CC9D33F47FA21482F12B4005381B8B01D2D5A69C5AABA;UpperCasedChecksum:8DCEAD985241126B8C62B746256EADC6D61322863386F7D4C30A4428270FE224;SizeAsReceived:2092;Count:13
-Received: by mail-pj1-f48.google.com with SMTP id j11so617919pjs.1
-for <devopsix@outlook.com>; Thu, 05 Dec 2019 12:25:12 -0800 (PST)
+Received: by mail-tester.com (Postfix, from userid 500)
+    id 44608A006C; Sun,  8 Dec 2019 10:42:21 +0100 (CET)
+Authentication-Results: mail-tester.com;
+    dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b=D9G90Drk;
+    dkim-atps=neutral
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on mail-tester.com
+X-Spam-Level: 
+X-Spam-Status: No/-0.2/5.0
+X-Spam-Test-Scores: DKIM_SIGNED=0.1,DKIM_VALID=-0.1,DKIM_VALID_AU=-0.1,
+    DKIM_VALID_EF=-0.1,FREEMAIL_FROM=0.001,HTML_MESSAGE=0.001,
+    SPF_PASS=-0.001
+X-Spam-Last-External-IP: 209.85.214.179
+X-Spam-Last-External-HELO: mail-pl1-f179.google.com
+X-Spam-Last-External-rDNS: mail-pl1-f179.google.com
+X-Spam-Date-of-Scan: Sun, 08 Dec 2019 10:42:21 +0100
+X-Spam-Report: 
+    * -0.0 SPF_PASS SPF: sender matches SPF record
+    *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+    *      provider (devopsix[at]gmail.com)
+    *  0.0 HTML_MESSAGE BODY: HTML included in message
+    * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+    *      envelope-from domain
+    * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+    *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+    *       valid
+    * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+    *      author's domain
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=209.85.214.179; helo=mail-pl1-f179.google.com; envelope-from=devopsix@gmail.com; receiver=test-fbll2@mail-tester.com 
+DMARC-Filter: OpenDMARC Filter v1.3.1 mail-tester.com 012FD9FF9D
+Authentication-Results: mail-tester.com; dmarc=pass header.from=gmail.com
+Authentication-Results: mail-tester.com;
+    dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b=D9G90Drk;
+    dkim-atps=neutral
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+    (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+    (No client certificate requested)
+    by mail-tester.com (Postfix) with ESMTPS id 012FD9FF9D
+    for <test-fbll2@mail-tester.com>; Sun,  8 Dec 2019 10:42:18 +0100 (CET)
+Received: by mail-pl1-f179.google.com with SMTP id k20so4541590pls.3
+        for <test-fbll2@mail-tester.com>; Sun, 08 Dec 2019 01:42:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-d=gmail.com; s=20161025;
-h=mime-version:from:date:message-id:subject:to;
-bh=wxQmcmlHswsxUXcCNkxXooBiHb2l5HV0lbXCSPuiQY4=;
-b=qb9HV4xN7+WgPQgtOPr7uChTkxNSSEVLSrfp9fkl+wKshSYTc7Wut33V6oW4wtRc/X
-In/uUET7M9gr2RAo4hR2kp2hSD3EqZ0a1SdKwaP7l47Leh07h5OeWZBQBPTQv6KL09+h
-vp5T77Fk18gSCWRHa9wgHFOfWdcOVp1ceskbn7I2AAWooSG/6UC8LRsjhj7NFP7LYFyX
-KqD5tcOHu2Tc/1onif4c9sEL0Mo5E4ujeJr87SVsbjemgDPLbRUIgT0OPA2lXus/B4TY
-50diGHCuYrciYUV2XMq5/GtbC/3zoQo8e4iD3IMkqD5pY84roS05+9g2bz2w/jBRSfkI
-p2mw==
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=NPwzKimrHvyFuxztGtuZl6eWTNK7KGBIRGgaYVlw6UA=;
+        b=D9G90Drk0UhseouHldVrDkmjP3HW8pjAi8HDkNT3i6fYtCtvIgcVg7p44LkXth6235
+         7a17RdmhOAtN44VZGdop0DLEuggH1C32C0V6YDKAhLnpg0haJzO+jnWyoY0+Cj/Bki5l
+         HfvkDHIb/KLKrwmeH/ToTGc/s4FQo1cpZkJQdPO+8ABVuMNinJx+KliqiLvxJWGc6ir4
+         MWKoXjc8ATK0VlTBPNB6i/LQyCeTRgmwMLJWzb8jsaFWTY/LXEmm1c1qWEn/g0F8qWds
+         9L9AB9wvgAhaMUAnARu1Snj3IPkT/jn8PgoamsqcP68Ll8LZyxVlGkzYkRl/6yIjCB5X
+         Em2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-d=1e100.net; s=20161025;
-h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-bh=wxQmcmlHswsxUXcCNkxXooBiHb2l5HV0lbXCSPuiQY4=;
-b=PMIA3jCEIjNDaHvZySB4vffNuXmOPCu8gtVwfNNr25S1XY4mZu8/orSDQf0cFU7KGW
-//wU1oUKyBUSPNuU4ZkGyXGDHy+wgTGhxUO7aPmjZe5QqI2OcbA8ae8pLMffZP6JJy5n
-Gkx2yw+/HOGKt4Xmpu7MCNTU7MgKt7DxJ2X68r9iWqLUKX0p4L1OvMwI9ogyLeZRl5QX
-iLF55G4vd6TYIwpla3C+tXT0+3eiOLbJDH1DVJ6dXV73gzDUL9+C7K0gZBpRGoE0dlsJ
-xA1bkcSDnKkqqOXcvXZ1hthRCPaJYkxZohv4R3ZzjMuLeaa1+y/Kd5VOGKISynn4Vg9a
-zPZw==
-X-Gm-Message-State: APjAAAXJFjJjzXJR68PVCvb5PcI1TL1pddn4fw8Vm3nZbUxEX6OYYWkA
-XJNlWY4t0pCHQO11QKH0TKMnKv+TKfPu4zXJVhtU+rl9gxPjGg==
-X-Google-Smtp-Source: APXvYqzLiYgX2Udm01Kqm/8PICWzUHEv0VbAgI6o/9KpxQ0mIftKTAdMe0JpLHJcIBic6JePxeO/EGr8emZZQ5u9+bk=
-X-Received: by 2002:a17:90a:4e5:: with SMTP id g92mr11439349pjg.94.1575577511671;
-Thu, 05 Dec 2019 12:25:11 -0800 (PST)
-From: devopsix <devopsix@gmail.com>
-Date: Thu, 5 Dec 2019 21:25:00 +0100
-Message-ID: <CAHGZRyXS4XyYr0KqWCqtCskuGKWCXNy28WyP470UYKurnB5n2A@mail.gmail.com>
-Subject: =?UTF-8?B?TMO2cmVtIElwc8O8bQ==?=
-To: devopsix@outlook.com
-Content-Type: multipart/mixed; boundary="000000000000e65bf70598fab950"
-X-IncomingHeaderCount: 13
-Return-Path: devopsix@gmail.com
-X-MS-Exchange-Organization-ExpirationStartTime: 05 Dec 2019 20:25:12.3510
-(UTC)
-X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
-X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
-X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
-X-MS-Exchange-Organization-Network-Message-Id:
-fd837334-b5a4-459d-550b-08d779c13b1b
-X-EOPAttributedMessage: 0
-X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
-X-MS-Exchange-Organization-MessageDirectionality: Incoming
-X-Forefront-Antispam-Report: EFV:NLI;
-X-MS-Exchange-Organization-AuthSource:
-DB5EUR01FT059.eop-EUR01.prod.protection.outlook.com
-X-MS-Exchange-Organization-AuthAs: Anonymous
-X-MS-PublicTrafficType: Email
-X-MS-UserLastLogonTime: 12/5/2019 8:25:02 PM
-X-MS-Office365-Filtering-Correlation-Id: fd837334-b5a4-459d-550b-08d779c13b1b
-X-MS-TrafficTypeDiagnostic: DB5EUR01HT064:
-X-MS-Exchange-EOPDirect: true
-X-Sender-IP: 209.85.216.48
-X-SID-PRA: DEVOPSIX@GMAIL.COM
-X-SID-Result: PASS
-X-MS-Exchange-Organization-PCL: 2
-X-Microsoft-Antispam: BCL:0;
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2019 20:25:12.3320
-(UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd837334-b5a4-459d-550b-08d779c13b1b
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5EUR01HT064
-X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.7961531
-X-MS-Exchange-Processed-By-BccFoldering: 15.20.2495.013
-X-Microsoft-Antispam-Mailbox-Delivery:
-abwl:0;wl:0;pcwl:0;kl:0;iwl:0;ijl:0;dwl:0;dkl:0;rwl:0;ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000261)(5061607266)(5061608174)(4900115)(4920090)(6515079)(4950130)(4990090);
-X-Message-Info:
-5vMbyqxGkdcxfSAjqbF1Y1xO+iG6VvtQcxrRkU7q5wXgPkcEuq6FwmdYlQuZ5eBwXzEh+Sg2ag6z1zbaxsXSfbhHVKYZauRw5jhYR4Jdnw8tS/Lg7DB+bdzqqw7NHgqWOmcnN0ZTr0rlIpok5HtU5jHH+jk7KZ5bCi65Aa5nAeF1XZwPPQDpimkUZ4ps3bIeIAoKiNaHVdDPnOCk8sOnqw==
-X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0xO0Q9MTtHRD0xO1NDTD0z
-X-Microsoft-Antispam-Message-Info:
-qhEce9AvwGqmIL+pnsMLzy0xE28IxOgUP2WPP+lpfYr3+bzHBAjQajfXHnCqUwsG+yyhSUBtCvRP9RXDnkRf4m40LbWKM39vFh6Sd+ODbnYKdInFCBzqzKlrKrGTcut1q31d+FAfADVjIq9u7vIFj/7+UBoNBhYp3itMNxOc1tuEDxrjGTgVBJ96SNLNKamUNgvFmNw8Fq0N1qrVCkL8u4GYQTjzj75ZO1okiCmtaZtKFPVpIGxJuXYXLRgZ6i7gTmUceIdu5PRULyQDZClJO26oW7JHmHq3HhUOeRL1lAXls8fBKqEGFz1FQybxsIUfQy87iVCsAsg+rHVWAwiFBxFIh9juWPrIEqEyWW1wDUYDia2On1tj6qEMdPhC3KIXWMkHOzLlq4+un9NfUK6+uwpYwBlCBqHesuBwoZxQF2rC29XJS7Amu1G6HGzt+3BmKlwXQsjZrad+hLDgwNtVP3VPneFgZXLFFVJYHMxO1hdiyYBjuNwKBDfWFYFBWR1I+k5YtMfgw/Lz2OHK3v9Yl29wB3EtvmEK44rHauSaq7OzRsNHqbY4lv8GN0THojsG/D8lVmzZf+XRK0S9AFQlrR/zbTfsTD0n9HKcr2664VVER3DtYcTg8HRgCbhcqeyGJ4dBu4UiEZVat27ZrYEXhLJZQGfBpmd/gpEKmWNlCqmtOZOdWeltZ6nuGmnG8HS/0qxHa5Un7/ClWLlAiTw9bVyvV/+tUrZDDJzPSNCneJU=
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=NPwzKimrHvyFuxztGtuZl6eWTNK7KGBIRGgaYVlw6UA=;
+        b=ObVrb3th3Qmn7oDGO6yG0/fa0u9xzboidrA03XS1uKy6oz7BfzaKcb+n5KpR+KtJJj
+         VP5hlscxWtgD3hXQlLndhKwnnoRE2Ryf29ibZO57HYEP8gdMnfDshdkC2QdY8KtiChzA
+         ru2pYEYwI6to5Mb50vUnU9jpxTkAdsmA71VYPPffcIzsDp7A6PL26nhnNpU4JLpipcC/
+         gYpYdPtR3xZrBsi6waTwwCuT9MIRynToRCbpK6kmojrtwPnwOOc1mOb/HSLE8V0aNH9T
+         Ln3x6uxAR49f/hCtg27zQHDIRa61Qb0MblsgUUj4iAX7j0YqDdLvxTZpSz1a9a4uQhwC
+         6RKg==
+X-Gm-Message-State: APjAAAVytvazn8u+bO7VP7z6fmaLYtbWDlitodyxH2mCU30u5JPRwMHd
+    mjEDSYh/g7hJO9gNftV3BmV5yVowojhJYxN+dX2q7HV9
+X-Google-Smtp-Source: APXvYqwsBoM8BMaigQyYJRmK6dwEUY5REjfA/OXojkVIxL/FA53z8DfnfnlCGkUIr7up3ClXJCHQGphYm+ntLC7S15E=
+X-Received: by 2002:a17:90a:3702:: with SMTP id u2mr24891150pjb.112.1575798137102;
+ Sun, 08 Dec 2019 01:42:17 -0800 (PST)
 MIME-Version: 1.0
+From: devopsix <devopsix@gmail.com>
+Date: Sun, 8 Dec 2019 10:42:05 +0100
+Message-ID: <CAHGZRyXO3Whiq_yzS=Fw5JCq5fwE4QTg5uABGi81SPjVUcyMFw@mail.gmail.com>
+Subject: =?UTF-8?B?TMO2cmVtIElwc8O8bQ==?=
+To: test-fbll2@mail-tester.com
+Content-Type: multipart/mixed; boundary="000000000000334c4f05992e18f8"
 
---000000000000e65bf70598fab950
-Content-Type: multipart/alternative; boundary="000000000000e65bf10598fab94e"
+--000000000000334c4f05992e18f8
+Content-Type: multipart/alternative; boundary="000000000000334c4b05992e18f6"
 
---000000000000e65bf10598fab94e
+--000000000000334c4b05992e18f6
 Content-Type: text/plain; charset="UTF-8"
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
@@ -123,37 +97,35 @@ eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
 zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum
 dolor sit amet,
 
---000000000000e65bf10598fab94e
+--000000000000334c4b05992e18f6
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><d=
-iv dir=3D"ltr">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed=
-diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat=
-, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebu=
-m. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor=
-sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed dia=
-m nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, se=
-d diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. S=
-tet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit=
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no=
-numy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed di=
-am voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet =
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit ame=
-t. &nbsp; <br><br>Duis autem vel eum iriure dolor in hendrerit in vulputate=
-velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis=
-at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt=
-atum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum=
-dolor sit amet,<br></div>
+<div dir=3D"ltr">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, s=
+ed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er=
+at, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea re=
+bum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dol=
+or sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed d=
+iam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, =
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.=
+ Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor s=
+it amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam =
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed =
+diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Ste=
+t clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit a=
+met. =C2=A0 <br><br>Duis autem vel eum iriure dolor in hendrerit in vulputa=
+te velit esse molestie consequat, vel illum dolore eu feugiat nulla facilis=
+is at vero eros et accumsan et iusto odio dignissim qui blandit praesent lu=
+ptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ips=
+um dolor sit amet,<br></div>
 
---000000000000e65bf10598fab94e--
-
---000000000000e65bf70598fab950
+--000000000000334c4b05992e18f6--
+--000000000000334c4f05992e18f8
 Content-Type: image/jpeg; name="lena.jpg"
 Content-Disposition: attachment; filename="lena.jpg"
 Content-Transfer-Encoding: base64
-Content-ID: <f_k3t65ur50>
-X-Attachment-Id: f_k3t65ur50
+Content-ID: <f_k3wtil4l0>
+X-Attachment-Id: f_k3wtil4l0
 
 /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsK
 CwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQU
@@ -1343,5 +1315,4 @@ Gmuv/PlG1WTwTwybG2Qopg5ZKVJ60K4NwNt15srSVK96J0q0kMt2tqkJERzFCc//AFC9IdoQPF7l
 uytVNNrJCUAlREbDUfOfpVV8YY8FpLYIT4vdB0+9R86PcdcTCxcWiVamJ6xtVMY1jDt2+Q6SCogJ
 y8vvSmY2XlKtThy4U6FOlRVBPjiSD0puxaXOJvJbZV3il6T1OmlLYHaOXTyO6SQAQZKv771Z/D3C
 qLa1TKEl0GRIB151KaXuRabgiMztq//Z
-
---000000000000e65bf70598fab950--
+--000000000000334c4f05992e18f8--

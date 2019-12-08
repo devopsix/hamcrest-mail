@@ -65,6 +65,11 @@
                 <version>1.6.2</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.james.jdkim</groupId>
+                <artifactId>apache-jdkim-library</artifactId>
+                <version>0.2</version>
+            </dependency>
+            <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>5.5.2</version>
@@ -85,6 +90,10 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.james.jdkim</groupId>
+            <artifactId>apache-jdkim-library</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

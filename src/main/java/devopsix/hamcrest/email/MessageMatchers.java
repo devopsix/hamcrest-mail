@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.time.OffsetDateTime;
+import java.util.Map;
 
 import javax.mail.Message;
 
@@ -12,15 +13,16 @@ import org.hamcrest.Matcher;
 import devopsix.hamcrest.email.matchers.MessageHasBcc;
 import devopsix.hamcrest.email.matchers.MessageHasCc;
 import devopsix.hamcrest.email.matchers.MessageHasDate;
+import devopsix.hamcrest.email.matchers.MessageHasDateHeader;
+import devopsix.hamcrest.email.matchers.MessageHasDateHeaders;
 import devopsix.hamcrest.email.matchers.MessageHasFrom;
 import devopsix.hamcrest.email.matchers.MessageHasHeader;
-import devopsix.hamcrest.email.matchers.MessageHasDateHeader;
 import devopsix.hamcrest.email.matchers.MessageHasHeaders;
-import devopsix.hamcrest.email.matchers.MessageHasDateHeaders;
 import devopsix.hamcrest.email.matchers.MessageHasReplyTo;
 import devopsix.hamcrest.email.matchers.MessageHasSender;
 import devopsix.hamcrest.email.matchers.MessageHasSubject;
 import devopsix.hamcrest.email.matchers.MessageHasTo;
+import devopsix.hamcrest.email.matchers.MessageHasValidDkimSignature;
 
 public final class MessageMatchers {
 
@@ -307,5 +309,26 @@ public final class MessageMatchers {
         requireNonNull(header);
         requireNonNull(matcher);
         return new MessageHasDateHeaders(header, matcher);
+    }
+    
+    /**
+     * <p>Returns a matcher that matches when the given message has a valid DKIM signature
+     * that can be verified using the given public key.</p>
+     * 
+     * <p>DKIM public keys are distributed as DNS TXT records. As tests should not depend
+     * on any real DNS records this method accepts a map of virtual TXT records. The map keys
+     * are DNS domain names and the map values are DKIM public keys. The public keys must be
+     * represented as described in
+     * <a href="https://tools.ietf.org/html/rfc4871#section-3.6">section 3.6. of RFC 4871</a>.</p>
+     * 
+     * <p>Example: &quot;foo._domainkey.example.com&quot; =&gt; &quot;k=rsa; p=Abcd1234&quot;</p>
+     * 
+     * @param publicKeys Map with public keys
+     * @return A matcher for the DKIM signature
+     * @throws NullPointerException when {@code publicKeys} is {@code null}
+     */
+    public static Matcher<Message> hasValidDkimSignature(Map<String, String> publicKeys) {
+        requireNonNull(publicKeys);
+        return new MessageHasValidDkimSignature(publicKeys);
     }
 }

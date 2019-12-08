@@ -12,13 +12,14 @@ import static devopsix.hamcrest.email.MessageMatchers.hasReplyTo;
 import static devopsix.hamcrest.email.MessageMatchers.hasSender;
 import static devopsix.hamcrest.email.MessageMatchers.hasSubject;
 import static devopsix.hamcrest.email.MessageMatchers.hasTo;
+import static devopsix.hamcrest.email.MessageMatchers.hasValidDkimSignature;
 import static java.time.OffsetDateTime.now;
 import static java.time.OffsetDateTime.parse;
 import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.util.Collections.emptyMap;
 import static javax.mail.Message.RecipientType.TO;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.sameOrBefore;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.within;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
@@ -29,6 +30,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
 
 import java.util.Properties;
 
@@ -181,6 +183,13 @@ public class GreenMailHeaderExampleTest {
         assertThat(message, hasDateHeaders("Resent-Date", (Matcher)contains(
             parse("1982-12-01T14:49:44+01:00"),
             parse("2019-12-01T14:49:44+01:00"))));
+    }
+    
+    @Test
+    public void messageShouldNotHaveDkimSignature() {
+        MimeMessage message = getReceivedMessage();
+        assertThat(message, hasHeader("DKIM-Signature", emptyOrNullString()));
+        assertThat(message, not(hasValidDkimSignature(emptyMap())));
     }
     
     private MimeMessage getReceivedMessage() {
