@@ -4,6 +4,7 @@ import static devopsix.hamcrest.email.MessageMatchers.hasDate;
 import static devopsix.hamcrest.email.MessageMatchers.hasFrom;
 import static devopsix.hamcrest.email.MessageMatchers.hasHeader;
 import static devopsix.hamcrest.email.MessageMatchers.hasHeaders;
+import static devopsix.hamcrest.email.MessageMatchers.hasMultipartBody;
 import static devopsix.hamcrest.email.MessageMatchers.hasSubject;
 import static devopsix.hamcrest.email.MessageMatchers.hasTo;
 import static devopsix.hamcrest.email.MessageMatchers.hasValidDkimSignature;
@@ -107,5 +108,10 @@ public class MessageFileExampleTest {
             + "pjdEyLWyNimk761CX6KymzYiRDNz1MOJOJ7OzFaS4PFbVLn0m5mf0HVNtBpPwWuCNvaFVflUYxEyblb"
             + "B6h/oWOPGbzoSgtRA47SHV53SwZjIsVpbq4LxUW9IxAEwYzGcSgZ4n5Q8X8TndowsDUzoccPFGhdwIDAQAB");
         assertThat(message, hasValidDkimSignature(gmailPublicKey));
+    }
+    
+    @Test
+    public void messageShouldHaveMultipartBody() {
+        assertThat(message, hasMultipartBody());
     }
 }

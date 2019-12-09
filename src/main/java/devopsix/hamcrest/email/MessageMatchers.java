@@ -1,6 +1,7 @@
 package devopsix.hamcrest.email;
 
 import static java.util.Objects.requireNonNull;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.time.OffsetDateTime;
@@ -14,17 +15,18 @@ import org.hamcrest.Matcher;
 import devopsix.hamcrest.email.matchers.MessageHasBcc;
 import devopsix.hamcrest.email.matchers.MessageHasCc;
 import devopsix.hamcrest.email.matchers.MessageHasDate;
-import devopsix.hamcrest.email.matchers.PartHasDateHeader;
-import devopsix.hamcrest.email.matchers.PartHasDateHeaders;
 import devopsix.hamcrest.email.matchers.MessageHasFrom;
-import devopsix.hamcrest.email.matchers.PartHasHeader;
-import devopsix.hamcrest.email.matchers.PartHasHeaders;
+import devopsix.hamcrest.email.matchers.MessageHasMultipartBody;
 import devopsix.hamcrest.email.matchers.MessageHasReplyTo;
 import devopsix.hamcrest.email.matchers.MessageHasSender;
 import devopsix.hamcrest.email.matchers.MessageHasSubject;
 import devopsix.hamcrest.email.matchers.MessageHasTextBody;
 import devopsix.hamcrest.email.matchers.MessageHasTo;
 import devopsix.hamcrest.email.matchers.MessageHasValidDkimSignature;
+import devopsix.hamcrest.email.matchers.PartHasDateHeader;
+import devopsix.hamcrest.email.matchers.PartHasDateHeaders;
+import devopsix.hamcrest.email.matchers.PartHasHeader;
+import devopsix.hamcrest.email.matchers.PartHasHeaders;
 
 public final class MessageMatchers {
 
@@ -326,7 +328,7 @@ public final class MessageMatchers {
      * <p>Example: &quot;foo._domainkey.example.com&quot; =&gt; &quot;k=rsa; p=Abcd1234&quot;</p>
      * 
      * @param publicKeys Map with public keys
-     * @return A matcher for the DKIM signature
+     * @return A matcher for a message
      * @throws NullPointerException when {@code publicKeys} is {@code null}
      */
     public static Matcher<Message> hasValidDkimSignature(Map<String, String> publicKeys) {
@@ -336,13 +338,34 @@ public final class MessageMatchers {
 
     /**
      * Returns a matcher that matches when the given message has a plain text body
+     * ({@code Content-Type: text/plain}) with any content.
+     * 
+     * @return A matcher for a message
+     */
+    public static Matcher<Message> hasTextBody() {
+        return new MessageHasTextBody(any(String.class));
+    }
+
+    /**
+     * Returns a matcher that matches when the given message has a plain text body
      * ({@code Content-Type: text/plain}) which matches the given matcher.
      * 
      * @param matcher The value matcher
-     * @return A matcher for the text body
+     * @return A matcher for a message
+     * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasTextBody(Matcher<String> matcher) {
         requireNonNull(matcher);
         return new MessageHasTextBody(matcher);
+    }
+
+    /**
+     * Returns a matcher that matches when the given message has a multipart body
+     * ({@code Content-Type: multipart/*}) with any content.
+     * 
+     * @return A matcher for a message
+     */
+    public static Matcher<Message> hasMultipartBody() {
+        return new MessageHasMultipartBody();
     }
 }

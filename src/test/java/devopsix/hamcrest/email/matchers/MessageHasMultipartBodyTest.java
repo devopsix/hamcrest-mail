@@ -1,25 +1,23 @@
 package devopsix.hamcrest.email.matchers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
+import javax.mail.internet.MimeMultipart;
 
 import org.junit.jupiter.api.Test;
 
-public class MessageHasTextBodyTest extends MatcherTest {
+public class MessageHasMultipartBodyTest extends MatcherTest {
     
     @Test
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
         when(message.getContent()).thenThrow(new MessagingException("error deocding header"));
-        MessageHasTextBody matcher = new MessageHasTextBody(any(String.class));
+        MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -28,16 +26,16 @@ public class MessageHasTextBodyTest extends MatcherTest {
     public void shouldNotMatchWhenContentIsNull() throws Exception {
         Message message = mock(Message.class);
         when(message.getContent()).thenReturn(null);
-        MessageHasTextBody matcher = new MessageHasTextBody(any(String.class));
+        MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
     
     @Test
-    public void shouldNotMatchWhenContentIsNotAString() throws Exception {
+    public void shouldNotMatchWhenContentIsNotAMultipartObject() throws Exception {
         Message message = mock(Message.class);
-        when(message.getContent()).thenReturn(mock(Multipart.class));
-        MessageHasTextBody matcher = new MessageHasTextBody(any(String.class));
+        when(message.getContent()).thenReturn("foo");
+        MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, not(matcher));
         logMismatchDescription(matcher, message);
     }
@@ -45,8 +43,8 @@ public class MessageHasTextBodyTest extends MatcherTest {
     @Test
     public void shouldMatchWhenContentIsPresent() throws Exception {
         Message message = mock(Message.class);
-        when(message.getContent()).thenReturn("Lorem ipsum");
-        MessageHasTextBody matcher = new MessageHasTextBody(equalTo("Lorem ipsum"));
+        when(message.getContent()).thenReturn(new MimeMultipart());
+        MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, matcher);
     }
 }
