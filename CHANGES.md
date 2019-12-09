@@ -3,6 +3,8 @@
 ## Unreleased
 
 * Added matcher for verifying DKIM signatures.
+* Added basic body matchers.
+* Moved all classes to `org.devopsix.hamcrest.mail` package.
 
 ## Version 0.0.1 (7 December 2019)
 
