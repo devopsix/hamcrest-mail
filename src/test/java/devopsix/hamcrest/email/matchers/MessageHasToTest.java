@@ -27,7 +27,6 @@ public class MessageHasToTest extends MatcherTest {
         when(message.getHeader(eq("To"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasTo matcher = new MessageHasTo(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -36,7 +35,6 @@ public class MessageHasToTest extends MatcherTest {
         when(message.getHeader(eq("To"))).thenReturn(null);
         MessageHasTo matcher = new MessageHasTo(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -45,7 +43,6 @@ public class MessageHasToTest extends MatcherTest {
         when(message.getHeader(eq("To"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasTo matcher = new MessageHasTo(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

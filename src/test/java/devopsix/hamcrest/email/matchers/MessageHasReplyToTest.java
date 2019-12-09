@@ -27,7 +27,6 @@ public class MessageHasReplyToTest extends MatcherTest {
         when(message.getHeader(eq("Reply-To"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasReplyTo matcher = new MessageHasReplyTo(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -36,7 +35,6 @@ public class MessageHasReplyToTest extends MatcherTest {
         when(message.getHeader(eq("Reply-To"))).thenReturn(null);
         MessageHasReplyTo matcher = new MessageHasReplyTo(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -45,7 +43,6 @@ public class MessageHasReplyToTest extends MatcherTest {
         when(message.getHeader(eq("Reply-To"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasReplyTo matcher = new MessageHasReplyTo(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

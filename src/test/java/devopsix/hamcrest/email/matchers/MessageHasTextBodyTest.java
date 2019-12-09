@@ -21,7 +21,6 @@ public class MessageHasTextBodyTest extends MatcherTest {
         when(message.getContent()).thenThrow(new MessagingException("error deocding header"));
         MessageHasTextBody matcher = new MessageHasTextBody(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -30,7 +29,6 @@ public class MessageHasTextBodyTest extends MatcherTest {
         when(message.getContent()).thenReturn(null);
         MessageHasTextBody matcher = new MessageHasTextBody(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -39,7 +37,6 @@ public class MessageHasTextBodyTest extends MatcherTest {
         when(message.getContent()).thenReturn(mock(Multipart.class));
         MessageHasTextBody matcher = new MessageHasTextBody(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

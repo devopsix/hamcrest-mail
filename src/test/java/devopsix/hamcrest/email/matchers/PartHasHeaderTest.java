@@ -27,7 +27,6 @@ public class PartHasHeaderTest extends MatcherTest {
         when(message.getHeader(eq("Message-ID"))).thenThrow(new MessagingException("error deocding header"));
         PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -36,7 +35,6 @@ public class PartHasHeaderTest extends MatcherTest {
         when(message.getHeader(eq("Message-ID"))).thenReturn(null);
         PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -45,7 +43,6 @@ public class PartHasHeaderTest extends MatcherTest {
         when(message.getHeader(eq("Message-ID"))).thenReturn(new String[] {"abc123@example.com", "def456@example.com"});
         PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

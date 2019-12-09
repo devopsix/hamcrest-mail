@@ -29,7 +29,6 @@ public class MessageHasDateTest extends MatcherTest {
         when(message.getHeader(eq("Date"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -38,7 +37,6 @@ public class MessageHasDateTest extends MatcherTest {
         when(message.getHeader(eq("Date"))).thenReturn(null);
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -47,7 +45,6 @@ public class MessageHasDateTest extends MatcherTest {
         when(message.getHeader(eq("Date"))).thenReturn(new String[] {now().format(RFC_1123_DATE_TIME), now().format(RFC_1123_DATE_TIME)});
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -56,7 +53,6 @@ public class MessageHasDateTest extends MatcherTest {
         when(message.getHeader(eq("Date"))).thenReturn(new String[] {"foobar"});
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

@@ -29,7 +29,6 @@ public class PartHasHeadersTest extends MatcherTest {
         when(message.getHeader(eq("Received"))).thenThrow(new MessagingException("error deocding headers"));
         PartHasHeaders matcher = new PartHasHeaders("Received", emptyIterableOf(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

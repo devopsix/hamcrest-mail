@@ -26,7 +26,6 @@ public class MessageHasSubjectTest extends MatcherTest {
         when(message.getHeader(eq("Subject"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasSubject matcher = new MessageHasSubject(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -35,7 +34,6 @@ public class MessageHasSubjectTest extends MatcherTest {
         when(message.getHeader(eq("Subject"))).thenReturn(null);
         MessageHasSubject matcher = new MessageHasSubject(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -44,7 +42,6 @@ public class MessageHasSubjectTest extends MatcherTest {
         when(message.getHeader(eq("Subject"))).thenReturn(new String[] {"foo", "bar"});
         MessageHasSubject matcher = new MessageHasSubject(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

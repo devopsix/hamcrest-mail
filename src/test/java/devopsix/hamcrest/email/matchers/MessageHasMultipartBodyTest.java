@@ -19,7 +19,6 @@ public class MessageHasMultipartBodyTest extends MatcherTest {
         when(message.getContent()).thenThrow(new MessagingException("error deocding header"));
         MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -28,7 +27,6 @@ public class MessageHasMultipartBodyTest extends MatcherTest {
         when(message.getContent()).thenReturn(null);
         MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -37,7 +35,6 @@ public class MessageHasMultipartBodyTest extends MatcherTest {
         when(message.getContent()).thenReturn("foo");
         MessageHasMultipartBody matcher = new MessageHasMultipartBody();
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

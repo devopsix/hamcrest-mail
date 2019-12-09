@@ -27,7 +27,6 @@ public class MessageHasBccTest extends MatcherTest {
         when(message.getHeader(eq("Bcc"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -36,7 +35,6 @@ public class MessageHasBccTest extends MatcherTest {
         when(message.getHeader(eq("Bcc"))).thenReturn(null);
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -45,7 +43,6 @@ public class MessageHasBccTest extends MatcherTest {
         when(message.getHeader(eq("Bcc"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test

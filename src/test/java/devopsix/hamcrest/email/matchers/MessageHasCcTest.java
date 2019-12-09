@@ -27,7 +27,6 @@ public class MessageHasCcTest extends MatcherTest {
         when(message.getHeader(eq("Cc"))).thenThrow(new MessagingException("error deocding header"));
         MessageHasCc matcher = new MessageHasCc(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -36,7 +35,6 @@ public class MessageHasCcTest extends MatcherTest {
         when(message.getHeader(eq("Cc"))).thenReturn(null);
         MessageHasCc matcher = new MessageHasCc(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
@@ -45,7 +43,6 @@ public class MessageHasCcTest extends MatcherTest {
         when(message.getHeader(eq("Cc"))).thenReturn(new String[] {"anna@example.com", "bob@example.com"});
         MessageHasCc matcher = new MessageHasCc(any(String.class));
         assertThat(message, not(matcher));
-        logMismatchDescription(matcher, message);
     }
     
     @Test
