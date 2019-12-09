@@ -1,14 +1,14 @@
 package examples;
 
-import static devopsix.hamcrest.email.MessageMatchers.hasDate;
-import static devopsix.hamcrest.email.MessageMatchers.hasFrom;
-import static devopsix.hamcrest.email.MessageMatchers.hasHeader;
-import static devopsix.hamcrest.email.MessageMatchers.hasHeaders;
-import static devopsix.hamcrest.email.MessageMatchers.hasMultipartBody;
-import static devopsix.hamcrest.email.MessageMatchers.hasSubject;
-import static devopsix.hamcrest.email.MessageMatchers.hasTo;
-import static devopsix.hamcrest.email.MessageMatchers.hasValidDkimSignature;
 import static java.util.Collections.singletonMap;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasDate;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartBody;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasTo;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.isDay;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
