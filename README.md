@@ -24,6 +24,9 @@ Here are a few examples:
     Assert.assertThat(message, MessageMatchers.hasTo("bob@example.com"));
 
     Message message;
+    Assert.assertThat(message, MessageMatchers.hasRecipients(Matchers.iterableWithSize(1)));
+
+    Message message;
     Assert.assertThat(message, MessageMatchers.hasSubject("Message from Anna"));
 
     Message message;
@@ -54,6 +57,7 @@ More example can be found in the [`examples`](examples/) directory.
 * __hasTo__ - Tests the `To` header against a given string or matcher
 * __hasCc__ - Tests the `Cc` header against a given string or matcher
 * __hasBcc__ - Tests the `Bcc` header against a given string or matcher
+* __hasRecipients__ - Tests a message's recipients against a given matcher
 * __hasSubject__ - Tests the `Subject` header against a given string or matcher
 * __hasHeader__ - Tests a named header against a given string or matcher
 * __hasHeaders__ - Tests a named header which may occur multiple times against a given matcher

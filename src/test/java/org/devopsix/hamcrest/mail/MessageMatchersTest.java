@@ -3,11 +3,15 @@ package org.devopsix.hamcrest.mail;
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static java.util.Collections.singletonMap;
+import static javax.mail.Message.RecipientType.BCC;
+import static javax.mail.Message.RecipientType.CC;
+import static javax.mail.Message.RecipientType.TO;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.ByteArrayInputStream;
@@ -31,12 +35,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.InternetHeaders;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.james.jdkim.DKIMSigner;
 import org.apache.james.jdkim.exceptions.FailException;
-import org.devopsix.hamcrest.mail.MessageMatchers;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 
@@ -147,6 +149,22 @@ public class MessageMatchersTest {
     public void hasBccWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
         Matcher<Message> matcher = MessageMatchers.hasBcc(any(String.class));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void hasRecipientsShouldReturnMatcher() throws Exception {
+        Message message = createTextMessage();
+        Matcher<Message> matcher = MessageMatchers.hasRecipients(iterableWithSize(3));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void hasRecipientsOfTypeShouldReturnMatcher() throws Exception {
+        Message message = createTextMessage();
+        Matcher<Message> matcher = MessageMatchers.hasRecipients(TO, iterableWithSize(1));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -279,9 +297,9 @@ public class MessageMatchersTest {
         message.setFrom("joe.average@example.com");
         message.setSender(new InternetAddress("joe.average@example.com"));
         message.setReplyTo(new Address[] {new InternetAddress("joe.average@example.com")});
-        message.setRecipient(RecipientType.TO, new InternetAddress("joe.average@example.com"));
-        message.setRecipient(RecipientType.CC, new InternetAddress("joe.average@example.com"));
-        message.setRecipient(RecipientType.BCC, new InternetAddress("joe.average@example.com"));
+        message.setRecipient(TO, new InternetAddress("joe.average@example.com"));
+        message.setRecipient(CC, new InternetAddress("joe.average@example.com"));
+        message.setRecipient(BCC, new InternetAddress("joe.average@example.com"));
         message.setHeader("Resent-Date", RESENT_DATE.format(RFC_1123_DATE_TIME));
         message.addHeader("Other-Date", OTHER_DATE1.format(RFC_1123_DATE_TIME));
         message.addHeader("Other-Date", OTHER_DATE2.format(RFC_1123_DATE_TIME));

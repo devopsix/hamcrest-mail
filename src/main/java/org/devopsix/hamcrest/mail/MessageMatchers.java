@@ -7,7 +7,9 @@ import static org.hamcrest.Matchers.equalTo;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
+import javax.mail.Address;
 import javax.mail.Message;
+import javax.mail.Message.RecipientType;
 import javax.mail.Part;
 
 import org.devopsix.hamcrest.mail.matchers.MessageHasBcc;
@@ -15,6 +17,7 @@ import org.devopsix.hamcrest.mail.matchers.MessageHasCc;
 import org.devopsix.hamcrest.mail.matchers.MessageHasDate;
 import org.devopsix.hamcrest.mail.matchers.MessageHasFrom;
 import org.devopsix.hamcrest.mail.matchers.MessageHasMultipartBody;
+import org.devopsix.hamcrest.mail.matchers.MessageHasRecipients;
 import org.devopsix.hamcrest.mail.matchers.MessageHasReplyTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSender;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSubject;
@@ -211,6 +214,33 @@ public final class MessageMatchers {
     public static Matcher<Message> hasBcc(String value) {
         requireNonNull(value);
         return new MessageHasBcc(equalTo(value));
+    }
+    
+    /**
+     * Returns a matcher that matches when the given message has a list of recipients
+     * (To, Cc, Bcc) which match the given matcher.
+     * 
+     * @param matcher A matcher for the recipients
+     * @return A matcher for a message
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Message> hasRecipients(Matcher<Iterable<Address>> matcher) {
+        requireNonNull(matcher);
+        return new MessageHasRecipients(matcher);
+    }
+    
+    /**
+     * Returns a matcher that matches when the given message has a list of recipients
+     * of the given type which match the given matcher.
+     * 
+     * @param type Type of recipients
+     * @param matcher A matcher for the recipients
+     * @return A matcher for a message
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Message> hasRecipients(RecipientType type, Matcher<Iterable<Address>> matcher) {
+        requireNonNull(matcher);
+        return new MessageHasRecipients(type, matcher);
     }
     
     /**

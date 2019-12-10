@@ -5,6 +5,7 @@ import static java.time.OffsetDateTime.now;
 import static java.time.OffsetDateTime.parse;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.util.Collections.emptyMap;
+import static javax.mail.Message.RecipientType.CC;
 import static javax.mail.Message.RecipientType.TO;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasBcc;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasCc;
@@ -13,6 +14,7 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasDateHeaders;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasRecipients;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasReplyTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSender;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
@@ -24,11 +26,13 @@ import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.within;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
@@ -136,6 +140,16 @@ public class GreenMailHeaderExampleTest {
     public void messageShouldNotHaveBcc() {
         MimeMessage message = getReceivedMessage();
         assertThat(message, hasBcc(emptyOrNullString()));
+    }
+    
+    @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void messageShouldHaveRecipients() {
+        MimeMessage message = getReceivedMessage();
+        assertThat(message, hasRecipients(iterableWithSize(1)));
+        assertThat(message, hasRecipients(TO, iterableWithSize(1)));
+        assertThat(message, hasRecipients(CC, (Matcher)emptyIterable()));
+        assertThat(message, hasRecipients((Matcher)hasItem(hasProperty("address", equalTo("anna@example.com")))));
     }
     
     @Test
