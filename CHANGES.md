@@ -1,6 +1,6 @@
 # Hamcrest Mail Changes
 
-## Unreleased
+## Version 0.1.0 (14 December 2019)
 
 * Added matcher for verifying DKIM signatures.
 * Added matcher for verifying recipients.

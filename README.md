@@ -9,7 +9,7 @@ To use Hamcrest Mail in a Maven project add this dependency to the pom.xml file:
     <dependency>
         <groupId>org.devopsix</groupId>
         <artifactId>hamcrest-mail</artifactId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.1.0</version>
         <scope>test</scope>
     </dependency>
 
