@@ -7,7 +7,7 @@ It provides matchers for types from the javax.mail package.
 To use Hamcrest Mail in a Maven project add this dependency to the pom.xml file:
 
     <dependency>
-        <groupId>io.github.devopsix</groupId>
+        <groupId>org.devopsix</groupId>
         <artifactId>hamcrest-mail</artifactId>
         <version>0.0.4-SNAPSHOT</version>
         <scope>test</scope>
