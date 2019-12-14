@@ -10,8 +10,11 @@ import java.util.Map;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
 import javax.mail.Part;
 
+import org.devopsix.hamcrest.mail.matchers.AddressHasAddress;
+import org.devopsix.hamcrest.mail.matchers.AddressHasPersonal;
 import org.devopsix.hamcrest.mail.matchers.MessageHasBcc;
 import org.devopsix.hamcrest.mail.matchers.MessageHasCc;
 import org.devopsix.hamcrest.mail.matchers.MessageHasDate;
@@ -241,6 +244,36 @@ public final class MessageMatchers {
     public static Matcher<Message> hasRecipients(RecipientType type, Matcher<Iterable<Address>> matcher) {
         requireNonNull(matcher);
         return new MessageHasRecipients(type, matcher);
+    }
+    
+    /**
+     * Returns a matcher that matchers when the given address is an {@code InternetAddress}
+     * with an {@code address} property that matches the given matcher.
+     * 
+     * @see InternetAddress#getAddress()
+     * 
+     * @param matcher A matcher for the address part
+     * @return A matcher for an Address
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Address> hasAddress(Matcher<String> matcher) {
+        requireNonNull(matcher);
+        return new AddressHasAddress(matcher);
+    }
+    
+    /**
+     * Returns a matcher that matchers when the given address is an {@code InternetAddress}
+     * with an {@code personal} property that matches the given matcher.
+     * 
+     * @see InternetAddress#getPersonal()
+     * 
+     * @param matcher A matcher for the address part
+     * @return A matcher for an Address
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Address> hasPersonal(Matcher<String> matcher) {
+        requireNonNull(matcher);
+        return new AddressHasPersonal(matcher);
     }
     
     /**

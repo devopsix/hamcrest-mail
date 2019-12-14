@@ -7,6 +7,7 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.util.Collections.emptyMap;
 import static javax.mail.Message.RecipientType.CC;
 import static javax.mail.Message.RecipientType.TO;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasAddress;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasBcc;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasCc;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasDate;
@@ -14,6 +15,7 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasDateHeaders;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasPersonal;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasRecipients;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasReplyTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSender;
@@ -24,6 +26,7 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.sameOrBefore;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.within;
 import static org.hamcrest.Matchers.arrayWithSize;
+import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.emptyIterable;
@@ -32,7 +35,6 @@ import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
@@ -61,7 +63,7 @@ import com.icegreen.greenmail.junit.GreenMailRule;
  * @author devopsix
  *
  */
-public class GreenMailHeaderExampleTest {
+public class GreenMailExampleTest {
 
     // This rule will fire up an SMTP server listening at 127.0.0.1:3025
     // for every test.
@@ -80,7 +82,7 @@ public class GreenMailHeaderExampleTest {
         Session session = Session.getDefaultInstance(properties);
         MimeMessage message = new MimeMessage(session);
         message.setFrom("bob@example.com");
-        message.setRecipients(TO, "anna@example.com");
+        message.setRecipients(TO, "Anna <anna@example.com>");
         message.setSubject("Message from Bob");
         message.setHeader("X-Custom-Header", "Foo");
         message.addHeader("X-Custom-Multi-Header", "Foo");
@@ -125,9 +127,9 @@ public class GreenMailHeaderExampleTest {
     public void messageShouldHaveTo() {
         MimeMessage message = getReceivedMessage();
         assertThat(message, hasTo(not(emptyOrNullString())));
-        assertThat(message, hasTo("anna@example.com"));
-        assertThat(message, hasTo(equalTo("anna@example.com")));
-        assertThat(message, hasTo(endsWith("@example.com")));
+        assertThat(message, hasTo("Anna <anna@example.com>"));
+        assertThat(message, hasTo(equalTo("Anna <anna@example.com>")));
+        assertThat(message, hasTo(endsWith("@example.com>")));
     }
     
     @Test
@@ -149,7 +151,9 @@ public class GreenMailHeaderExampleTest {
         assertThat(message, hasRecipients(iterableWithSize(1)));
         assertThat(message, hasRecipients(TO, iterableWithSize(1)));
         assertThat(message, hasRecipients(CC, (Matcher)emptyIterable()));
-        assertThat(message, hasRecipients((Matcher)hasItem(hasProperty("address", equalTo("anna@example.com")))));
+        assertThat(message, hasRecipients((Matcher)hasItem(hasAddress(equalTo("anna@example.com")))));
+        assertThat(message, hasRecipients(TO, (Matcher)hasItem(
+            both(hasAddress(equalTo("anna@example.com"))).and(hasPersonal(equalTo("Anna"))))));
     }
     
     @Test

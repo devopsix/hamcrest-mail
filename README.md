@@ -19,34 +19,27 @@ Here are a few examples:
 
     Message message;
     Assert.assertThat(message, MessageMatchers.hasFrom("anna@example.com"));
-
-    Message message;
+    
     Assert.assertThat(message, MessageMatchers.hasTo("bob@example.com"));
-
-    Message message;
+    
     Assert.assertThat(message, MessageMatchers.hasRecipients(Matchers.iterableWithSize(1)));
-
-    Message message;
+    
     Assert.assertThat(message, MessageMatchers.hasSubject("Message from Anna"));
-
-    Message message;
+    
     Assert.assertThat(message, MessageMatchers.hasHeader("Return-Path", Matchers.notNullValue()));
-
-    Message message;
+    
     Assert.assertThat(message, MessageMatchers.hasDateHeader("Resent-Date", Matchers.isA(OffsetDateTime.class)));
-
-    Message message;
+    
     // OffsetDateTimeMatchers is from eXparity/hamcrest-date:
     // https://github.com/eXparity/hamcrest-date
     Assert.assertThat(message, MessageMatchers.hasDate(OffsetDateTimeMatchers.within(1, MINUTES, now())));
-
-    Message message;
+    
     // Casting to Matcher is required when a matcher's signature is
     // Matcher<Iterable<? extends T>> or Matcher<Iterable<? super T>>
     Assert.assertThat(message, MessageMatchers.hasHeaders("Received", (Matcher)Matchers.hasItems(
             Matchers.containsString("host1"), Matchers.containsString("host2"))));
 
-More example can be found in the [`examples`](examples/) directory.
+More example can be found in the [examples](examples/) directory.
 
 ## Matchers
 
@@ -58,6 +51,8 @@ More example can be found in the [`examples`](examples/) directory.
 * __hasCc__ - Tests the `Cc` header against a given string or matcher
 * __hasBcc__ - Tests the `Bcc` header against a given string or matcher
 * __hasRecipients__ - Tests a message's recipients against a given matcher
+* __hasAddress__ - Tests an InternetAdress' address against a given matcher
+* __hasPersonal__ - Tests an InternetAdress' personal name against a given matcher
 * __hasSubject__ - Tests the `Subject` header against a given string or matcher
 * __hasHeader__ - Tests a named header against a given string or matcher
 * __hasHeaders__ - Tests a named header which may occur multiple times against a given matcher

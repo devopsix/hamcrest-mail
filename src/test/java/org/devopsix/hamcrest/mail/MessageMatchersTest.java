@@ -170,6 +170,22 @@ public class MessageMatchersTest {
     }
     
     @Test
+    public void hasAddressShouldReturnMatcher() throws Exception {
+        Address address = new InternetAddress("anna@example.com");
+        Matcher<Address> matcher = MessageMatchers.hasAddress(is("anna@example.com"));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(address, matcher);
+    }
+    
+    @Test
+    public void hasPersonalShouldReturnMatcher() throws Exception {
+        Address address = new InternetAddress("Anna <anna@example.com>");
+        Matcher<Address> matcher = MessageMatchers.hasPersonal(is("Anna"));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(address, matcher);
+    }
+    
+    @Test
     public void hasSubjectWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
         Matcher<Message> matcher = MessageMatchers.hasSubject(any(String.class));
