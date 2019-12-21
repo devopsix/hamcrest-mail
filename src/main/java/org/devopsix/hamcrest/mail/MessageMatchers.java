@@ -10,8 +10,8 @@ import java.util.Map;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
 import javax.mail.Part;
+import javax.mail.internet.InternetAddress;
 
 import org.devopsix.hamcrest.mail.matchers.AddressHasAddress;
 import org.devopsix.hamcrest.mail.matchers.AddressHasPersonal;
@@ -24,13 +24,13 @@ import org.devopsix.hamcrest.mail.matchers.MessageHasRecipients;
 import org.devopsix.hamcrest.mail.matchers.MessageHasReplyTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSender;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSubject;
-import org.devopsix.hamcrest.mail.matchers.MessageHasTextBody;
 import org.devopsix.hamcrest.mail.matchers.MessageHasTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasValidDkimSignature;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeaders;
 import org.devopsix.hamcrest.mail.matchers.PartHasHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasHeaders;
+import org.devopsix.hamcrest.mail.matchers.PartHasTextContent;
 import org.hamcrest.Matcher;
 
 public final class MessageMatchers {
@@ -399,26 +399,26 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given message has a plain text body
+     * Returns a matcher that matches when the given part has plain text content
      * ({@code Content-Type: text/plain}) with any content.
      * 
-     * @return A matcher for a message
+     * @return A matcher for a message part
      */
-    public static Matcher<Message> hasTextBody() {
-        return new MessageHasTextBody(any(String.class));
+    public static Matcher<Part> hasTextContent() {
+        return new PartHasTextContent(any(String.class));
     }
 
     /**
-     * Returns a matcher that matches when the given message has a plain text body
+     * Returns a matcher that matches when the given part has plain text content
      * ({@code Content-Type: text/plain}) which matches the given matcher.
      * 
-     * @param matcher The value matcher
-     * @return A matcher for a message
+     * @param matcher The conent matcher
+     * @return A matcher for a message part
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
-    public static Matcher<Message> hasTextBody(Matcher<String> matcher) {
+    public static Matcher<Part> hasTextContent(Matcher<String> matcher) {
         requireNonNull(matcher);
-        return new MessageHasTextBody(matcher);
+        return new PartHasTextContent(matcher);
     }
 
     /**

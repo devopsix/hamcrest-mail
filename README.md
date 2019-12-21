@@ -59,7 +59,7 @@ More example can be found in the [examples](examples/) directory.
 * __hasDateHeader__ - Tests a named date header against a given date or matcher
 * __hasDateHeaders__ - Tests a named date header which may occur multiple times against a given matcher
 * __hasValidDkimSignature__ - Tests a message for having a valid [DKIM][] signature
-* __hasTextBody__ - Tests a message for having a plain text body against a given matcher
+* __hasTextContent__ - Tests a message or a part of a multipart message for having plain text content against a given matcher
 * __hasMultipartBody__ - Tests a message for having a multipart body
 
 [Java Hamcrest]: http://github.com/hamcrest/JavaHamcrest

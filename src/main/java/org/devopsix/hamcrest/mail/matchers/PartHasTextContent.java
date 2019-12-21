@@ -7,8 +7,8 @@ import static org.hamcrest.Condition.notMatched;
 
 import java.io.IOException;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Part;
 
 import org.hamcrest.Condition;
 import org.hamcrest.Description;
@@ -16,43 +16,43 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher for plain text bodies.
+ * A matcher for plain text content.
  * 
  * @author devopsix
  *
  */
-public class MessageHasTextBody extends TypeSafeDiagnosingMatcher<Message> {
+public class PartHasTextContent extends TypeSafeDiagnosingMatcher<Part> {
     
-    final Matcher<String> bodyMatcher;
+    final Matcher<String> matcher;
 
-    public MessageHasTextBody(Matcher<String> bodyMatcher) {
-        this.bodyMatcher = bodyMatcher;
+    public PartHasTextContent(Matcher<String> matcher) {
+        this.matcher = matcher;
     }
 
     @Override
-    protected boolean matchesSafely(Message message, Description mismatch) {
-        return body(message, mismatch).matching(bodyMatcher);
+    protected boolean matchesSafely(Part part, Description mismatch) {
+        return body(part, mismatch).matching(matcher);
     }
     
-    private Condition<String> body(Message message, Description mismatch) {
+    private Condition<String> body(Part part, Description mismatch) {
         Object content;
         try {
-            content = message.getContent();
+            content = part.getContent();
         } catch (IOException | MessagingException e) {
-            mismatch.appendText(format("failed to extract body: ", e.getMessage()));
+            mismatch.appendText(format("failed to extract content: ", e.getMessage()));
             return notMatched();
         }
         if (content instanceof String) {
             return matched((String)content, mismatch);
         } else {
-            mismatch.appendText(format("not a text body: %s", isNull(content) ? null : content.getClass().getSimpleName()));
+            mismatch.appendText(format("not text content: %s", isNull(content) ? null : content.getClass().getSimpleName()));
             return notMatched();
         }
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("has a body which matches: ");
-        bodyMatcher.describeTo(description);
+        description.appendText("has text conent which matches: ");
+        matcher.describeTo(description);
     }
 }

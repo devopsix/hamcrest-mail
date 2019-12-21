@@ -20,7 +20,7 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasRecipients;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasReplyTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSender;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
-import static org.devopsix.hamcrest.mail.MessageMatchers.hasTextBody;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasTextContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.sameOrBefore;
@@ -214,7 +214,7 @@ public class GreenMailExampleTest {
     @Test
     public void messageShouldHaveTextBody() {
         MimeMessage message = getReceivedMessage();
-        assertThat(message, hasTextBody(containsString("Lorem ipsum")));
+        assertThat(message, hasTextContent(containsString("Lorem ipsum")));
     }
     
     private MimeMessage getReceivedMessage() {

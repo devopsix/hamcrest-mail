@@ -252,17 +252,17 @@ public class MessageMatchersTest {
     }
     
     @Test
-    public void hasTextBodyShouldReturnMatcher() throws Exception {
+    public void hasTextContentShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasTextBody();
+        Matcher<Part> matcher = MessageMatchers.hasTextContent();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
     
     @Test
-    public void hasTextBodyWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasTextContentWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasTextBody(equalTo("Lorem ipsum"));
+        Matcher<Part> matcher = MessageMatchers.hasTextContent(equalTo("Lorem ipsum"));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
