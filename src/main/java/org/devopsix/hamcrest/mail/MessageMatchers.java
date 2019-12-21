@@ -2,7 +2,9 @@ package org.devopsix.hamcrest.mail;
 
 import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.any;
+import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -26,6 +28,7 @@ import org.devopsix.hamcrest.mail.matchers.MessageHasSender;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSubject;
 import org.devopsix.hamcrest.mail.matchers.MessageHasTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasValidDkimSignature;
+import org.devopsix.hamcrest.mail.matchers.PartHasBinaryContent;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeaders;
 import org.devopsix.hamcrest.mail.matchers.PartHasHeader;
@@ -412,13 +415,36 @@ public final class MessageMatchers {
      * Returns a matcher that matches when the given part has plain text content
      * ({@code Content-Type: text/plain}) which matches the given matcher.
      * 
-     * @param matcher The conent matcher
+     * @param matcher The content matcher
      * @return A matcher for a message part
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasTextContent(Matcher<String> matcher) {
         requireNonNull(matcher);
         return new PartHasTextContent(matcher);
+    }
+
+    /**
+     * Returns a matcher that matches when the given part has binary content
+     * ({@code Content-Type: text/plain}) with any (non-empty) content.
+     * 
+     * @return A matcher for a message part
+     */
+    public static Matcher<Part> hasBinaryContent() {
+        return new PartHasBinaryContent(not(emptyArray()));
+    }
+
+    /**
+     * Returns a matcher that matches when the given part has binary content
+     * ({@code Content-Type: text/plain}) which matches the given matcher.
+     * 
+     * @param matcher The content matcher
+     * @return A matcher for a message part
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Part> hasBinaryContent(Matcher<Byte[]> matcher) {
+        requireNonNull(matcher);
+        return new PartHasBinaryContent(matcher);
     }
 
     /**

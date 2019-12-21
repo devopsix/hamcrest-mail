@@ -60,6 +60,7 @@ More example can be found in the [examples](examples/) directory.
 * __hasDateHeaders__ - Tests a named date header which may occur multiple times against a given matcher
 * __hasValidDkimSignature__ - Tests a message for having a valid [DKIM][] signature
 * __hasTextContent__ - Tests a message or a part of a multipart message for having plain text content against a given matcher
+* __hasBinaryContent__ - Tests a message or a part of a multipart message for having binary content against a given matcher
 * __hasMultipartBody__ - Tests a message for having a multipart body
 
 [Java Hamcrest]: http://github.com/hamcrest/JavaHamcrest

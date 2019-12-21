@@ -8,10 +8,12 @@ import static javax.mail.Message.RecipientType.CC;
 import static javax.mail.Message.RecipientType.TO;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
+import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.ByteArrayInputStream;
@@ -268,6 +270,22 @@ public class MessageMatchersTest {
     }
     
     @Test
+    public void hasBinaryContentShouldReturnMatcher() throws Exception {
+        Part part = createBinaryPart();
+        Matcher<Part> matcher = MessageMatchers.hasBinaryContent();
+        assertThat(matcher, is(notNullValue()));
+        assertThat(part, matcher);
+    }
+    
+    @Test
+    public void hasBinaryContentWithMatcherShouldReturnMatcher() throws Exception {
+        Part part = createBinaryPart();
+        Matcher<Part> matcher = MessageMatchers.hasBinaryContent(not(emptyArray()));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(part, matcher);
+    }
+    
+    @Test
     public void hasMultipartBodyShouldReturnMatcher() throws Exception {
         Message message = createMultipartMessage();
         Matcher<Message> matcher = MessageMatchers.hasMultipartBody();
@@ -297,13 +315,17 @@ public class MessageMatchersTest {
     
     private Message createMultipartMessage() throws IOException, FailException, MessagingException {
         Message message = createMessage();
-        InternetHeaders headers = new InternetHeaders();
-        headers.addHeader("Content-Type", "application/octet-stream");
-        message.setContent(new MimeMultipart(new MimeBodyPart(headers, new byte[] {1,2,3})));
+        message.setContent(new MimeMultipart(createBinaryPart()));
         signMessage(message);
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         message.writeTo(buffer);
         return new MimeMessage(message.getSession(), new ByteArrayInputStream(buffer.toByteArray()));
+    }
+    
+    private MimeBodyPart createBinaryPart() throws MessagingException {
+        InternetHeaders headers = new InternetHeaders();
+        headers.addHeader("Content-Type", "application/octet-stream");
+        return new MimeBodyPart(headers, new byte[] {1,2,3});
     }
     
     private MimeMessage createMessage() throws IOException, FailException, MessagingException {
