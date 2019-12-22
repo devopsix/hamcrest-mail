@@ -1,13 +1,14 @@
 package org.devopsix.hamcrest.mail.matchers;
 
 import static java.lang.String.format;
-import static java.util.Objects.isNull;
 import static org.devopsix.hamcrest.mail.util.ArrayUtils.toObject;
+import static org.devopsix.hamcrest.mail.util.IOUtils.toByteArray;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 import javax.mail.MessagingException;
 import javax.mail.Part;
@@ -32,12 +33,12 @@ public class PartHasBinaryContent extends TypeSafeDiagnosingMatcher<Part> {
     
     private Condition<Byte[]> content(Part part, Description mismatch) {
         try {
-            Object content = part.getContent();
-            if (content instanceof InputStream) {
-                return matched(toObject(((InputStream)content).readAllBytes()), mismatch);
-            } else {
-                mismatch.appendText(format("not binary content: %s", isNull(content) ? null : content.getClass().getSimpleName()));
+            InputStream data = part.getDataHandler().getInputStream();
+            if (Objects.isNull(data)) {
+                mismatch.appendText("null");
                 return notMatched();
+            } else {
+                return matched(toObject(toByteArray(data)), mismatch);
             }
         } catch (IOException | MessagingException e) {
             mismatch.appendText(format("failed to extract content: ", e.getMessage()));

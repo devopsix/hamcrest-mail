@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 
+import javax.activation.DataHandler;
 import javax.mail.MessagingException;
 import javax.mail.Part;
 
@@ -21,7 +22,7 @@ public class PartHasBinaryContentTest extends MatcherTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Part part = mock(Part.class);
-        when(part.getContent()).thenThrow(new MessagingException("error deocding header"));
+        when(part.getDataHandler()).thenThrow(new MessagingException("error deocding header"));
         PartHasBinaryContent matcher = new PartHasBinaryContent((Matcher)anything());
         assertThat(part, not(matcher));
     }
@@ -29,16 +30,20 @@ public class PartHasBinaryContentTest extends MatcherTest {
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void shouldNotMatchWhenContentIsNull() throws Exception {
+        DataHandler dataHandler = mock(DataHandler.class);
+        when(dataHandler.getInputStream()).thenReturn(null);
         Part part = mock(Part.class);
-        when(part.getContent()).thenReturn(null);
+        when(part.getDataHandler()).thenReturn(dataHandler);
         PartHasBinaryContent matcher = new PartHasBinaryContent((Matcher)anything());
         assertThat(part, not(matcher));
     }
     
     @Test
     public void shouldMatchWhenContentIsPresent() throws Exception {
+        DataHandler dataHandler = mock(DataHandler.class);
+        when(dataHandler.getInputStream()).thenReturn(new ByteArrayInputStream(new byte[] {1,2,3}));
         Part part = mock(Part.class);
-        when(part.getContent()).thenReturn(new ByteArrayInputStream(new byte[] {1,2,3}));
+        when(part.getDataHandler()).thenReturn(dataHandler);
         PartHasBinaryContent matcher = new PartHasBinaryContent(arrayWithSize(3));
         assertThat(part, matcher);
     }
