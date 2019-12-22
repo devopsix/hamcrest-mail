@@ -31,13 +31,13 @@ public class PartHasMultipartContent extends TypeSafeDiagnosingMatcher<Part> {
     }
 
     @Override
-    protected boolean matchesSafely(Part message, Description mismatch) {
-        return body(message, mismatch).matching(matcher);
+    protected boolean matchesSafely(Part part, Description mismatch) {
+        return content(part, mismatch).matching(matcher);
     }
     
-    private Condition<Multipart> body(Part message, Description mismatch) {
+    private Condition<Multipart> content(Part part, Description mismatch) {
         try {
-            Object content = message.getContent();
+            Object content = part.getContent();
             if (content instanceof Multipart) {
                 return matched((Multipart)content, mismatch);
             } else {

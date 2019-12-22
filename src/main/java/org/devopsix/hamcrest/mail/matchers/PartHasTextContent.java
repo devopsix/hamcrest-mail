@@ -31,10 +31,10 @@ public class PartHasTextContent extends TypeSafeDiagnosingMatcher<Part> {
 
     @Override
     protected boolean matchesSafely(Part part, Description mismatch) {
-        return body(part, mismatch).matching(matcher);
+        return content(part, mismatch).matching(matcher);
     }
     
-    private Condition<String> body(Part part, Description mismatch) {
+    private Condition<String> content(Part part, Description mismatch) {
         Object content;
         try {
             content = part.getContent();

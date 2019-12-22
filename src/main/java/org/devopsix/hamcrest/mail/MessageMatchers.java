@@ -3,9 +3,7 @@ package org.devopsix.hamcrest.mail;
 import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
 
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -432,8 +430,9 @@ public final class MessageMatchers {
      * 
      * @return A matcher for a message part
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Matcher<Part> hasBinaryContent() {
-        return new PartHasBinaryContent(not(emptyArray()));
+        return new PartHasBinaryContent((Matcher)anything());
     }
 
     /**
