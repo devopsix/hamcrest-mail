@@ -10,6 +10,8 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasTextContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
+import static org.devopsix.hamcrest.mail.MessageMatchers.multipartContentType;
+import static org.devopsix.hamcrest.mail.MessageMatchers.multipartMixed;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.isDay;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
@@ -17,6 +19,7 @@ import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
@@ -112,8 +115,10 @@ public class MessageFileExampleTest {
     }
     
     @Test
-    public void messageShouldHaveMultipartBody() {
-        assertThat(message, hasMultipartContent());
+    public void messageShouldHaveMultipartContent() {
         assertThat(message, not(hasTextContent()));
+        assertThat(message, hasMultipartContent());
+        assertThat(message, hasMultipartContent(is(multipartMixed())));
+        assertThat(message, hasMultipartContent(is(multipartContentType(startsWith("multipart/mixed;")))));
     }
 }

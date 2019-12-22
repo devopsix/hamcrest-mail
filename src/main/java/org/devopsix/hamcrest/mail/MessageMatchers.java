@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
 
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -27,6 +28,7 @@ import org.devopsix.hamcrest.mail.matchers.MessageHasSender;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSubject;
 import org.devopsix.hamcrest.mail.matchers.MessageHasTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasValidDkimSignature;
+import org.devopsix.hamcrest.mail.matchers.MultipartHasContentType;
 import org.devopsix.hamcrest.mail.matchers.PartHasBinaryContent;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeaders;
@@ -470,5 +472,43 @@ public final class MessageMatchers {
     public static Matcher<Part> hasMultipartContent(Matcher<Multipart> matcher) {
         requireNonNull(matcher);
         return new PartHasMultipartContent(matcher);
+    }
+    
+    /**
+     * Returns a matcher that matches when the given multipart has 
+     * {@code multipart/mixed} content type.
+     * 
+     * @param matcher The content matcher
+     * @return A matcher for a multipart
+     */
+    public static Matcher<Multipart> multipartMixed() {
+        return new MultipartHasContentType(startsWith("multipart/mixed"));
+    }
+    
+    /**
+     * Returns a matcher that matches when the given multipart has 
+     * {@code multipart/alternative} content type.
+     * 
+     * @param matcher The content matcher
+     * @return A matcher for a multipart
+     */
+    public static Matcher<Multipart> multipartAlternative() {
+        return new MultipartHasContentType(startsWith("multipart/alternative"));
+    }
+    
+    /**
+     * <p>Returns a matcher that matches when the given multipart has a content type
+     * which matches the given matcher.</p>
+     * 
+     * <p>Mind that the content type string contains line breaks and the boundary,
+     * e.g. {@code multipart/alternative; \r\n\tboundary="----=_Part_17_872522004.1577017605979"}.</p>
+     * 
+     * @param matcher The content matcher
+     * @return A matcher for a multipart
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Multipart> multipartContentType(Matcher<String> matcher) {
+        requireNonNull(matcher);
+        return new MultipartHasContentType(matcher);
     }
 }

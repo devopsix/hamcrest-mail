@@ -32,6 +32,7 @@ import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -303,6 +304,30 @@ public class MessageMatchersTest {
         assertThat(message, matcher);
     }
     
+    @Test
+    public void isMixedShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartMixed();
+        Matcher<Multipart> matcher = MessageMatchers.multipartMixed();
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void isAlternativeShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartAlternative();
+        Matcher<Multipart> matcher = MessageMatchers.multipartAlternative();
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void multipartContentTypeShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartAlternative();
+        Matcher<Multipart> matcher = MessageMatchers.multipartContentType(any(String.class));
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+
     private static final KeyPair keyPair;
     static {
         try {
@@ -336,6 +361,14 @@ public class MessageMatchersTest {
         InternetHeaders headers = new InternetHeaders();
         headers.addHeader("Content-Type", "application/octet-stream");
         return new MimeBodyPart(headers, new byte[] {1,2,3});
+    }
+    
+    private Multipart createMultipartMixed() throws MessagingException {
+        return new MimeMultipart("mixed", createBinaryPart(), createBinaryPart());
+    }
+    
+    private Multipart createMultipartAlternative() throws MessagingException {
+        return new MimeMultipart("alternative", createBinaryPart(), createBinaryPart());
     }
     
     private MimeMessage createMessage() throws IOException, FailException, MessagingException {

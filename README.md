@@ -62,6 +62,8 @@ More example can be found in the [examples](examples/) directory.
 * __hasTextContent__ - Tests a message or a part of a multipart message for having plain text content against a given matcher
 * __hasBinaryContent__ - Tests a message or a part of a multipart message for having binary content against a given matcher
 * __hasMultipartContent__ - Tests a message or a part of a multipart message for having multipart content against a given matcher
+* __multipartMixed__ - Tests a multipart for having `multipart/mixed` content type
+* __multipartAlternative__ - Tests a multipart for having `multipart/alternative` content type
 
 [Java Hamcrest]: http://github.com/hamcrest/JavaHamcrest
 [DKIM]: https://tools.ietf.org/html/rfc4871
