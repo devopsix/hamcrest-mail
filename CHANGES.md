@@ -1,5 +1,10 @@
 # Hamcrest Mail Changes
 
+## Version 0.2.0 (22 December 2019)
+
+* Added matchers for verifying multipart content.
+* Added matcher for verifying binary content.
+
 ## Version 0.1.0 (14 December 2019)
 
 * Added matcher for verifying DKIM signatures.

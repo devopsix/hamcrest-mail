@@ -9,7 +9,7 @@ To use Hamcrest Mail in a Maven project add this dependency to the pom.xml file:
     <dependency>
         <groupId>org.devopsix</groupId>
         <artifactId>hamcrest-mail</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
         <scope>test</scope>
     </dependency>
 
@@ -59,11 +59,15 @@ More example can be found in the [examples](examples/) directory.
 * __hasDateHeader__ - Tests a named date header against a given date or matcher
 * __hasDateHeaders__ - Tests a named date header which may occur multiple times against a given matcher
 * __hasValidDkimSignature__ - Tests a message for having a valid [DKIM][] signature
-* __hasTextContent__ - Tests a message or a part of a multipart message for having plain text content against a given matcher
-* __hasBinaryContent__ - Tests a message or a part of a multipart message for having binary content against a given matcher
-* __hasMultipartContent__ - Tests a message or a part of a multipart message for having multipart content against a given matcher
+* __hasTextContent__ - Tests a message or a part of a multipart message for having plain text content matching a given matcher
+* __hasBinaryContent__ - Tests a message or a part of a multipart message for having binary content matching a given matcher
+* __hasMultipartContent__ - Tests a message or a part of a multipart message for having multipart content matching a given matcher
 * __multipartMixed__ - Tests a multipart for having `multipart/mixed` content type
 * __multipartAlternative__ - Tests a multipart for having `multipart/alternative` content type
+* __multipartRelated__ - Tests a multipart for having `multipart/related` content type
+* __multipartContentType__ - Tests a multipart's content type against a given matcher
+* __hasPart__ - Tests a multipart for having at least one part matching a given matcher
+* __hasParts__ - Tests a multipart for having parts matching a given matcher
 
 [Java Hamcrest]: http://github.com/hamcrest/JavaHamcrest
 [DKIM]: https://tools.ietf.org/html/rfc4871
