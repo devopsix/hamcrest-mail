@@ -51,7 +51,7 @@ abstract class AbstractMultiHeaderMatcher<P extends Part,T> extends TypeSafeDiag
         try {
             values = part.getHeader(header);
         } catch (MessagingException e) {
-            mismatch.appendText(format("failed to extract %s headers: ", header) + e.getMessage());
+            mismatch.appendText(format("failed to extract %s headers: %s", header, e.getMessage()));
             return notMatched();
         }
         if (isEmpty(values)) {

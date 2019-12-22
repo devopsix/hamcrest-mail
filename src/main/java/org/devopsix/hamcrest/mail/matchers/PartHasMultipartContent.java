@@ -45,7 +45,7 @@ public class PartHasMultipartContent extends TypeSafeDiagnosingMatcher<Part> {
                 return notMatched();
             }
         } catch (IOException | MessagingException e) {
-            mismatch.appendText(format("failed to extract content: ", e.getMessage()));
+            mismatch.appendText(format("failed to extract content: %s", e.getMessage()));
             return notMatched();
         }
     }

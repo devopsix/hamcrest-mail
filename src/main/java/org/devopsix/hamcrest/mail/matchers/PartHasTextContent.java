@@ -39,7 +39,7 @@ public class PartHasTextContent extends TypeSafeDiagnosingMatcher<Part> {
         try {
             content = part.getContent();
         } catch (IOException | MessagingException e) {
-            mismatch.appendText(format("failed to extract content: ", e.getMessage()));
+            mismatch.appendText(format("failed to extract content: %s", e.getMessage()));
             return notMatched();
         }
         if (content instanceof String) {

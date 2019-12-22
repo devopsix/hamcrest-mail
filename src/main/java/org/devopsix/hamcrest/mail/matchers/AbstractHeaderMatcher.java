@@ -48,7 +48,7 @@ abstract class AbstractHeaderMatcher<P extends Part,T>  extends TypeSafeDiagnosi
         try {
             values = part.getHeader(header);
         } catch (MessagingException e) {
-            mismatch.appendText(format("failed to extract %s header: ", header) + e.getMessage());
+            mismatch.appendText(format("failed to extract %s header: %s", header, e.getMessage()));
             return notMatched();
         }
         if (isEmpty(values)) {

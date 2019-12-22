@@ -62,7 +62,7 @@ public class MessageHasRecipients extends TypeSafeDiagnosingMatcher<Message> {
                 recipients = message.getRecipients(type);
             }
         } catch (MessagingException e) {
-            mismatch.appendText("failed to extract recipients: " + e.getMessage());
+            mismatch.appendText(format("failed to extract recipients: %s", e.getMessage()));
             return notMatched();
         }
         return matched(isNull(recipients) ? emptyList() : asList(recipients), mismatch);

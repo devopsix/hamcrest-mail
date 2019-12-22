@@ -19,7 +19,7 @@ public class PartHasMultipartContentTest extends MatcherTest {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Part part = mock(Part.class);
-        when(part.getContent()).thenThrow(new MessagingException("error deocding header"));
+        when(part.getContent()).thenThrow(new MessagingException("error deocding content"));
         PartHasMultipartContent matcher = new PartHasMultipartContent((Matcher)anything());
         assertThat(part, not(matcher));
     }
