@@ -481,7 +481,6 @@ public final class MessageMatchers {
      * Returns a matcher that matches when the given multipart has 
      * {@code multipart/mixed} content type.
      * 
-     * @param matcher The content matcher
      * @return A matcher for a multipart
      */
     public static Matcher<Multipart> multipartMixed() {
@@ -492,7 +491,6 @@ public final class MessageMatchers {
      * Returns a matcher that matches when the given multipart has 
      * {@code multipart/alternative} content type.
      * 
-     * @param matcher The content matcher
      * @return A matcher for a multipart
      */
     public static Matcher<Multipart> multipartAlternative() {
@@ -503,7 +501,6 @@ public final class MessageMatchers {
      * Returns a matcher that matches when the given multipart has 
      * {@code multipart/related} content type.
      * 
-     * @param matcher The content matcher
      * @return A matcher for a multipart
      */
     public static Matcher<Multipart> multipartRelated() {
@@ -556,6 +553,7 @@ public final class MessageMatchers {
     /**
      * Returns a matcher that matches when the given multipart has the give number of parts,
      * 
+     * @param size The number of parts
      * @return A matcher for a multipart
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
