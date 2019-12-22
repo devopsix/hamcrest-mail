@@ -1,19 +1,25 @@
 package examples;
 
 import static java.util.Collections.singletonMap;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasBinaryContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasDate;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartContent;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasPart;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasParts;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasTextContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
+import static org.devopsix.hamcrest.mail.MessageMatchers.multipartAlternative;
 import static org.devopsix.hamcrest.mail.MessageMatchers.multipartContentType;
 import static org.devopsix.hamcrest.mail.MessageMatchers.multipartMixed;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.isDay;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.endsWith;
@@ -120,5 +126,35 @@ public class MessageFileExampleTest {
         assertThat(message, hasMultipartContent());
         assertThat(message, hasMultipartContent(is(multipartMixed())));
         assertThat(message, hasMultipartContent(is(multipartContentType(startsWith("multipart/mixed;")))));
+        assertThat(message, hasMultipartContent(hasParts(2)));
+    }
+    
+    @Test
+    public void messageShouldHaveAlternativeTextAndHtmlContent() {
+        // The message has multipart/mixed content which contains another
+        // multipart/alternative part which has a plain text and an HTML part.
+        assertThat(message, hasMultipartContent(hasPart(hasMultipartContent(allOf(
+            multipartAlternative(),
+            hasParts(2),
+            hasPart(allOf(
+                hasHeader("Content-Type", startsWith("text/plain;")),
+                hasTextContent(containsString("Lorem ipsum"))
+            )),
+            hasPart(allOf(
+                hasHeader("Content-Type", startsWith("text/html;")),
+                hasTextContent(containsString("Lorem ipsum"))
+            ))
+        )))));
+    }
+    
+    @Test
+    public void messageShouldHaveImageAttachment() {
+        // The message has multipart/mixed content which contains
+        // the image attachment.
+        assertThat(message, hasMultipartContent(hasPart(allOf(
+            hasHeader("Content-Type", startsWith("image/jpeg;")),
+            hasHeader("Content-Disposition", containsString("lena.jpg")),
+            hasBinaryContent(arrayWithSize(67683))
+        ))));
     }
 }

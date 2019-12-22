@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.startsWith;
 
 import java.time.OffsetDateTime;
@@ -29,6 +30,7 @@ import org.devopsix.hamcrest.mail.matchers.MessageHasSubject;
 import org.devopsix.hamcrest.mail.matchers.MessageHasTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasValidDkimSignature;
 import org.devopsix.hamcrest.mail.matchers.MultipartHasContentType;
+import org.devopsix.hamcrest.mail.matchers.MultipartHasParts;
 import org.devopsix.hamcrest.mail.matchers.PartHasBinaryContent;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeaders;
@@ -37,6 +39,7 @@ import org.devopsix.hamcrest.mail.matchers.PartHasHeaders;
 import org.devopsix.hamcrest.mail.matchers.PartHasMultipartContent;
 import org.devopsix.hamcrest.mail.matchers.PartHasTextContent;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 public final class MessageMatchers {
 
@@ -510,5 +513,42 @@ public final class MessageMatchers {
     public static Matcher<Multipart> multipartContentType(Matcher<String> matcher) {
         requireNonNull(matcher);
         return new MultipartHasContentType(matcher);
+    }
+
+    /**
+     * Returns a matcher that matches when the given multipart's parts
+     * match the given matcher.
+     * 
+     * @param matcher The parts matcher
+     * @return A matcher for a multipart
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Multipart> hasParts(Matcher<Iterable<Part>> matcher) {
+        requireNonNull(matcher);
+        return new MultipartHasParts(matcher);
+    }
+
+    /**
+     * Returns a matcher that matches when the given multipart has at least one part
+     * which matches the given matcher.
+     * 
+     * @param matcher The part matcher
+     * @return A matcher for a multipart
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Matcher<Multipart> hasPart(Matcher<Part> matcher) {
+        requireNonNull(matcher);
+        return new MultipartHasParts((Matcher)hasItem(matcher));
+    }
+
+    /**
+     * Returns a matcher that matches when the given multipart has the give number of parts,
+     * 
+     * @return A matcher for a multipart
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Matcher<Multipart> hasParts(int size) {
+        return new MultipartHasParts((Matcher)Matchers.hasSize(size));
     }
 }

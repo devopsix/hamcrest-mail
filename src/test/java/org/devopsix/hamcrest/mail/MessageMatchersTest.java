@@ -327,6 +327,32 @@ public class MessageMatchersTest {
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
+    
+    @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void hasPartsShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartMixed();
+        Matcher<Multipart> matcher = MessageMatchers.hasParts((Matcher)anything());
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void hasPartShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartMixed();
+        Matcher<Multipart> matcher = MessageMatchers.hasPart((Matcher)anything());
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void hasPartsSizeShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartMixed();
+        Matcher<Multipart> matcher = MessageMatchers.hasParts(2);
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
 
     private static final KeyPair keyPair;
     static {
