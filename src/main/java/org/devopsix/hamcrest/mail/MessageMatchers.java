@@ -2,6 +2,7 @@ package org.devopsix.hamcrest.mail;
 
 import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.any;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -12,6 +13,7 @@ import java.util.Map;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
+import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.internet.InternetAddress;
 
@@ -21,7 +23,6 @@ import org.devopsix.hamcrest.mail.matchers.MessageHasBcc;
 import org.devopsix.hamcrest.mail.matchers.MessageHasCc;
 import org.devopsix.hamcrest.mail.matchers.MessageHasDate;
 import org.devopsix.hamcrest.mail.matchers.MessageHasFrom;
-import org.devopsix.hamcrest.mail.matchers.MessageHasMultipartBody;
 import org.devopsix.hamcrest.mail.matchers.MessageHasRecipients;
 import org.devopsix.hamcrest.mail.matchers.MessageHasReplyTo;
 import org.devopsix.hamcrest.mail.matchers.MessageHasSender;
@@ -33,6 +34,7 @@ import org.devopsix.hamcrest.mail.matchers.PartHasDateHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasDateHeaders;
 import org.devopsix.hamcrest.mail.matchers.PartHasHeader;
 import org.devopsix.hamcrest.mail.matchers.PartHasHeaders;
+import org.devopsix.hamcrest.mail.matchers.PartHasMultipartContent;
 import org.devopsix.hamcrest.mail.matchers.PartHasTextContent;
 import org.hamcrest.Matcher;
 
@@ -448,12 +450,26 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given message has a multipart body
-     * ({@code Content-Type: multipart/*}) with any content.
+     * Returns a matcher that matches when the given part has multipart content
+     * ({@code Content-Type: multipart/*}).
      * 
-     * @return A matcher for a message
+     * @return A matcher for a message part
      */
-    public static Matcher<Message> hasMultipartBody() {
-        return new MessageHasMultipartBody();
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Matcher<Part> hasMultipartContent() {
+        return new PartHasMultipartContent((Matcher)anything());
+    }
+
+    /**
+     * Returns a matcher that matches when the given part has multipart content
+     * ({@code Content-Type: multipart/*}) which matches the given matcher.
+     * 
+     * @param matcher The content matcher
+     * @return A matcher for a message part
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Part> hasMultipartContent(Matcher<Multipart> matcher) {
+        requireNonNull(matcher);
+        return new PartHasMultipartContent(matcher);
     }
 }

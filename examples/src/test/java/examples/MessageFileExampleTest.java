@@ -5,8 +5,9 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasDate;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
-import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartBody;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasTextContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasTo;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.isDay;
@@ -112,6 +113,7 @@ public class MessageFileExampleTest {
     
     @Test
     public void messageShouldHaveMultipartBody() {
-        assertThat(message, hasMultipartBody());
+        assertThat(message, hasMultipartContent());
+        assertThat(message, not(hasTextContent()));
     }
 }

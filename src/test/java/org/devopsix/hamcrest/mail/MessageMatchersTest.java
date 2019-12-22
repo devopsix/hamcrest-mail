@@ -8,6 +8,7 @@ import static javax.mail.Message.RecipientType.CC;
 import static javax.mail.Message.RecipientType.TO;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.any;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -286,9 +287,18 @@ public class MessageMatchersTest {
     }
     
     @Test
-    public void hasMultipartBodyShouldReturnMatcher() throws Exception {
+    public void hasMultipartContentShouldReturnMatcher() throws Exception {
         Message message = createMultipartMessage();
-        Matcher<Message> matcher = MessageMatchers.hasMultipartBody();
+        Matcher<Part> matcher = MessageMatchers.hasMultipartContent();
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void hasMultipartContentWithMatcherShouldReturnMatcher() throws Exception {
+        Message message = createMultipartMessage();
+        Matcher<Part> matcher = MessageMatchers.hasMultipartContent((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }

@@ -15,6 +15,7 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasDateHeaders;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartContent;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasPersonal;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasRecipients;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasReplyTo;
@@ -215,6 +216,7 @@ public class GreenMailExampleTest {
     public void messageShouldHaveTextBody() {
         MimeMessage message = getReceivedMessage();
         assertThat(message, hasTextContent(containsString("Lorem ipsum")));
+        assertThat(message, not(hasMultipartContent()));
     }
     
     private MimeMessage getReceivedMessage() {
