@@ -485,7 +485,7 @@ public final class MessageMatchers {
      * @return A matcher for a multipart
      */
     public static Matcher<Multipart> multipartMixed() {
-        return new MultipartHasContentType(startsWith("multipart/mixed"));
+        return new MultipartHasContentType(startsWith("multipart/mixed;"));
     }
     
     /**
@@ -496,7 +496,18 @@ public final class MessageMatchers {
      * @return A matcher for a multipart
      */
     public static Matcher<Multipart> multipartAlternative() {
-        return new MultipartHasContentType(startsWith("multipart/alternative"));
+        return new MultipartHasContentType(startsWith("multipart/alternative;"));
+    }
+    
+    /**
+     * Returns a matcher that matches when the given multipart has 
+     * {@code multipart/related} content type.
+     * 
+     * @param matcher The content matcher
+     * @return A matcher for a multipart
+     */
+    public static Matcher<Multipart> multipartRelated() {
+        return new MultipartHasContentType(startsWith("multipart/related;"));
     }
     
     /**

@@ -305,7 +305,7 @@ public class MessageMatchersTest {
     }
     
     @Test
-    public void isMixedShouldReturnMatcher() throws Exception {
+    public void multipartMixedShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartMixed();
         Matcher<Multipart> matcher = MessageMatchers.multipartMixed();
         assertThat(matcher, is(notNullValue()));
@@ -313,9 +313,17 @@ public class MessageMatchersTest {
     }
     
     @Test
-    public void isAlternativeShouldReturnMatcher() throws Exception {
+    public void multipartAlternativeShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartAlternative();
         Matcher<Multipart> matcher = MessageMatchers.multipartAlternative();
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
+    public void multipartRelatedShouldReturnMatcher() throws Exception {
+        Multipart message = createMultipartRelated();
+        Matcher<Multipart> matcher = MessageMatchers.multipartRelated();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -395,6 +403,10 @@ public class MessageMatchersTest {
     
     private Multipart createMultipartAlternative() throws MessagingException {
         return new MimeMultipart("alternative", createBinaryPart(), createBinaryPart());
+    }
+    
+    private Multipart createMultipartRelated() throws MessagingException {
+        return new MimeMultipart("related", createBinaryPart(), createBinaryPart());
     }
     
     private MimeMessage createMessage() throws IOException, FailException, MessagingException {
