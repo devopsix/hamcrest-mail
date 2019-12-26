@@ -305,6 +305,15 @@ public class MessageMatchersTest {
     }
     
     @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void hasMultipartContentRecursiveShouldReturnMatcher() throws Exception {
+        Message message = createMultipartMessage();
+        Matcher<Part> matcher = MessageMatchers.hasMultipartContentRecursive((Matcher)anything());
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+    
+    @Test
     public void multipartMixedShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartMixed();
         Matcher<Multipart> matcher = MessageMatchers.multipartMixed();

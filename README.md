@@ -62,6 +62,7 @@ More example can be found in the [examples](examples/) directory.
 * __hasTextContent__ - Tests a message or a part of a multipart message for having plain text content matching a given matcher
 * __hasBinaryContent__ - Tests a message or a part of a multipart message for having binary content matching a given matcher
 * __hasMultipartContent__ - Tests a message or a part of a multipart message for having multipart content matching a given matcher
+* __hasMultipartContentRecursive__ - Tests a message or a part of a multipart message and recursively all child parts thereof for having at least one part with multipart content matching a given matcher
 * __multipartMixed__ - Tests a multipart for having `multipart/mixed` content type
 * __multipartAlternative__ - Tests a multipart for having `multipart/alternative` content type
 * __multipartRelated__ - Tests a multipart for having `multipart/related` content type

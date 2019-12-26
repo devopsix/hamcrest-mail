@@ -461,7 +461,7 @@ public final class MessageMatchers {
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Matcher<Part> hasMultipartContent() {
-        return new PartHasMultipartContent((Matcher)anything());
+        return new PartHasMultipartContent(false, (Matcher)anything());
     }
 
     /**
@@ -474,7 +474,20 @@ public final class MessageMatchers {
      */
     public static Matcher<Part> hasMultipartContent(Matcher<Multipart> matcher) {
         requireNonNull(matcher);
-        return new PartHasMultipartContent(matcher);
+        return new PartHasMultipartContent(false, matcher);
+    }
+
+    /**
+     * Returns a matcher that matches when the given part or any child part has multipart content
+     * ({@code Content-Type: multipart/*}) which matches the given matcher.
+     * 
+     * @param matcher The multipart matcher
+     * @return A matcher for a message
+     * @throws NullPointerException when {@code matcher} is {@code null}
+     */
+    public static Matcher<Part> hasMultipartContentRecursive(Matcher<Multipart> matcher) {
+        requireNonNull(matcher);
+        return new PartHasMultipartContent(true, matcher);
     }
     
     /**
@@ -524,8 +537,12 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given multipart's parts
-     * match the given matcher.
+     * <p>Returns a matcher that matches when the given multipart's parts
+     * match the given matcher.</p>
+     * 
+     * <p>Only immediate child parts of the given multipart are considered.</p>
+     * 
+     * <p>For testing all parts of a message at any depth see {@link #hasMultipartContentRecursive(Matcher)}.</p>
      * 
      * @param matcher The parts matcher
      * @return A matcher for a multipart
@@ -537,8 +554,10 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given multipart has at least one part
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given multipart has at least one part
+     * which matches the given matcher.</p<
+     * 
+     * <p>Only immediate child parts of the given multipart are considered.</p>
      * 
      * @param matcher The part matcher
      * @return A matcher for a multipart

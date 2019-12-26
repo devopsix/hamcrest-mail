@@ -1,9 +1,8 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import static java.util.Objects.nonNull;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
-
-import java.util.Objects;
 
 import javax.mail.Multipart;
 
@@ -33,7 +32,7 @@ public class MultipartHasContentType extends TypeSafeDiagnosingMatcher<Multipart
     
     private Condition<String> contentType(Multipart multipart, Description mismatch) {
         String contentType = multipart.getContentType();
-        if (Objects.nonNull(contentType)) {
+        if (nonNull(contentType)) {
             return matched(contentType, mismatch);
         } else {
             mismatch.appendText("null");

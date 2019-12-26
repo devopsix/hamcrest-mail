@@ -7,6 +7,7 @@ import static org.devopsix.hamcrest.mail.MessageMatchers.hasFrom;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeaders;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartContent;
+import static org.devopsix.hamcrest.mail.MessageMatchers.hasMultipartContentRecursive;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasPart;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasParts;
 import static org.devopsix.hamcrest.mail.MessageMatchers.hasSubject;
@@ -130,6 +131,7 @@ public class MessageFileExampleTest {
     }
     
     @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void messageShouldHaveAlternativeTextAndHtmlContent() {
         // The message has multipart/mixed content which contains another
         // multipart/alternative part which has a plain text and an HTML part.
@@ -145,6 +147,20 @@ public class MessageFileExampleTest {
                 hasTextContent(containsString("Lorem ipsum"))
             ))
         )))));
+        // Match presence of multipart/alternative part independent from actual
+        // message structure.
+        assertThat(message, hasMultipartContentRecursive((Matcher)allOf(
+            multipartAlternative(),
+            hasParts(2),
+            hasPart(allOf(
+                hasHeader("Content-Type", startsWith("text/plain;")),
+                hasTextContent(containsString("Lorem ipsum"))
+            )),
+            hasPart(allOf(
+                hasHeader("Content-Type", startsWith("text/html;")),
+                hasTextContent(containsString("Lorem ipsum"))
+            ))
+        )));
     }
     
     @Test
