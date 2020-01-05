@@ -272,14 +272,6 @@ public class MessageMatchersTest {
     }
     
     @Test
-    public void hasBinaryContentShouldReturnMatcher() throws Exception {
-        Part part = createBinaryPart();
-        Matcher<Part> matcher = MessageMatchers.hasBinaryContent();
-        assertThat(matcher, is(notNullValue()));
-        assertThat(part, matcher);
-    }
-    
-    @Test
     public void hasBinaryContentWithMatcherShouldReturnMatcher() throws Exception {
         Part part = createBinaryPart();
         Matcher<Part> matcher = MessageMatchers.hasBinaryContent(not(emptyArray()));

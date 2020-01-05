@@ -434,17 +434,6 @@ public final class MessageMatchers {
 
     /**
      * <p>Returns a matcher that matches when the given part has binary content
-     * with any content.</p>
-     * 
-     * @return A matcher for a {@link Part}
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public static Matcher<Part> hasBinaryContent() {
-        return new PartHasBinaryContent((Matcher)anything());
-    }
-
-    /**
-     * <p>Returns a matcher that matches when the given part has binary content
      * which matches the given matcher.</p>
      * 
      * @param matcher The content matcher
