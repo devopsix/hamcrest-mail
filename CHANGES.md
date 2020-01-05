@@ -1,5 +1,9 @@
 # Hamcrest Mail Changes
 
+## Version 0.3.0 (5 January 2020)
+
+* Added matcher for recursively verifying parts of a multipart message.
+
 ## Version 0.2.0 (22 December 2019)
 
 * Added matchers for verifying multipart content.
