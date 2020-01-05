@@ -2,7 +2,7 @@ package org.devopsix.hamcrest.mail.matchers;
 
 import static java.util.Collections.singletonMap;
 import static javax.mail.Message.RecipientType.TO;
-import static org.devopsix.hamcrest.mail.MessageMatchers.hasValidDkimSignature;
+import static org.devopsix.hamcrest.mail.MailMatchers.hasValidDkimSignature;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -27,7 +27,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.james.jdkim.DKIMSigner;
 import org.apache.james.jdkim.exceptions.FailException;
-import org.devopsix.hamcrest.mail.MessageMatchers;
+import org.devopsix.hamcrest.mail.MailMatchers;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         MimeMessage message = createMessage();
         String publicKey = "k=rsa; p=" + base64(keyPair.getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", publicKey);
-        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        Matcher<Message> matcher = MailMatchers.hasValidDkimSignature(publicKeys);
         assertThat(message, matcher);
     }
     
@@ -47,7 +47,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         MimeMessage message = createMessage();
         String wrongPublicKey = "k=rsa; p=" + base64(generateKeyPair().getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", wrongPublicKey);
-        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        Matcher<Message> matcher = MailMatchers.hasValidDkimSignature(publicKeys);
         assertThat(message, not(matcher));
     }
     
@@ -56,7 +56,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         MimeMessage message = createMessage();
         String publicKey = "k=rsa; p=" + base64(keyPair.getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", publicKey);
-        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        Matcher<Message> matcher = MailMatchers.hasValidDkimSignature(publicKeys);
         assertThat(matcher.matches(writeAndReread(message)), is(true));
         message.setFrom("evil@example.com");
         message = writeAndReread(message);
@@ -68,7 +68,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         MimeMessage message = createMessage();
         String publicKey = "k=rsa; p=" + base64(keyPair.getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", publicKey);
-        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        Matcher<Message> matcher = MailMatchers.hasValidDkimSignature(publicKeys);
         assertThat(matcher.matches(writeAndReread(message)), is(true));
         message.setRecipient(TO, new InternetAddress("evil@example.com"));
         message = writeAndReread(message);
@@ -80,7 +80,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         MimeMessage message = createMessage();
         String publicKey = "k=rsa; p=" + base64(keyPair.getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", publicKey);
-        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        Matcher<Message> matcher = MailMatchers.hasValidDkimSignature(publicKeys);
         assertThat(matcher.matches(writeAndReread(message)), is(true));
         message.setSubject("Evil");
         message = writeAndReread(message);

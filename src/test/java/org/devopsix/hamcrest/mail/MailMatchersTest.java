@@ -46,7 +46,7 @@ import org.apache.james.jdkim.exceptions.FailException;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 
-public class MessageMatchersTest {
+public class MailMatchersTest {
     
     private static final OffsetDateTime SENT_DATE = now().truncatedTo(SECONDS);
     private static final OffsetDateTime RESENT_DATE = now().plusMinutes(9);
@@ -56,7 +56,7 @@ public class MessageMatchersTest {
     @Test
     public void hasDateWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasDate(any(OffsetDateTime.class));
+        Matcher<Message> matcher = MailMatchers.hasDate(any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -64,7 +64,7 @@ public class MessageMatchersTest {
     @Test
     public void hasDateWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasDate(SENT_DATE);
+        Matcher<Message> matcher = MailMatchers.hasDate(SENT_DATE);
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -72,7 +72,7 @@ public class MessageMatchersTest {
     @Test
     public void hasFromWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasFrom(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasFrom(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -80,7 +80,7 @@ public class MessageMatchersTest {
     @Test
     public void hasFromWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasFrom("joe.average@example.com");
+        Matcher<Message> matcher = MailMatchers.hasFrom("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -88,7 +88,7 @@ public class MessageMatchersTest {
     @Test
     public void hasSenderWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasSender(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasSender(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -96,7 +96,7 @@ public class MessageMatchersTest {
     @Test
     public void hasSenderWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasSender("joe.average@example.com");
+        Matcher<Message> matcher = MailMatchers.hasSender("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -104,7 +104,7 @@ public class MessageMatchersTest {
     @Test
     public void hasReplyToWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasReplyTo(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasReplyTo(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -112,7 +112,7 @@ public class MessageMatchersTest {
     @Test
     public void hasReplyToWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasReplyTo("joe.average@example.com");
+        Matcher<Message> matcher = MailMatchers.hasReplyTo("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -120,7 +120,7 @@ public class MessageMatchersTest {
     @Test
     public void hasToWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasTo(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasTo(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -128,7 +128,7 @@ public class MessageMatchersTest {
     @Test
     public void hasToWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasTo("joe.average@example.com");
+        Matcher<Message> matcher = MailMatchers.hasTo("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
         assertThat(matcher.matches(message), is(true));
     }
@@ -136,7 +136,7 @@ public class MessageMatchersTest {
     @Test
     public void hasCcWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasCc(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasCc(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -144,7 +144,7 @@ public class MessageMatchersTest {
     @Test
     public void hasCcWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasCc("joe.average@example.com");
+        Matcher<Message> matcher = MailMatchers.hasCc("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -152,7 +152,7 @@ public class MessageMatchersTest {
     @Test
     public void hasBccWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasBcc(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasBcc(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -160,7 +160,7 @@ public class MessageMatchersTest {
     @Test
     public void hasRecipientsShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasRecipients(iterableWithSize(3));
+        Matcher<Message> matcher = MailMatchers.hasRecipients(iterableWithSize(3));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -168,7 +168,7 @@ public class MessageMatchersTest {
     @Test
     public void hasRecipientsOfTypeShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasRecipients(TO, iterableWithSize(1));
+        Matcher<Message> matcher = MailMatchers.hasRecipients(TO, iterableWithSize(1));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -176,7 +176,7 @@ public class MessageMatchersTest {
     @Test
     public void hasAddressShouldReturnMatcher() throws Exception {
         Address address = new InternetAddress("anna@example.com");
-        Matcher<Address> matcher = MessageMatchers.hasAddress(is("anna@example.com"));
+        Matcher<Address> matcher = MailMatchers.hasAddress(is("anna@example.com"));
         assertThat(matcher, is(notNullValue()));
         assertThat(address, matcher);
     }
@@ -184,7 +184,7 @@ public class MessageMatchersTest {
     @Test
     public void hasPersonalShouldReturnMatcher() throws Exception {
         Address address = new InternetAddress("Anna <anna@example.com>");
-        Matcher<Address> matcher = MessageMatchers.hasPersonal(is("Anna"));
+        Matcher<Address> matcher = MailMatchers.hasPersonal(is("Anna"));
         assertThat(matcher, is(notNullValue()));
         assertThat(address, matcher);
     }
@@ -192,7 +192,7 @@ public class MessageMatchersTest {
     @Test
     public void hasSubjectWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasSubject(any(String.class));
+        Matcher<Message> matcher = MailMatchers.hasSubject(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -200,7 +200,7 @@ public class MessageMatchersTest {
     @Test
     public void hasSubjectWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Message> matcher = MessageMatchers.hasSubject("Message from Joe");
+        Matcher<Message> matcher = MailMatchers.hasSubject("Message from Joe");
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -208,7 +208,7 @@ public class MessageMatchersTest {
     @Test
     public void hasHeaderWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
+        Matcher<Part> matcher = MailMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -216,7 +216,7 @@ public class MessageMatchersTest {
     @Test
     public void hasHeaderWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasHeader("Message-ID", any(String.class));
+        Matcher<Part> matcher = MailMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -224,7 +224,7 @@ public class MessageMatchersTest {
     @Test
     public void hasHeadersWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasHeaders("Received", hasItems(any(String.class), any(String.class)));
+        Matcher<Part> matcher = MailMatchers.hasHeaders("Received", hasItems(any(String.class), any(String.class)));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -232,7 +232,7 @@ public class MessageMatchersTest {
     @Test
     public void hasDateHeaderWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasDateHeader("Resent-Date", any(OffsetDateTime.class));
+        Matcher<Part> matcher = MailMatchers.hasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -240,7 +240,7 @@ public class MessageMatchersTest {
     @Test
     public void hasDateHeadersWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
+        Matcher<Part> matcher = MailMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -250,7 +250,7 @@ public class MessageMatchersTest {
         Message message = createTextMessage();
         String publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", "k=rsa; p=" + publicKey);
-        Matcher<Message> matcher = MessageMatchers.hasValidDkimSignature(publicKeys);
+        Matcher<Message> matcher = MailMatchers.hasValidDkimSignature(publicKeys);
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -258,7 +258,7 @@ public class MessageMatchersTest {
     @Test
     public void hasTextContentShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasTextContent();
+        Matcher<Part> matcher = MailMatchers.hasTextContent();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -266,7 +266,7 @@ public class MessageMatchersTest {
     @Test
     public void hasTextContentWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
-        Matcher<Part> matcher = MessageMatchers.hasTextContent(equalTo("Lorem ipsum"));
+        Matcher<Part> matcher = MailMatchers.hasTextContent(equalTo("Lorem ipsum"));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -274,7 +274,7 @@ public class MessageMatchersTest {
     @Test
     public void hasBinaryContentWithMatcherShouldReturnMatcher() throws Exception {
         Part part = createBinaryPart();
-        Matcher<Part> matcher = MessageMatchers.hasBinaryContent(not(emptyArray()));
+        Matcher<Part> matcher = MailMatchers.hasBinaryContent(not(emptyArray()));
         assertThat(matcher, is(notNullValue()));
         assertThat(part, matcher);
     }
@@ -282,7 +282,7 @@ public class MessageMatchersTest {
     @Test
     public void hasMultipartContentShouldReturnMatcher() throws Exception {
         Message message = createMultipartMessage();
-        Matcher<Part> matcher = MessageMatchers.hasMultipartContent();
+        Matcher<Part> matcher = MailMatchers.hasMultipartContent();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -291,7 +291,7 @@ public class MessageMatchersTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void hasMultipartContentWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createMultipartMessage();
-        Matcher<Part> matcher = MessageMatchers.hasMultipartContent((Matcher)anything());
+        Matcher<Part> matcher = MailMatchers.hasMultipartContent((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -300,7 +300,7 @@ public class MessageMatchersTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void hasMultipartContentRecursiveShouldReturnMatcher() throws Exception {
         Message message = createMultipartMessage();
-        Matcher<Part> matcher = MessageMatchers.hasMultipartContentRecursive((Matcher)anything());
+        Matcher<Part> matcher = MailMatchers.hasMultipartContentRecursive((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -308,7 +308,7 @@ public class MessageMatchersTest {
     @Test
     public void multipartMixedShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartMixed();
-        Matcher<Multipart> matcher = MessageMatchers.multipartMixed();
+        Matcher<Multipart> matcher = MailMatchers.multipartMixed();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -316,7 +316,7 @@ public class MessageMatchersTest {
     @Test
     public void multipartAlternativeShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartAlternative();
-        Matcher<Multipart> matcher = MessageMatchers.multipartAlternative();
+        Matcher<Multipart> matcher = MailMatchers.multipartAlternative();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -324,7 +324,7 @@ public class MessageMatchersTest {
     @Test
     public void multipartRelatedShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartRelated();
-        Matcher<Multipart> matcher = MessageMatchers.multipartRelated();
+        Matcher<Multipart> matcher = MailMatchers.multipartRelated();
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -332,7 +332,7 @@ public class MessageMatchersTest {
     @Test
     public void multipartContentTypeShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartAlternative();
-        Matcher<Multipart> matcher = MessageMatchers.multipartContentType(any(String.class));
+        Matcher<Multipart> matcher = MailMatchers.multipartContentType(any(String.class));
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -341,7 +341,7 @@ public class MessageMatchersTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void hasPartsShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartMixed();
-        Matcher<Multipart> matcher = MessageMatchers.hasParts((Matcher)anything());
+        Matcher<Multipart> matcher = MailMatchers.hasParts((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -350,7 +350,7 @@ public class MessageMatchersTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void hasPartShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartMixed();
-        Matcher<Multipart> matcher = MessageMatchers.hasPart((Matcher)anything());
+        Matcher<Multipart> matcher = MailMatchers.hasPart((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
@@ -358,7 +358,7 @@ public class MessageMatchersTest {
     @Test
     public void hasPartsSizeShouldReturnMatcher() throws Exception {
         Multipart message = createMultipartMixed();
-        Matcher<Multipart> matcher = MessageMatchers.hasParts(2);
+        Matcher<Multipart> matcher = MailMatchers.hasParts(2);
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }

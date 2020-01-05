@@ -1,7 +1,7 @@
 package org.devopsix.hamcrest.mail.matchers;
 
-import static org.devopsix.hamcrest.mail.MessageMatchers.hasHeader;
-import static org.devopsix.hamcrest.mail.MessageMatchers.hasPart;
+import static org.devopsix.hamcrest.mail.MailMatchers.hasHeader;
+import static org.devopsix.hamcrest.mail.MailMatchers.hasPart;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.not;

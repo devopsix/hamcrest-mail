@@ -44,9 +44,9 @@ import org.hamcrest.Matchers;
 /**
  * This class provides static access to all hamcrest-mail matchers.
  */
-public final class MessageMatchers {
+public final class MailMatchers {
 
-    private MessageMatchers() { }
+    private MailMatchers() { }
     
     /**
      * <p>Returns a matcher that matches when the given message has exactly one "Date" header
@@ -547,7 +547,7 @@ public final class MessageMatchers {
 
     /**
      * <p>Returns a matcher that matches when the given multipart has at least one part
-     * which matches the given matcher.</p<
+     * which matches the given matcher.</p>
      * 
      * <p>Only immediate child parts of the given multipart are considered.</p>
      * 

@@ -13,30 +13,30 @@ To use Hamcrest Mail in a Maven project add this dependency to the pom.xml file:
         <scope>test</scope>
     </dependency>
 
-The matchers are exposed as static methods on the `MessageMatchers` class.
+The matchers are exposed as static methods on the `MailMatchers` class.
 
 Here are a few examples:
 
     Message message;
-    Assert.assertThat(message, MessageMatchers.hasFrom("anna@example.com"));
+    Assert.assertThat(message, MailMatchers.hasFrom("anna@example.com"));
     
-    Assert.assertThat(message, MessageMatchers.hasTo("bob@example.com"));
+    Assert.assertThat(message, MailMatchers.hasTo("bob@example.com"));
     
-    Assert.assertThat(message, MessageMatchers.hasRecipients(Matchers.iterableWithSize(1)));
+    Assert.assertThat(message, MailMatchers.hasRecipients(Matchers.iterableWithSize(1)));
     
-    Assert.assertThat(message, MessageMatchers.hasSubject("Message from Anna"));
+    Assert.assertThat(message, MailMatchers.hasSubject("Message from Anna"));
     
-    Assert.assertThat(message, MessageMatchers.hasHeader("Return-Path", Matchers.notNullValue()));
+    Assert.assertThat(message, MailMatchers.hasHeader("Return-Path", Matchers.notNullValue()));
     
-    Assert.assertThat(message, MessageMatchers.hasDateHeader("Resent-Date", Matchers.isA(OffsetDateTime.class)));
+    Assert.assertThat(message, MailMatchers.hasDateHeader("Resent-Date", Matchers.isA(OffsetDateTime.class)));
     
     // OffsetDateTimeMatchers is from eXparity/hamcrest-date:
     // https://github.com/eXparity/hamcrest-date
-    Assert.assertThat(message, MessageMatchers.hasDate(OffsetDateTimeMatchers.within(1, MINUTES, now())));
+    Assert.assertThat(message, MailMatchers.hasDate(OffsetDateTimeMatchers.within(1, MINUTES, now())));
     
     // Casting to Matcher is required when a matcher's signature is
     // Matcher<Iterable<? extends T>> or Matcher<Iterable<? super T>>
-    Assert.assertThat(message, MessageMatchers.hasHeaders("Received", (Matcher)Matchers.hasItems(
+    Assert.assertThat(message, MailMatchers.hasHeaders("Received", (Matcher)Matchers.hasItems(
             Matchers.containsString("host1"), Matchers.containsString("host2"))));
 
 More example can be found in the [examples](examples/) directory.
