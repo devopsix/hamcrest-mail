@@ -7,7 +7,9 @@ import javax.mail.Message;
 import org.hamcrest.Matcher;
 
 /**
- * A matcher for the "From" header.
+ * <p>A matcher for the "From" header.</p>
+ * 
+ * @see Message
  * 
  * @author devopsix
  *

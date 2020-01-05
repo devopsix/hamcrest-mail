@@ -20,10 +20,12 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 /**
  * A base class for header matchers.
  * 
+ * @see Part
+ * 
  * @author devopsix
  *
  */
-abstract class AbstractMultiHeaderMatcher<P extends Part,T> extends TypeSafeDiagnosingMatcher<P> {
+abstract class AbstractMultiHeaderMatcher<P extends Part, T> extends TypeSafeDiagnosingMatcher<P> {
     
     private final String header;
     private final Matcher<Iterable<T>> matcher;

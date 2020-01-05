@@ -16,7 +16,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher for plain text content.
+ * <p>A matcher for text content.</p>
  * 
  * @author devopsix
  *
@@ -52,7 +52,7 @@ public class PartHasTextContent extends TypeSafeDiagnosingMatcher<Part> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("has text conent which matches: ");
+        description.appendText("has text content which matches: ");
         matcher.describeTo(description);
     }
 }

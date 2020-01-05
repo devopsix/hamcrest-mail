@@ -14,9 +14,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher for the {@code address} property of {@code javax.mail.internet.InternetAddress} objects.
+ * <p>A matcher for the {@code address} property of {@code javax.mail.internet.InternetAddress} objects.</p>
  * 
  * @see InternetAddress#getAddress()
+ * @see Address
  * 
  * @author devopsix
  *

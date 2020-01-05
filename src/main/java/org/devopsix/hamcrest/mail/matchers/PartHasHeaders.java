@@ -5,7 +5,7 @@ import javax.mail.Part;
 import org.hamcrest.Matcher;
 
 /**
- * A matcher for a named header which may be present multiple times.
+ * <p>A matcher for a named header which may be present multiple times.</p>
  * 
  * @author devopsix
  *

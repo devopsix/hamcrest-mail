@@ -26,6 +26,14 @@ import org.apache.james.jdkim.exceptions.TempFailException;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
+/**
+ * <p>A matcher that verifies DKIM signatures.</p>
+ * 
+ * @see Message
+ * 
+ * @author devopsix
+ *
+ */
 public class MessageHasValidDkimSignature extends TypeSafeDiagnosingMatcher<Message> {
     
     private final DKIMVerifier dkimVerifier;

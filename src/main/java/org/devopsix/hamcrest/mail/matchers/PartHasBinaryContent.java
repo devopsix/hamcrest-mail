@@ -18,6 +18,12 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
+/**
+ * <p>A matcher for binary content.</p>
+ * 
+ * @author devopsix
+ *
+ */
 public class PartHasBinaryContent extends TypeSafeDiagnosingMatcher<Part> {
     
     final Matcher<Byte[]> contentMatcher;

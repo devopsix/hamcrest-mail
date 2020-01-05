@@ -12,7 +12,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher for multipart content.
+ * <p>A matcher for multipart content type.</p>
  * 
  * @author devopsix
  *

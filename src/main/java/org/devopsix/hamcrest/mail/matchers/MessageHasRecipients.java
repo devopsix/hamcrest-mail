@@ -18,7 +18,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher for recipients (To, Cc, Bcc) of a message.
+ * <p>A matcher for recipients (To, Cc, Bcc) of a message.</p>
+ * 
+ * @see Message
  * 
  * @author devopsix
  *

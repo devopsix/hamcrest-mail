@@ -6,7 +6,15 @@ import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-class AbstractStringMultiHeaderMatcher<P extends Part> extends AbstractMultiHeaderMatcher<P,String> {
+/**
+ * Base class for header matchers.
+ * 
+ * @see Part
+ * 
+ * @author devopsix
+ *
+ */
+class AbstractStringMultiHeaderMatcher<P extends Part> extends AbstractMultiHeaderMatcher<P, String> {
 
     protected AbstractStringMultiHeaderMatcher(String header, Matcher<Iterable<String>> matcher) {
         super(header, matcher);

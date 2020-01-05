@@ -7,7 +7,7 @@ import javax.mail.Part;
 import org.hamcrest.Matcher;
 
 /**
- * A matcher for a named date header.
+ * <p>A matcher for a named date header.</p>
  * 
  * @author devopsix
  *

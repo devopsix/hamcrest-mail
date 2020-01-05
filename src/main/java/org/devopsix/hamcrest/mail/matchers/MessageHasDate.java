@@ -9,7 +9,10 @@ import javax.mail.Message;
 import org.hamcrest.Matcher;
 
 /**
- * A matcher for the "Date" header which accepts {@code OffsetDateTime} matchers for the value.
+ * <p>A matcher for the "Date" header.</p>
+ * 
+ * @see OffsetDateTime
+ * @see Message
  * 
  * @author devopsix
  *

@@ -7,7 +7,9 @@ import javax.mail.Message;
 import org.hamcrest.Matcher;
 
 /**
- * A matcher for the "Cc" header.
+ * <p>A matcher for the "Cc" header.</p>
+ * 
+ * @see Message
  * 
  * @author devopsix
  *

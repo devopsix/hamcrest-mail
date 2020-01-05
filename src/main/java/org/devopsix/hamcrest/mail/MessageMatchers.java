@@ -41,16 +41,19 @@ import org.devopsix.hamcrest.mail.matchers.PartHasTextContent;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+/**
+ * This class provides static access to all hamcrest-mail matchers.
+ */
 public final class MessageMatchers {
 
     private MessageMatchers() { }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Date" header
-     * with proper date/time format which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "Date" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "Date" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasDate(Matcher<OffsetDateTime> matcher) {
@@ -59,11 +62,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Date" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Date" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "Date" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasDate(OffsetDateTime value) {
@@ -72,11 +75,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "From" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "From" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "From" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasFrom(Matcher<String> matcher) {
@@ -85,11 +88,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "From" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "From" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "From" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasFrom(String value) {
@@ -98,11 +101,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Sender" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "Sender" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "Sender" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasSender(Matcher<String> matcher) {
@@ -111,11 +114,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Sender" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Sender" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "Sender" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasSender(String value) {
@@ -124,11 +127,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Reply-To" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "Reply-To" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "Reply-To" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasReplyTo(Matcher<String> matcher) {
@@ -137,11 +140,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Reply-To" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Reply-To" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "Reply-To" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasReplyTo(String value) {
@@ -150,11 +153,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "To" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "To" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "To" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasTo(Matcher<String> matcher) {
@@ -163,11 +166,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "To" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "To" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "To" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasTo(String value) {
@@ -176,11 +179,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Cc" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "Cc" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "Cc" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasCc(Matcher<String> matcher) {
@@ -189,11 +192,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Cc" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Cc" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "Cc" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasCc(String value) {
@@ -202,11 +205,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Bcc" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "Bcc" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "Bcc" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasBcc(Matcher<String> matcher) {
@@ -215,11 +218,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Bcc" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Bcc" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "Bcc" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasBcc(String value) {
@@ -228,11 +231,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has a list of recipients
-     * (To, Cc, Bcc) which match the given matcher.
+     * <p>Returns a matcher that matches when the given message has a list of recipients
+     * (To, Cc, Bcc) which matches the given matcher.</p>
      * 
-     * @param matcher A matcher for the recipients
-     * @return A matcher for a message
+     * @param matcher A matcher for the list of recipients
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasRecipients(Matcher<Iterable<Address>> matcher) {
@@ -241,12 +244,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has a list of recipients
-     * of the given type which match the given matcher.
+     * <p>Returns a matcher that matches when the given message has a list of recipients
+     * of the given type which matches the given matcher.</p>
      * 
      * @param type Type of recipients
      * @param matcher A matcher for the recipients
-     * @return A matcher for a message
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasRecipients(RecipientType type, Matcher<Iterable<Address>> matcher) {
@@ -255,8 +258,8 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matchers when the given address is an {@code InternetAddress}
-     * with an {@code address} property that matches the given matcher.
+     * <p>Returns a matcher that matches when the given address is an {@code InternetAddress}
+     * with an {@code address} property that matches the given matcher.</p>
      * 
      * @see InternetAddress#getAddress()
      * 
@@ -270,12 +273,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matchers when the given address is an {@code InternetAddress}
-     * with an {@code personal} property that matches the given matcher.
+     * <p>Returns a matcher that matchers when the given address is an {@code InternetAddress}
+     * with an {@code personal} property that matches the given matcher.</p>
      * 
      * @see InternetAddress#getPersonal()
      * 
-     * @param matcher A matcher for the address part
+     * @param matcher A matcher for the personal part
      * @return A matcher for an Address
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
@@ -285,11 +288,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Subject" header
-     * which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one "Subject" header
+     * and this header matches the given matcher.</p>
      * 
      * @param matcher The value matcher
-     * @return A matcher for the "Subject" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Message> hasSubject(Matcher<String> matcher) {
@@ -298,11 +301,11 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Subject" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Subject" header
+     * and this header has the given value.</p>
      * 
      * @param value The expected header value
-     * @return A matcher for the "Subject" header
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code value} is {@code null}
      */
     public static Matcher<Message> hasSubject(String value) {
@@ -311,12 +314,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one header with the
-     * given name which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message part has exactly one header with the
+     * given name and this header matches the given matcher.</p>
      * 
      * @param header The header name
      * @param matcher The value matcher
-     * @return A matcher for the header
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasHeader(String header, Matcher<String> matcher) {
@@ -326,12 +329,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one "Subject" header
-     * with the given value.
+     * <p>Returns a matcher that matches when the given message has exactly one "Subject" header
+     * and this header has the given value.</p>
      * 
      * @param header The header name
      * @param value The expected header value
-     * @return A matcher for the header
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code header} is {@code null} or {@code value} is {@code null}
      */
     public static Matcher<Part> hasHeader(String header, String value) {
@@ -341,12 +344,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has headers with the
-     * given name which match the given matcher.
+     * <p>Returns a matcher that matches when the given message has headers with the
+     * given name which match the given matcher.</p>
      * 
      * @param header The header name
      * @param matcher The value matcher
-     * @return A matcher for the headers
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasHeaders(String header, Matcher<Iterable<String>> matcher) {
@@ -356,12 +359,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has exactly one date header with the
-     * given name which matches the given matcher.
+     * <p>Returns a matcher that matches when the given message has exactly one date header with the
+     * given name and this header matches the given matcher.</p>
      * 
      * @param header The header name
      * @param matcher The value matcher
-     * @return A matcher for the header
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasDateHeader(String header, Matcher<OffsetDateTime> matcher) {
@@ -371,12 +374,12 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given message has date headers with the
-     * given name which match the given matcher.
+     * <p>Returns a matcher that matches when the given message has date headers with the
+     * given name which match the given matcher.</p>
      * 
      * @param header The header name
      * @param matcher The value matcher
-     * @return A matcher for the headers
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code header} is {@code null} or {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasDateHeaders(String header, Matcher<Iterable<OffsetDateTime>> matcher) {
@@ -391,14 +394,14 @@ public final class MessageMatchers {
      * 
      * <p>DKIM public keys are distributed as DNS TXT records. As tests should not depend
      * on any real DNS records this method accepts a map of virtual TXT records. The map keys
-     * are DNS domain names and the map values are DKIM public keys. The public keys must be
-     * represented as described in
+     * are fully qualified DNS domain names (without trailing dot) and the map values are
+     * DKIM public keys. The public keys must be represented as described in
      * <a href="https://tools.ietf.org/html/rfc4871#section-3.6">section 3.6. of RFC 4871</a>.</p>
      * 
      * <p>Example: &quot;foo._domainkey.example.com&quot; =&gt; &quot;k=rsa; p=Abcd1234&quot;</p>
      * 
      * @param publicKeys Map with public keys
-     * @return A matcher for a message
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code publicKeys} is {@code null}
      */
     public static Matcher<Message> hasValidDkimSignature(Map<String, String> publicKeys) {
@@ -407,21 +410,21 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given part has plain text content
-     * ({@code Content-Type: text/plain}) with any content.
+     * <p>Returns a matcher that matches when the given part has plain text content
+     * ({@code Content-Type: text/plain}) with any content.</p>
      * 
-     * @return A matcher for a message part
+     * @return A matcher for a {@link Part}
      */
     public static Matcher<Part> hasTextContent() {
         return new PartHasTextContent(any(String.class));
     }
 
     /**
-     * Returns a matcher that matches when the given part has plain text content
-     * ({@code Content-Type: text/plain}) which matches the given matcher.
+     * <p>Returns a matcher that matches when the given part has plain text content
+     * ({@code Content-Type: text/plain}) which matches the given matcher.</p>
      * 
      * @param matcher The content matcher
-     * @return A matcher for a message part
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasTextContent(Matcher<String> matcher) {
@@ -430,10 +433,10 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given part has binary content
-     * ({@code Content-Type: text/plain}) with any (non-empty) content.
+     * <p>Returns a matcher that matches when the given part has binary content
+     * with any content.</p>
      * 
-     * @return A matcher for a message part
+     * @return A matcher for a {@link Part}
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Matcher<Part> hasBinaryContent() {
@@ -441,11 +444,11 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given part has binary content
-     * ({@code Content-Type: text/plain}) which matches the given matcher.
+     * <p>Returns a matcher that matches when the given part has binary content
+     * which matches the given matcher.</p>
      * 
      * @param matcher The content matcher
-     * @return A matcher for a message part
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasBinaryContent(Matcher<Byte[]> matcher) {
@@ -454,10 +457,10 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given part has multipart content
-     * ({@code Content-Type: multipart/*}).
+     * <p>Returns a matcher that matches when the given part has multipart content
+     * ({@code Content-Type: multipart/*}).</p>
      * 
-     * @return A matcher for a message part
+     * @return A matcher for a {@link Part}
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Matcher<Part> hasMultipartContent() {
@@ -465,11 +468,11 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given part has multipart content
-     * ({@code Content-Type: multipart/*}) which matches the given matcher.
+     * <p>Returns a matcher that matches when the given part has multipart content
+     * ({@code Content-Type: multipart/*}) which matches the given matcher.</p>
      * 
      * @param matcher The content matcher
-     * @return A matcher for a message part
+     * @return A matcher for a {@link Part}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasMultipartContent(Matcher<Multipart> matcher) {
@@ -478,11 +481,11 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given part or any child part has multipart content
-     * ({@code Content-Type: multipart/*}) which matches the given matcher.
+     * <p>Returns a matcher that matches when the given part or any child part has multipart content
+     * ({@code Content-Type: multipart/*}) which matches the given matcher.<p>
      * 
      * @param matcher The multipart matcher
-     * @return A matcher for a message
+     * @return A matcher for a {@link Message}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Part> hasMultipartContentRecursive(Matcher<Multipart> matcher) {
@@ -491,30 +494,30 @@ public final class MessageMatchers {
     }
     
     /**
-     * Returns a matcher that matches when the given multipart has 
-     * {@code multipart/mixed} content type.
+     * <p>Returns a matcher that matches when the given multipart has 
+     * {@code multipart/mixed} content type.</p>
      * 
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      */
     public static Matcher<Multipart> multipartMixed() {
         return new MultipartHasContentType(startsWith("multipart/mixed;"));
     }
     
     /**
-     * Returns a matcher that matches when the given multipart has 
-     * {@code multipart/alternative} content type.
+     * <p>Returns a matcher that matches when the given multipart has 
+     * {@code multipart/alternative} content type.</p>
      * 
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      */
     public static Matcher<Multipart> multipartAlternative() {
         return new MultipartHasContentType(startsWith("multipart/alternative;"));
     }
     
     /**
-     * Returns a matcher that matches when the given multipart has 
-     * {@code multipart/related} content type.
+     * <p>Returns a matcher that matches when the given multipart has 
+     * {@code multipart/related} content type.</p>
      * 
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      */
     public static Matcher<Multipart> multipartRelated() {
         return new MultipartHasContentType(startsWith("multipart/related;"));
@@ -528,7 +531,7 @@ public final class MessageMatchers {
      * e.g. {@code multipart/alternative; \r\n\tboundary="----=_Part_17_872522004.1577017605979"}.</p>
      * 
      * @param matcher The content matcher
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Multipart> multipartContentType(Matcher<String> matcher) {
@@ -542,10 +545,10 @@ public final class MessageMatchers {
      * 
      * <p>Only immediate child parts of the given multipart are considered.</p>
      * 
-     * <p>For testing all parts of a message at any depth see {@link #hasMultipartContentRecursive(Matcher)}.</p>
+     * <p>For testing all parts at any depth see {@link #hasMultipartContentRecursive(Matcher)}.</p>
      * 
      * @param matcher The parts matcher
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     public static Matcher<Multipart> hasParts(Matcher<Iterable<Part>> matcher) {
@@ -560,7 +563,7 @@ public final class MessageMatchers {
      * <p>Only immediate child parts of the given multipart are considered.</p>
      * 
      * @param matcher The part matcher
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      * @throws NullPointerException when {@code matcher} is {@code null}
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -570,10 +573,10 @@ public final class MessageMatchers {
     }
 
     /**
-     * Returns a matcher that matches when the given multipart has the give number of parts,
+     * <p>Returns a matcher that matches when the given multipart has the given number of parts.</p>
      * 
      * @param size The number of parts
-     * @return A matcher for a multipart
+     * @return A matcher for a {@link Multipart}
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Matcher<Multipart> hasParts(int size) {

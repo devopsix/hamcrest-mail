@@ -15,12 +15,14 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A base class for header matchers.
+ * Base class for header matchers.
+ * 
+ * @see Part
  * 
  * @author devopsix
  *
  */
-abstract class AbstractHeaderMatcher<P extends Part,T>  extends TypeSafeDiagnosingMatcher<P> {
+abstract class AbstractHeaderMatcher<P extends Part, T>  extends TypeSafeDiagnosingMatcher<P> {
     
     private final String header;
     private final Matcher<T> matcher;

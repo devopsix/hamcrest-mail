@@ -5,7 +5,7 @@ import javax.mail.Part;
 import org.hamcrest.Matcher;
 
 /**
- * A matcher for the a named header.
+ * <p>A matcher for a named header.</p>
  * 
  * @author devopsix
  *

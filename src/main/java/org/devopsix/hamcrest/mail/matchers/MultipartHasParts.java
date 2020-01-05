@@ -16,7 +16,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher for multipart parts.
+ * <p>A matcher for multipart parts.</p>
  * 
  * @author devopsix
  *

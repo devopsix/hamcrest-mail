@@ -15,7 +15,16 @@ import org.hamcrest.Condition.Step;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-abstract class AbstractDateHeaderMatcher<P extends Part> extends AbstractHeaderMatcher<P,OffsetDateTime> {
+/**
+ * Base class for date header matchers.
+ * 
+ * @see Part
+ * @see OffsetDateTime
+ * 
+ * @author devopsix
+ *
+ */
+abstract class AbstractDateHeaderMatcher<P extends Part> extends AbstractHeaderMatcher<P, OffsetDateTime> {
 
     protected AbstractDateHeaderMatcher(String header, Matcher<OffsetDateTime> matcher) {
         super(header, matcher);
