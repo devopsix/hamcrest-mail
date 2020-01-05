@@ -1,6 +1,6 @@
 package org.devopsix.hamcrest.mail.matchers;
 
-import static org.devopsix.hamcrest.mail.util.HeaderNames.DATE;
+import static org.devopsix.hamcrest.mail.matchers.HeaderNames.DATE;
 
 import java.time.OffsetDateTime;
 

@@ -54,7 +54,7 @@ public class MessageMatchersTest {
     private static final OffsetDateTime OTHER_DATE2 = now().plusMinutes(28);
     
     @Test
-    public void hasDateOffsetDateTimeWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasDateWithMatcherShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
         Matcher<Message> matcher = MessageMatchers.hasDate(any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
@@ -62,7 +62,7 @@ public class MessageMatchersTest {
     }
     
     @Test
-    public void hasDateOffsetDateTimeWithValueShouldReturnMatcher() throws Exception {
+    public void hasDateWithValueShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
         Matcher<Message> matcher = MessageMatchers.hasDate(SENT_DATE);
         assertThat(matcher, is(notNullValue()));

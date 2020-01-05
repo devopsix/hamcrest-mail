@@ -1,14 +1,14 @@
-package org.devopsix.hamcrest.mail.util;
+package org.devopsix.hamcrest.mail.matchers;
 
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.internet.MimeUtility;
 
-public final class HeaderUtils {
+final class HeaderUtils {
 
     private HeaderUtils() {}
     
-    public static String decodeHeader(String rawvalue) {
+    static String decodeHeader(String rawvalue) {
         try {
             return MimeUtility.decodeText(MimeUtility.unfold(rawvalue));
         } catch (UnsupportedEncodingException ex) {

@@ -1,4 +1,4 @@
-package org.devopsix.hamcrest.mail.util;
+package org.devopsix.hamcrest.mail.matchers;
 
 import static java.time.chrono.IsoChronology.INSTANCE;
 import static java.time.format.ResolverStyle.SMART;
@@ -19,15 +19,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class supplies a date time formatter relaxed enough to read both,
+ * <p>This class supplies a date time formatter relaxed enough to read both,
  * RFC 822 (two-digit year) and RFC 2822/1123 (four-digit year) notation.
  * Furthermore, it allows a trailing time zone name in parentheses after
- * the zone offset.
+ * the zone offset.</p>
  * 
  * @author devopsix
  *
  */
-public final class MailDateTimeFormatter {
+final class MailDateTimeFormatter {
 
     private MailDateTimeFormatter() {}
 
@@ -65,7 +65,7 @@ public final class MailDateTimeFormatter {
     private static final Map<Long, String> DAY_NAMES = dayNames();
     private static final Map<Long, String> MONTH_NAMES = monthNames();
     
-    public static final DateTimeFormatter MAIL_DATE_TIME = new DateTimeFormatterBuilder()
+    static final DateTimeFormatter MAIL_DATE_TIME = new DateTimeFormatterBuilder()
         .parseCaseInsensitive()
         .parseLenient()
         .optionalStart()

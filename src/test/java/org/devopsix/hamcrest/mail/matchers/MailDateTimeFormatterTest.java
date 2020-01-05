@@ -1,4 +1,4 @@
-package org.devopsix.hamcrest.mail.util;
+package org.devopsix.hamcrest.mail.matchers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import java.time.OffsetDateTime;
 
-import org.devopsix.hamcrest.mail.util.MailDateTimeFormatter;
+import org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 public class MailDateTimeFormatterTest {

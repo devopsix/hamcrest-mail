@@ -1,16 +1,16 @@
-package org.devopsix.hamcrest.mail.util;
+package org.devopsix.hamcrest.mail.matchers;
 
 import static java.util.Objects.isNull;
 
-public final class ArrayUtils {
+final class ArrayUtils {
 
     private ArrayUtils() {}
     
-    public static final boolean isEmpty(String[] array) {
+    static final boolean isEmpty(String[] array) {
         return isNull(array) || array.length == 0;
     }
     
-    public static final Byte[] toObject(byte[] array) {
+    static final Byte[] toObject(byte[] array) {
         if (isNull(array)) {
             return null;
         }

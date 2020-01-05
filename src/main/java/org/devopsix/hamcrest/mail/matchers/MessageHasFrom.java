@@ -1,6 +1,6 @@
 package org.devopsix.hamcrest.mail.matchers;
 
-import static org.devopsix.hamcrest.mail.util.HeaderNames.FROM;
+import static org.devopsix.hamcrest.mail.matchers.HeaderNames.FROM;
 
 import javax.mail.Message;
 

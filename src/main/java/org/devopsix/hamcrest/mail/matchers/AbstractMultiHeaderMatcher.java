@@ -4,14 +4,13 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
-import static org.devopsix.hamcrest.mail.util.ArrayUtils.isEmpty;
+import static org.devopsix.hamcrest.mail.matchers.ArrayUtils.isEmpty;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 
 import javax.mail.MessagingException;
 import javax.mail.Part;
 
-import org.devopsix.hamcrest.mail.util.HeaderUtils;
 import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

@@ -1,6 +1,6 @@
 package org.devopsix.hamcrest.mail.matchers;
 
-import static org.devopsix.hamcrest.mail.util.HeaderNames.BCC;
+import static org.devopsix.hamcrest.mail.matchers.HeaderNames.BCC;
 
 import javax.mail.Message;
 

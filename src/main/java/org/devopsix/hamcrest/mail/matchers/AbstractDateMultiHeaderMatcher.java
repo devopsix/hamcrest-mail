@@ -1,10 +1,11 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import static java.lang.String.format;
 import static java.time.OffsetDateTime.parse;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
-import static org.devopsix.hamcrest.mail.util.MailDateTimeFormatter.MAIL_DATE_TIME;
+import static org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter.MAIL_DATE_TIME;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 
@@ -48,7 +49,7 @@ abstract class AbstractDateMultiHeaderMatcher<P extends Part> extends AbstractMu
                     Iterable<OffsetDateTime> convertedValues = stream(values.spliterator(), false).map((v) -> parse(v, MAIL_DATE_TIME)).collect(toList());
                     return matched(convertedValues, mismatch);
                 } catch (Exception e) {
-                    mismatch.appendText("failed to parse date header value: " + e.getMessage());
+                    mismatch.appendText(format("failed to parse date header value: %s", e.getMessage()));
                     return notMatched();
                 }
             }

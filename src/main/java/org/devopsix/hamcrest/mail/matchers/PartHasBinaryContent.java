@@ -1,14 +1,14 @@
 package org.devopsix.hamcrest.mail.matchers;
 
 import static java.lang.String.format;
-import static org.devopsix.hamcrest.mail.util.ArrayUtils.toObject;
-import static org.devopsix.hamcrest.mail.util.IOUtils.toByteArray;
+import static java.util.Objects.isNull;
+import static org.devopsix.hamcrest.mail.matchers.ArrayUtils.toObject;
+import static org.devopsix.hamcrest.mail.matchers.IOUtils.toByteArray;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 
 import javax.mail.MessagingException;
 import javax.mail.Part;
@@ -40,7 +40,7 @@ public class PartHasBinaryContent extends TypeSafeDiagnosingMatcher<Part> {
     private Condition<Byte[]> content(Part part, Description mismatch) {
         try {
             InputStream data = part.getDataHandler().getInputStream();
-            if (Objects.isNull(data)) {
+            if (isNull(data)) {
                 mismatch.appendText("null");
                 return notMatched();
             } else {
