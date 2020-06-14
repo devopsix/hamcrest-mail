@@ -4,6 +4,7 @@ import static java.lang.String.format;
 import static java.time.OffsetDateTime.parse;
 import static java.util.Objects.isNull;
 import static org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter.MAIL_DATE_TIME;
+import static org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter.trimTrailingZoneText;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 
@@ -44,6 +45,7 @@ abstract class AbstractDateHeaderMatcher<P extends Part> extends AbstractHeaderM
                     return matched(null, mismatch);
                 }
                 try {
+                    value = trimTrailingZoneText(value);
                     return matched(parse(value, MAIL_DATE_TIME), mismatch);
                 } catch (Exception e) {
                     mismatch.appendText(format("failed to parse date header value: %s", e.getMessage()));

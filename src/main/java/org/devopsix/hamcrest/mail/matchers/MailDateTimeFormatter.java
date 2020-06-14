@@ -3,7 +3,6 @@ package org.devopsix.hamcrest.mail.matchers;
 import static java.time.chrono.IsoChronology.INSTANCE;
 import static java.time.format.ResolverStyle.SMART;
 import static java.time.format.SignStyle.NOT_NEGATIVE;
-import static java.time.format.TextStyle.SHORT;
 import static java.time.temporal.ChronoField.DAY_OF_MONTH;
 import static java.time.temporal.ChronoField.DAY_OF_WEEK;
 import static java.time.temporal.ChronoField.HOUR_OF_DAY;
@@ -11,18 +10,19 @@ import static java.time.temporal.ChronoField.MINUTE_OF_HOUR;
 import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
 import static java.time.temporal.ChronoField.SECOND_OF_MINUTE;
 import static java.time.temporal.ChronoField.YEAR;
+import static java.util.Objects.isNull;
+import static java.util.regex.Pattern.compile;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * <p>This class supplies a date time formatter relaxed enough to read both,
- * RFC 822 (two-digit year) and RFC 2822/1123 (four-digit year) notation.
- * Furthermore, it allows a trailing time zone name in parentheses after
- * the zone offset.</p>
+ * RFC 822 (two-digit year) and RFC 2822/1123 (four-digit year) notation.</p>
  * 
  * @author devopsix
  *
@@ -87,13 +87,23 @@ final class MailDateTimeFormatter {
         .optionalEnd()
         .appendLiteral(' ')
         .appendOffset("+HHMM", "GMT")
-        .optionalStart()
-        .appendLiteral(' ')
-        .appendLiteral('(')
-        .appendZoneText(SHORT)
-        .appendLiteral(')')
-        .optionalEnd()
         .toFormatter()
         .withResolverStyle(SMART)
         .withChronology(INSTANCE);
+    
+    private static Pattern TRAILING_ZONE = compile("\\s+\\([^\\(]+\\)\\s*$");
+    /**
+     * <p>Trims trailing time zone name in parentheses after the zone offset.</p>
+     * 
+     * <p>Some mailer programs seem to append the zone name although that is not covered by the RFCs.</p>
+     * 
+     * @param value RFC 822/2822/1123 date time string
+     * @return date time string with trailing time zone name removed
+     */
+    static final String trimTrailingZoneText(String value) {
+        if (isNull(value)) {
+            return null;
+        }
+        return TRAILING_ZONE.matcher(value).replaceAll("");
+    }
 }
