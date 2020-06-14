@@ -1,9 +1,10 @@
-name: Build
+name: Build and test
 
 on: [push]
 
 jobs:
   build:
+    name: Build and test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -11,5 +12,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Build hamcrest-mail artifact
+      run: mvn -B install --file pom.xml
+    - name: Run tests in hamcrest-mail-examples
+      run: mvn -B test --file examples/pom.xml
