@@ -1,3 +1,5 @@
+![](https://github.com/devopsix/hamcrest-mail/workflows/Build/badge.svg)
+
 # Hamcrest Mail
 
 Hamcrest Mail is an extension library for the [Java Hamcrest][] matcher library.
