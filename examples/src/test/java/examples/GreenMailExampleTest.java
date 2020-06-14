@@ -80,7 +80,7 @@ public class GreenMailExampleTest {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "127.0.0.1");
         properties.put("mail.smtp.port", "3025");
-        Session session = Session.getDefaultInstance(properties);
+        Session session = Session.getInstance(properties);
         MimeMessage message = new MimeMessage(session);
         message.setFrom("bob@example.com");
         message.setRecipients(TO, "Anna <anna@example.com>");
