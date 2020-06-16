@@ -1,4 +1,6 @@
-![](https://github.com/devopsix/hamcrest-mail/workflows/Build/badge.svg)
+[![Build Status](https://img.shields.io/github/workflow/status/devopsix/hamcrest-mail/Build)](https://github.com/devopsix/hamcrest-mail/actions?query=workflow%3ABuild)
+[![Maven Central](https://img.shields.io/maven-central/v/org.devopsix/hamcrest-mail.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.devopsix%22%20AND%20a:%22hamcrest-mail%22)
+[![License](https://img.shields.io/github/license/devopsix/hamcrest-mail)](LICENSE.txt)
 
 # Hamcrest Mail
 
@@ -6,14 +8,8 @@ Hamcrest Mail is an extension library for the [Java Hamcrest][] matcher library.
 It provides matchers for types from the javax.mail package.
 
 ## Usage
-To use Hamcrest Mail in a Maven project add this dependency to the pom.xml file:
-
-    <dependency>
-        <groupId>org.devopsix</groupId>
-        <artifactId>hamcrest-mail</artifactId>
-        <version>0.3.0</version>
-        <scope>test</scope>
-    </dependency>
+To use Hamcrest Mail in a Maven project add a dependency on `org.devopsix:hamcrest-mail` to the pom.xml file.
+The most recent version can be found in [Maven Central](https://search.maven.org/artifact/org.devopsix/hamcrest-mail).
 
 The matchers are exposed as static methods on the `MailMatchers` class.
 
