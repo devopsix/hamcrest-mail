@@ -1,5 +1,9 @@
 # Hamcrest Mail Changes
 
+## Version 0.3.1 (26 August 2020)
+
+* Fixed an issue with parsing DST zone names in date headers.
+
 ## Version 0.3.0 (5 January 2020)
 
 * Added matcher for recursively verifying parts of a multipart message.
