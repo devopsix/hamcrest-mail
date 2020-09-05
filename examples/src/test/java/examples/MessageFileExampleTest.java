@@ -18,6 +18,7 @@ import static org.devopsix.hamcrest.mail.MailMatchers.multipartAlternative;
 import static org.devopsix.hamcrest.mail.MailMatchers.multipartContentType;
 import static org.devopsix.hamcrest.mail.MailMatchers.multipartMixed;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.isDay;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.arrayWithSize;
@@ -30,7 +31,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
-import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,8 +44,8 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
 import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This class demonstrates how the Hamcrest Mail Matchers can be used for
@@ -58,7 +58,7 @@ public class MessageFileExampleTest {
     
     private Message message;
 
-    @Before
+    @BeforeEach
     public void loadMessage() throws IOException, MessagingException {
         try (InputStream messageStream = getClass().getClassLoader().getResourceAsStream("message.txt")) {
             Session session = Session.getDefaultInstance(new Properties());

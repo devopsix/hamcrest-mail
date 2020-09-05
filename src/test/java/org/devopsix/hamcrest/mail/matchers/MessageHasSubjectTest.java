@@ -16,7 +16,6 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import org.devopsix.hamcrest.mail.matchers.MessageHasSubject;
 import org.junit.jupiter.api.Test;
 
 public class MessageHasSubjectTest extends MatcherTest {

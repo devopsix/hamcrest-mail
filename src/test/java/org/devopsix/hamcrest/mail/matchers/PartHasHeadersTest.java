@@ -18,7 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import org.devopsix.hamcrest.mail.matchers.PartHasHeaders;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 

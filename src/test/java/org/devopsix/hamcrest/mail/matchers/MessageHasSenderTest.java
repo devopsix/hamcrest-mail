@@ -16,7 +16,6 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.devopsix.hamcrest.mail.matchers.MessageHasSender;
 import org.junit.jupiter.api.Test;
 
 public class MessageHasSenderTest extends MatcherTest {

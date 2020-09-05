@@ -17,7 +17,6 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.devopsix.hamcrest.mail.matchers.MessageHasTo;
 import org.junit.jupiter.api.Test;
 
 public class MessageHasToTest extends MatcherTest {

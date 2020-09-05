@@ -26,6 +26,7 @@ import static org.devopsix.hamcrest.mail.MailMatchers.hasTo;
 import static org.devopsix.hamcrest.mail.MailMatchers.hasValidDkimSignature;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.sameOrBefore;
 import static org.exparity.hamcrest.date.OffsetDateTimeMatchers.within;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
@@ -38,7 +39,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
 
 import java.util.Properties;
 
@@ -47,11 +47,11 @@ import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
 
 import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-import com.icegreen.greenmail.junit.GreenMailRule;
+import com.icegreen.greenmail.junit5.GreenMailExtension;
 
 /**
  * This class demonstrates how the Hamcrest Mail Matchers can be used together
@@ -66,12 +66,12 @@ import com.icegreen.greenmail.junit.GreenMailRule;
  */
 public class GreenMailExampleTest {
 
-    // This rule will fire up an SMTP server listening at 127.0.0.1:3025
+    // This extension will fire up an SMTP server listening at 127.0.0.1:3025
     // for every test.
-    @Rule
-    public GreenMailRule greenMail = new GreenMailRule(SMTP);
+    @RegisterExtension
+    static GreenMailExtension greenMail = new GreenMailExtension(SMTP);
     
-    @Before
+    @BeforeEach
     public void sendMessage() throws Exception {
         // This is what your application code would do and what you usually
         // would invoke a method on the test subject for.

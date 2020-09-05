@@ -15,7 +15,6 @@ import java.time.OffsetDateTime;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
-import org.devopsix.hamcrest.mail.matchers.PartHasDateHeaders;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 

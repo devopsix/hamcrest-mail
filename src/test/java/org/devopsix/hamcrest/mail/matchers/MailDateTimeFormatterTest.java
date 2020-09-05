@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import java.time.OffsetDateTime;
 
-import org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 public class MailDateTimeFormatterTest {
