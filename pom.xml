@@ -3,7 +3,7 @@
     
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail</artifactId>
-    <version>0.3.2-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>Hamcrest Mail</name>
@@ -33,7 +33,7 @@
         <connection>scm:git:https://github.com/devopsix/hamcrest-mail.git</connection>
         <developerConnection>scm:git:https://github.com/devopsix/hamcrest-mail.git</developerConnection>
         <url>https://github.com/devopsix/hamcrest-mail</url>
-      <tag>HEAD</tag>
+      <tag>v1.0.0</tag>
   </scm>
 
     <distributionManagement>
