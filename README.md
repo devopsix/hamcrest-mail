@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/github/workflow/status/devopsix/hamcrest-mail/Build)](https://github.com/devopsix/hamcrest-mail/actions?query=workflow%3ABuild)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/devopsix/hamcrest-mail/build.yml)](https://github.com/devopsix/hamcrest-mail/actions?query=workflow%3ABuild)
 [![Maven Central](https://img.shields.io/maven-central/v/org.devopsix/hamcrest-mail.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.devopsix%22%20AND%20a:%22hamcrest-mail%22)
 [![License](https://img.shields.io/github/license/devopsix/hamcrest-mail)](LICENSE.txt)
 
