@@ -17,11 +17,11 @@ jobs:
         run: >-
           mvn
           --batch-mode
-          --file pom.xml
+          --projects hamcrest-mail
           install
       - name: Run tests in hamcrest-mail-examples
         run: >-
           mvn
           --batch-mode
-          --file examples/pom.xml
+          --projects examples
           test

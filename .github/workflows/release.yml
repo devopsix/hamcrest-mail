@@ -47,32 +47,31 @@ jobs:
         run: >-
           mvn
           --batch-mode
-          --file parent-pom.xml
-          release:prepare
-          -DpomFileName=parent-pom.xml
           "-DpreparationGoals=clean compile"
           "-DreleaseVersion=${{ github.event.inputs.releaseVersion }}"
           "-DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}"
           "-Dtag=v${{ github.event.inputs.releaseVersion }}"
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
-      # Intentionally using pom.xml - not parent-pom.xml.
+          release:prepare
+      # Intentionally using hamcrest-mail/pom.xml - not ./pom.xml.
       # We do want to release only one single self-contained artifact with no reference to a parent project.
-      # The purpose of parent-pom.xml is having an entry point for preparing (and rolling back) a release
+      # The purpose of ./pom.xml is having an entry point for preparing (and rolling back) a release
       # with the help of the Maven Release Plugin.
       - name: Perform release
         id: perform_release
         run: >-
           mvn
           --batch-mode
-          --file pom.xml
-          release:perform
-          -DpomFileName=pom.xml
-          -Dgoals=deploy
-          -DreleaseProfiles=release
+          "-DpomFileName=hamcrest-mail/pom.xml"
+          "-Dgoals=deploy"
+          "-DreleaseProfiles=release"
+          "-DconnectionUrl=scm:git:$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          "-Dtag=v${{ github.event.inputs.releaseVersion }}"
           "-Darguments=-Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}"
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          release:perform
       # Maven Release Plugin 3.0.0-M1 would automatically remove the tag, but unfortunately
       # it's unusable due to this bug: https://issues.apache.org/jira/browse/MRELEASE-1038
       # Hence, for the time being, we have to delete the tag ourselves.
@@ -84,11 +83,9 @@ jobs:
           ;
           mvn
           --batch-mode
-          --file parent-pom.xml
-          release:rollback
-          -DpomFileName=parent-pom.xml
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          release:rollback
       - name: Create GitHub release
         id: create_github_release
         uses: ncipollo/release-action@v1
@@ -107,7 +104,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_github_release.outputs.upload_url }} 
-          asset_path: ./target/checkout/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
+          asset_path: ./target/checkout/hamcrest-mail/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
           asset_name: hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
           asset_content_type: application/java-archive
       - name: Upload release javadoc JAR file
@@ -116,6 +113,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_github_release.outputs.upload_url }} 
-          asset_path: ./target/checkout/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
+          asset_path: ./target/checkout/hamcrest-mail/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
           asset_name: hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
           asset_content_type: application/java-archive
