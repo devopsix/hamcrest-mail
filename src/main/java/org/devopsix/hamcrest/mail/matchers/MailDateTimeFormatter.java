@@ -31,7 +31,7 @@ final class MailDateTimeFormatter {
 
     private MailDateTimeFormatter() {}
 
-    private static final Map<Long, String> dayNames() {
+    private static Map<Long, String> dayNames() {
         Map<Long, String> dayNames = new HashMap<>();
         dayNames.put(1L, "Mon");
         dayNames.put(2L, "Tue");
@@ -43,7 +43,7 @@ final class MailDateTimeFormatter {
         return dayNames;
     }
 
-    private static final Map<Long, String> monthNames() {
+    private static Map<Long, String> monthNames() {
         Map<Long, String> monthNames = new HashMap<>();
         monthNames.put(1L, "Jan");
         monthNames.put(2L, "Feb");
@@ -76,7 +76,7 @@ final class MailDateTimeFormatter {
         .appendLiteral(' ')
         .appendText(MONTH_OF_YEAR, MONTH_NAMES)
         .appendLiteral(' ')
-        .appendValueReduced(YEAR, 2, 4, LocalDate.of(1900, 01, 01))
+        .appendValueReduced(YEAR, 2, 4, LocalDate.of(1900, 1, 1))
         .appendLiteral(' ')
         .appendValue(HOUR_OF_DAY, 2)
         .appendLiteral(':')
@@ -91,7 +91,7 @@ final class MailDateTimeFormatter {
         .withResolverStyle(SMART)
         .withChronology(INSTANCE);
     
-    private static Pattern TRAILING_ZONE = compile("\\s+\\([^\\(]+\\)\\s*$");
+    private static final Pattern TRAILING_ZONE = compile("\\s+\\([^(]+\\)\\s*$");
     /**
      * <p>Trims trailing time zone name in parentheses after the zone offset.</p>
      * 
@@ -100,7 +100,7 @@ final class MailDateTimeFormatter {
      * @param value RFC 822/2822/1123 date time string
      * @return date time string with trailing time zone name removed
      */
-    static final String trimTrailingZoneText(String value) {
+    static String trimTrailingZoneText(String value) {
         if (isNull(value)) {
             return null;
         }

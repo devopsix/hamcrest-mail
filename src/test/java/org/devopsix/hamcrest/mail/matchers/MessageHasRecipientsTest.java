@@ -24,7 +24,7 @@ public class MessageHasRecipientsTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenRecipientsCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getAllRecipients()).thenThrow(new MessagingException("error deocding recipients"));
+        when(message.getAllRecipients()).thenThrow(new MessagingException("error decoding recipients"));
         MessageHasRecipients matcher = new MessageHasRecipients(emptyIterableOf(Address.class));
         assertThat(message, not(matcher));
     }
@@ -32,7 +32,7 @@ public class MessageHasRecipientsTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenRecipientsOfCertainTypeCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getRecipients(any(RecipientType.class))).thenThrow(new MessagingException("error deocding recipients"));
+        when(message.getRecipients(any(RecipientType.class))).thenThrow(new MessagingException("error decoding recipients"));
         MessageHasRecipients matcher = new MessageHasRecipients(TO, emptyIterableOf(Address.class));
         assertThat(message, not(matcher));
     }

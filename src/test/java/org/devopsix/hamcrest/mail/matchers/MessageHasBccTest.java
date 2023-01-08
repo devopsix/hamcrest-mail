@@ -24,7 +24,7 @@ public class MessageHasBccTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getHeader(eq("Bcc"))).thenThrow(new MessagingException("error deocding header"));
+        when(message.getHeader(eq("Bcc"))).thenThrow(new MessagingException("error decoding header"));
         MessageHasBcc matcher = new MessageHasBcc(any(String.class));
         assertThat(message, not(matcher));
     }

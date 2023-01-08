@@ -21,7 +21,7 @@ public class MultipartHasPartsTest {
     public void shouldNotMatchWhenPartsCannotBeExtracted() throws Exception {
         Multipart multipart = mock(Multipart.class);
         when(multipart.getCount()).thenReturn(1);
-        when(multipart.getBodyPart(anyInt())).thenThrow(new MessagingException("error deocding part"));
+        when(multipart.getBodyPart(anyInt())).thenThrow(new MessagingException("error decoding part"));
         MultipartHasParts matcher = new MultipartHasParts((Matcher)anything());
         assertThat(multipart, not(matcher));
     }

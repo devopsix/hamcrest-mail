@@ -26,7 +26,7 @@ public class MessageHasDateTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getHeader(eq("Date"))).thenThrow(new MessagingException("error deocding header"));
+        when(message.getHeader(eq("Date"))).thenThrow(new MessagingException("error decoding header"));
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
     }

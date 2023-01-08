@@ -24,7 +24,7 @@ public class PartHasHeaderTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getHeader(eq("Message-ID"))).thenThrow(new MessagingException("error deocding header"));
+        when(message.getHeader(eq("Message-ID"))).thenThrow(new MessagingException("error decoding header"));
         PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, not(matcher));
     }

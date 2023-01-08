@@ -38,19 +38,16 @@ abstract class AbstractDateHeaderMatcher<P extends Part> extends AbstractHeaderM
     }
     
     private Step<String, OffsetDateTime> parseDateTime() {
-        return new Step<String, OffsetDateTime>() {
-            @Override
-            public Condition<OffsetDateTime> apply(String value, Description mismatch) {
-                if (isNull(value)) {
-                    return matched(null, mismatch);
-                }
-                try {
-                    value = trimTrailingZoneText(value);
-                    return matched(parse(value, MAIL_DATE_TIME), mismatch);
-                } catch (Exception e) {
-                    mismatch.appendText(format("failed to parse date header value: %s", e.getMessage()));
-                    return notMatched();
-                }
+        return (value, mismatch) -> {
+            if (isNull(value)) {
+                return matched(null, mismatch);
+            }
+            try {
+                value = trimTrailingZoneText(value);
+                return matched(parse(value, MAIL_DATE_TIME), mismatch);
+            } catch (Exception e) {
+                mismatch.appendText(format("failed to parse date header value: %s", e.getMessage()));
+                return notMatched();
             }
         };
     }

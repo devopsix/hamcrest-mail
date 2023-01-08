@@ -15,14 +15,14 @@ import org.junit.jupiter.api.Test;
 public class AddressHasPersonalTest {
     
     @Test
-    public void shouldNotMatchWhenItsNoInternetAddress() throws Exception {
+    public void shouldNotMatchWhenItsNoInternetAddress() {
         Address address = mock(Address.class);
         AddressHasPersonal matcher = new AddressHasPersonal(any(String.class));
         assertThat(address, not(matcher));
     }
     
     @Test
-    public void shouldNotMatchNull() throws Exception {
+    public void shouldNotMatchNull() {
         Address address = null;
         AddressHasPersonal matcher = new AddressHasPersonal(any(String.class));
         assertThat(address, not(matcher));
