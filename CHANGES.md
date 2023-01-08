@@ -1,5 +1,9 @@
 # Hamcrest Mail Changes
 
+## Version 1.0.1 (8 January 2023)
+
+* Dependencies updated
+
 ## Version 1.0.0 (5 September 2020)
 
 *Increment major version in order to indicate it's ready for production use.*
