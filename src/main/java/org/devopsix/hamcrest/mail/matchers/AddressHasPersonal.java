@@ -51,15 +51,12 @@ public class AddressHasPersonal extends TypeSafeDiagnosingMatcher<Address> {
     }
     
     private Step<InternetAddress, String> extractPersonal() {
-        return new Step<InternetAddress, String>() {
-            @Override
-            public Condition<String> apply(InternetAddress address, Description mismatch) {
-                if (isNull(address)) {
-                    mismatch.appendText("null");
-                    return notMatched();
-                } else {
-                    return matched(address.getPersonal(), mismatch);
-                }
+        return (address, mismatch) -> {
+            if (isNull(address)) {
+                mismatch.appendText("null");
+                return notMatched();
+            } else {
+                return matched(address.getPersonal(), mismatch);
             }
         };
     }

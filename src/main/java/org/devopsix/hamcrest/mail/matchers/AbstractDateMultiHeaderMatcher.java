@@ -1,23 +1,21 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import org.hamcrest.Condition;
+import org.hamcrest.Condition.Step;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+
+import javax.mail.Part;
+import java.time.OffsetDateTime;
+
 import static java.lang.String.format;
 import static java.time.OffsetDateTime.parse;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
 import static org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter.MAIL_DATE_TIME;
-import static org.devopsix.hamcrest.mail.matchers.MailDateTimeFormatter.trimTrailingZoneText;
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
-
-import java.time.OffsetDateTime;
-
-import javax.mail.Part;
-
-import org.hamcrest.Condition;
-import org.hamcrest.Condition.Step;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 
 /**
  * Base class for date header matchers.
@@ -40,23 +38,20 @@ abstract class AbstractDateMultiHeaderMatcher<P extends Part> extends AbstractMu
     }
     
     private Step<Iterable<String>, Iterable<OffsetDateTime>> parseDateTime() {
-        return new Step<Iterable<String>, Iterable<OffsetDateTime>>() {
-            @Override
-            public Condition<Iterable<OffsetDateTime>> apply(Iterable<String> values, Description mismatch) {
-                if (isNull(values)) {
-                    return matched(null, mismatch);
-                }
-                try {
-                    Iterable<OffsetDateTime> convertedValues =
-                        stream(values.spliterator(), false)
-                        .map((v) -> trimTrailingZoneText(v))
-                        .map((v) -> parse(v, MAIL_DATE_TIME))
-                        .collect(toList());
-                    return matched(convertedValues, mismatch);
-                } catch (Exception e) {
-                    mismatch.appendText(format("failed to parse date header value: %s", e.getMessage()));
-                    return notMatched();
-                }
+        return (values, mismatch) -> {
+            if (isNull(values)) {
+                return matched(null, mismatch);
+            }
+            try {
+                Iterable<OffsetDateTime> convertedValues =
+                    stream(values.spliterator(), false)
+                    .map(MailDateTimeFormatter::trimTrailingZoneText)
+                    .map((v) -> parse(v, MAIL_DATE_TIME))
+                    .collect(toList());
+                return matched(convertedValues, mismatch);
+            } catch (Exception e) {
+                mismatch.appendText(format("failed to parse date header value: %s", e.getMessage()));
+                return notMatched();
             }
         };
     }

@@ -1,11 +1,14 @@
 package org.devopsix.hamcrest.mail.matchers;
 
-import static java.lang.String.format;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
+import org.apache.james.jdkim.DKIMVerifier;
+import org.apache.james.jdkim.api.PublicKeyRecordRetriever;
+import org.apache.james.jdkim.api.SignatureRecord;
+import org.apache.james.jdkim.exceptions.FailException;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,17 +17,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-
-import org.apache.james.jdkim.DKIMVerifier;
-import org.apache.james.jdkim.api.PublicKeyRecordRetriever;
-import org.apache.james.jdkim.api.SignatureRecord;
-import org.apache.james.jdkim.exceptions.FailException;
-import org.apache.james.jdkim.exceptions.PermFailException;
-import org.apache.james.jdkim.exceptions.TempFailException;
-import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
+import static java.lang.String.format;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 /**
  * <p>A matcher that verifies DKIM signatures.</p>
@@ -73,8 +70,7 @@ public class MessageHasValidDkimSignature extends TypeSafeDiagnosingMatcher<Mess
         }
 
         @Override
-        public List<String> getRecords(CharSequence methodAndOption, CharSequence selector, CharSequence token)
-                throws TempFailException, PermFailException {
+        public List<String> getRecords(CharSequence methodAndOption, CharSequence selector, CharSequence token) {
             assertMethodAndOptionAreSupported(methodAndOption);
             String lookupName = buildLookupName(selector, token);
             String record = publicKeys.get(lookupName);

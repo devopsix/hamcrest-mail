@@ -18,7 +18,7 @@ public class PartHasTextContentTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Part part = mock(Part.class);
-        when(part.getContent()).thenThrow(new MessagingException("error deocding content"));
+        when(part.getContent()).thenThrow(new MessagingException("error decoding content"));
         PartHasTextContent matcher = new PartHasTextContent(any(String.class));
         assertThat(part, not(matcher));
     }

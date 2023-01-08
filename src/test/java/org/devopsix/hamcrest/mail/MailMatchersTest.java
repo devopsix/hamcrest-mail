@@ -156,7 +156,15 @@ public class MailMatchersTest {
         assertThat(matcher, is(notNullValue()));
         assertThat(message, matcher);
     }
-    
+
+    @Test
+    public void hasBccWithValueShouldReturnMatcher() throws Exception {
+        Message message = createTextMessage();
+        Matcher<Message> matcher = MailMatchers.hasBcc("joe.average@example.com");
+        assertThat(matcher, is(notNullValue()));
+        assertThat(message, matcher);
+    }
+
     @Test
     public void hasRecipientsShouldReturnMatcher() throws Exception {
         Message message = createTextMessage();
@@ -410,7 +418,7 @@ public class MailMatchersTest {
         return new MimeMultipart("related", createBinaryPart(), createBinaryPart());
     }
     
-    private MimeMessage createMessage() throws IOException, FailException, MessagingException {
+    private MimeMessage createMessage() throws MessagingException {
         Session session = Session.getDefaultInstance(new Properties());
         MimeMessage message = new MimeMessage(session);
         message.setSentDate(new Date(SENT_DATE.toInstant().toEpochMilli()));

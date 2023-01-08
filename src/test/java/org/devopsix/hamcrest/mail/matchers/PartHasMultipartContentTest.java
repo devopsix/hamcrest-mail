@@ -1,5 +1,18 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
+
+import javax.mail.*;
+import javax.mail.internet.InternetHeaders;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import static org.devopsix.hamcrest.mail.MailMatchers.hasHeader;
 import static org.devopsix.hamcrest.mail.MailMatchers.hasPart;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,33 +21,13 @@ import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Properties;
-
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.internet.InternetHeaders;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-
-import org.apache.james.jdkim.exceptions.FailException;
-import org.hamcrest.Matcher;
-import org.junit.jupiter.api.Test;
-
 public class PartHasMultipartContentTest extends MatcherTest {
     
     @Test
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Part part = mock(Part.class);
-        when(part.getContent()).thenThrow(new MessagingException("error deocding content"));
+        when(part.getContent()).thenThrow(new MessagingException("error decoding content"));
         PartHasMultipartContent matcher = new PartHasMultipartContent(false, (Matcher)anything());
         assertThat(part, not(matcher));
     }
@@ -92,7 +85,7 @@ public class PartHasMultipartContentTest extends MatcherTest {
         assertThat(message, not(matcher));
     }
     
-    private Message createTextMessage() throws IOException, FailException, MessagingException {
+    private Message createTextMessage() throws IOException, MessagingException {
         Session session = Session.getDefaultInstance(new Properties());
         MimeMessage message = new MimeMessage(session);
         message.setText("Lorem ipsum");
@@ -101,7 +94,7 @@ public class PartHasMultipartContentTest extends MatcherTest {
         return new MimeMessage(session, new ByteArrayInputStream(buffer.toByteArray()));
     }
     
-    private Message createMultipartMessage(BodyPart... parts) throws IOException, FailException, MessagingException {
+    private Message createMultipartMessage(BodyPart... parts) throws IOException, MessagingException {
         Session session = Session.getDefaultInstance(new Properties());
         MimeMessage message = new MimeMessage(session);
         message.setContent(new MimeMultipart("mixed", parts));

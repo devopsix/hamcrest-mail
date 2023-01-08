@@ -149,7 +149,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
-    private static final KeyPair generateKeyPair() {
+    private static KeyPair generateKeyPair() {
         try {
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
             keyGen.initialize(2048);

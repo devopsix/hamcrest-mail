@@ -46,7 +46,7 @@ abstract class AbstractHeaderMatcher<P extends Part, T>  extends TypeSafeDiagnos
     protected abstract Condition<T> value(P part, Description mismatch);
     
     protected Condition<String> headerValue(P part, Description mismatch) {
-        String[] values = null;
+        String[] values;
         try {
             values = part.getHeader(header);
         } catch (MessagingException e) {

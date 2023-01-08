@@ -56,7 +56,7 @@ public class MessageHasRecipients extends TypeSafeDiagnosingMatcher<Message> {
     }
     
     protected Condition<Iterable<Address>> recipients(Message message, Description mismatch) {
-        Address[] recipients = null;
+        Address[] recipients;
         try {
             if (allRecipientTypes()) {
                 recipients = message.getAllRecipients();

@@ -23,7 +23,7 @@ public class MessageHasSubjectTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getHeader(eq("Subject"))).thenThrow(new MessagingException("error deocding header"));
+        when(message.getHeader(eq("Subject"))).thenThrow(new MessagingException("error decoding header"));
         MessageHasSubject matcher = new MessageHasSubject(any(String.class));
         assertThat(message, not(matcher));
     }

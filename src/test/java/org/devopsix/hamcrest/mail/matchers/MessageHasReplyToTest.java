@@ -24,7 +24,7 @@ public class MessageHasReplyToTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getHeader(eq("Reply-To"))).thenThrow(new MessagingException("error deocding header"));
+        when(message.getHeader(eq("Reply-To"))).thenThrow(new MessagingException("error decoding header"));
         MessageHasReplyTo matcher = new MessageHasReplyTo(any(String.class));
         assertThat(message, not(matcher));
     }

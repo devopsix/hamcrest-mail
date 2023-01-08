@@ -6,11 +6,11 @@ final class ArrayUtils {
 
     private ArrayUtils() {}
     
-    static final boolean isEmpty(String[] array) {
+    static boolean isEmpty(String[] array) {
         return isNull(array) || array.length == 0;
     }
     
-    static final Byte[] toObject(byte[] array) {
+    static Byte[] toObject(byte[] array) {
         if (isNull(array)) {
             return null;
         }

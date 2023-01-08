@@ -23,7 +23,7 @@ public class MessageHasSenderTest extends MatcherTest {
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
         Message message = mock(Message.class);
-        when(message.getHeader(eq("Sender"))).thenThrow(new MessagingException("error deocding header"));
+        when(message.getHeader(eq("Sender"))).thenThrow(new MessagingException("error decoding header"));
         MessageHasSender matcher = new MessageHasSender(any(String.class));
         assertThat(message, not(matcher));
     }

@@ -47,7 +47,7 @@ public class PartHasBinaryContent extends TypeSafeDiagnosingMatcher<Part> {
                 return matched(toObject(toByteArray(data)), mismatch);
             }
         } catch (IOException | MessagingException e) {
-            mismatch.appendText(format("failed to extract content: ", e.getMessage()));
+            mismatch.appendText(format("failed to extract content: %s", e.getMessage()));
             return notMatched();
         }
     }

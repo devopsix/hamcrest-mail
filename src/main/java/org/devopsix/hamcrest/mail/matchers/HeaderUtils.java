@@ -8,11 +8,11 @@ final class HeaderUtils {
 
     private HeaderUtils() {}
     
-    static String decodeHeader(String rawvalue) {
+    static String decodeHeader(String rawValue) {
         try {
-            return MimeUtility.decodeText(MimeUtility.unfold(rawvalue));
+            return MimeUtility.decodeText(MimeUtility.unfold(rawValue));
         } catch (UnsupportedEncodingException ex) {
-            return rawvalue;
+            return rawValue;
         }
     }
 }

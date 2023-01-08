@@ -22,7 +22,7 @@ public class PartHasBinaryContentTest extends MatcherTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Part part = mock(Part.class);
-        when(part.getDataHandler()).thenThrow(new MessagingException("error deocding header"));
+        when(part.getDataHandler()).thenThrow(new MessagingException("error decoding header"));
         PartHasBinaryContent matcher = new PartHasBinaryContent((Matcher)anything());
         assertThat(part, not(matcher));
     }
