@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.devopsix</groupId>
-    <artifactId>hamcrest-mail</artifactId>
+    <artifactId>hamcrest-mail-jakarta</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Hamcrest Mail (Java EE 8)</name>
+    <name>Hamcrest Mail (Jakarta EE 9+)</name>
     <url>https://github.com/devopsix/hamcrest-mail</url>
-    <description>Hamcrest javax.mail Matchers for Java</description>
+    <description>Hamcrest jakarta.mail Matchers for Java</description>
 
     <licenses>
         <license>
@@ -61,8 +61,8 @@
             </dependency>
             <dependency>
                 <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-                <version>1.6.2</version>
+                <artifactId>jakarta.mail</artifactId>
+                <version>2.0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.james.jdkim</groupId>
@@ -89,7 +89,7 @@
         </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
+            <artifactId>jakarta.mail</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.james.jdkim</groupId>
@@ -127,6 +127,16 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.2.1</version>
                 </plugin>
@@ -146,6 +156,94 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${basedir}/target/generated-sources/java"/>
+                                <mkdir dir="${basedir}/target/generated-test-sources/java"/>
+                                <mkdir dir="${basedir}/target/generated-test-sources/resources"/>
+                                <copy todir="${basedir}/target/generated-sources/java">
+                                    <fileset dir="${basedir}/../hamcrest-mail/src/main/java"/>
+                                </copy>
+                                <copy todir="${basedir}/target/generated-test-sources/java">
+                                    <fileset dir="${basedir}/../hamcrest-mail/src/test/java"/>
+                                </copy>
+                                <copy todir="${basedir}/target/generated-test-sources/resources">
+                                    <fileset dir="${basedir}/../hamcrest-mail/src/test/resources"/>
+                                </copy>
+                                <replace token="javax.mail." value="jakarta.mail."
+                                         dir="${basedir}/target/generated-sources/java">
+                                    <include name="**/*.java"/>
+                                </replace>
+                                <replace token="javax.activation." value="jakarta.activation."
+                                         dir="${basedir}/target/generated-sources/java">
+                                    <include name="**/*.java"/>
+                                </replace>
+                                <replace token="javax.mail." value="jakarta.mail."
+                                         dir="${basedir}/target/generated-test-sources/java">
+                                    <include name="**/*.java"/>
+                                </replace>
+                                <replace token="javax.activation." value="jakarta.activation."
+                                         dir="${basedir}/target/generated-test-sources/java">
+                                    <include name="**/*.java"/>
+                                </replace>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-test-sources</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-test-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-test-resources</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>add-test-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/generated-test-sources/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>

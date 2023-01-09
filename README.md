@@ -5,11 +5,11 @@
 # Hamcrest Mail
 
 Hamcrest Mail is an extension library for the [Java Hamcrest][] matcher library.
-It provides matchers for types from the javax.mail package.
+It provides matchers for types from the javax.mail and jakarta.mail packages.
 
 ## Usage
-To use Hamcrest Mail in a Maven project add a dependency on `org.devopsix:hamcrest-mail` to the pom.xml file.
-The most recent version can be found in [Maven Central](https://search.maven.org/artifact/org.devopsix/hamcrest-mail).
+To use Hamcrest Mail in a Maven project add a dependency on `org.devopsix:hamcrest-mail` (for Java EE 8 / javax.mail) or `org.devopsix:hamcrest-mail-jakarta` (for Jakarta EE 9+ / jakarta.mail) to the pom.xml file.
+The most recent version can be found in [Maven Central](https://search.maven.org/search?q=g:org.devopsix).
 
 The matchers are exposed as static methods on the `MailMatchers` class.
 
@@ -37,7 +37,7 @@ Here are a few examples:
     Assert.assertThat(message, MailMatchers.hasHeaders("Received", (Matcher)Matchers.hasItems(
             Matchers.containsString("host1"), Matchers.containsString("host2"))));
 
-More example can be found in the [examples](examples/) directory.
+More example can be found in the [examples](examples/) directory (for Java EE 8 / javax.mail) and in the [examples-jakarta](examples-jakarta/) directory (for Jakarta EE 9+ / jakarta.mail).
 
 ## Matchers
 

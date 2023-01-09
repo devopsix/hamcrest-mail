@@ -1,4 +1,4 @@
-# Hamcrest Mail Examples (Java EE 8)
+# Hamcrest Mail Examples (Jakarta EE 9+)
 
 This project contains usage examples for the [Hamcrest Mail](../) matcher library.
 
