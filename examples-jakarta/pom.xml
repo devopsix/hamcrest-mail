@@ -9,8 +9,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>hamcrest-mail-examples</artifactId>
-    <name>Hamcrest Mail Examples (Java EE 8)</name>
+    <artifactId>hamcrest-mail-examples-jakarta</artifactId>
+    <name>Hamcrest Mail Examples (Jakarta EE 9+)</name>
 
     <licenses>
         <license>
@@ -32,8 +32,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-                <version>1.6.2</version>
+                <artifactId>jakarta.mail</artifactId>
+                <version>2.0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -48,7 +48,7 @@
             <dependency>
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail-junit5</artifactId>
-                <version>1.6.12</version>
+                <version>2.0.0-alpha-3</version>
             </dependency>
             <dependency>
                 <groupId>org.exparity</groupId>
@@ -66,7 +66,7 @@
     <dependencies>
         <dependency>
             <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
+            <artifactId>jakarta.mail</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -85,7 +85,7 @@
         </dependency>
         <dependency>
             <groupId>org.devopsix</groupId>
-            <artifactId>hamcrest-mail</artifactId>
+            <artifactId>hamcrest-mail-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

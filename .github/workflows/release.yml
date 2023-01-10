@@ -47,32 +47,24 @@ jobs:
         run: >-
           mvn
           --batch-mode
-          --file parent-pom.xml
-          release:prepare
-          -DpomFileName=parent-pom.xml
           "-DpreparationGoals=clean compile"
           "-DreleaseVersion=${{ github.event.inputs.releaseVersion }}"
           "-DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}"
           "-Dtag=v${{ github.event.inputs.releaseVersion }}"
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
-      # Intentionally using pom.xml - not parent-pom.xml.
-      # We do want to release only one single self-contained artifact with no reference to a parent project.
-      # The purpose of parent-pom.xml is having an entry point for preparing (and rolling back) a release
-      # with the help of the Maven Release Plugin.
+          release:prepare
       - name: Perform release
         id: perform_release
         run: >-
           mvn
           --batch-mode
-          --file pom.xml
-          release:perform
-          -DpomFileName=pom.xml
-          -Dgoals=deploy
-          -DreleaseProfiles=release
+          "-Dgoals=deploy"
+          "-DreleaseProfiles=release,-examples"
           "-Darguments=-Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}"
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          release:perform
       # Maven Release Plugin 3.0.0-M1 would automatically remove the tag, but unfortunately
       # it's unusable due to this bug: https://issues.apache.org/jira/browse/MRELEASE-1038
       # Hence, for the time being, we have to delete the tag ourselves.
@@ -84,38 +76,21 @@ jobs:
           ;
           mvn
           --batch-mode
-          --file parent-pom.xml
-          release:rollback
-          -DpomFileName=parent-pom.xml
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          release:rollback
       - name: Create GitHub release
         id: create_github_release
-        uses: ncipollo/release-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag: v${{ github.event.inputs.releaseVersion }}
+          tag_name: v${{ github.event.inputs.releaseVersion }}
           name: hamcrest-mail-${{ github.event.inputs.releaseVersion }}
           body: |-
             Release ${{ github.event.inputs.releaseVersion }} of hamcrest-mail
             
             [Change log](https://github.com/devopsix/hamcrest-mail/blob/master/CHANGES.md)
-      - name: Upload release JAR file
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_github_release.outputs.upload_url }} 
-          asset_path: ./target/checkout/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
-          asset_name: hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
-          asset_content_type: application/java-archive
-      - name: Upload release javadoc JAR file
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_github_release.outputs.upload_url }} 
-          asset_path: ./target/checkout/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
-          asset_name: hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
-          asset_content_type: application/java-archive
+          files: |
+            ./target/checkout/hamcrest-mail/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
+            ./target/checkout/hamcrest-mail/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
+            ./target/checkout/hamcrest-mail-jakarta/target/hamcrest-mail-jakarta-${{ github.event.inputs.releaseVersion }}.jar
+            ./target/checkout/hamcrest-mail-jakarta/target/hamcrest-mail-jakarta-${{ github.event.inputs.releaseVersion }}-javadoc.jar
