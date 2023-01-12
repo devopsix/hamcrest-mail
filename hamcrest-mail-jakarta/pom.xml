@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail-jakarta</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
 
     <name>Hamcrest Mail (Jakarta EE 9+)</name>
@@ -34,7 +33,7 @@
         <connection>scm:git:https://github.com/devopsix/hamcrest-mail.git</connection>
         <developerConnection>scm:git:https://github.com/devopsix/hamcrest-mail.git</developerConnection>
         <url>https://github.com/devopsix/hamcrest-mail</url>
-        <tag>HEAD</tag>
+        <tag>v1.1.1</tag>
     </scm>
 
     <distributionManagement>
@@ -165,33 +164,29 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <target>
-                                <mkdir dir="${basedir}/target/generated-sources/java"/>
-                                <mkdir dir="${basedir}/target/generated-test-sources/java"/>
-                                <mkdir dir="${basedir}/target/generated-test-sources/resources"/>
+                                <mkdir dir="${basedir}/target/generated-sources/java" />
+                                <mkdir dir="${basedir}/target/generated-test-sources/java" />
+                                <mkdir dir="${basedir}/target/generated-test-sources/resources" />
                                 <copy todir="${basedir}/target/generated-sources/java">
-                                    <fileset dir="${basedir}/../hamcrest-mail/src/main/java"/>
+                                    <fileset dir="${basedir}/../hamcrest-mail/src/main/java" />
                                 </copy>
                                 <copy todir="${basedir}/target/generated-test-sources/java">
-                                    <fileset dir="${basedir}/../hamcrest-mail/src/test/java"/>
+                                    <fileset dir="${basedir}/../hamcrest-mail/src/test/java" />
                                 </copy>
                                 <copy todir="${basedir}/target/generated-test-sources/resources">
-                                    <fileset dir="${basedir}/../hamcrest-mail/src/test/resources"/>
+                                    <fileset dir="${basedir}/../hamcrest-mail/src/test/resources" />
                                 </copy>
-                                <replace token="javax.mail." value="jakarta.mail."
-                                         dir="${basedir}/target/generated-sources/java">
-                                    <include name="**/*.java"/>
+                                <replace token="javax.mail." value="jakarta.mail." dir="${basedir}/target/generated-sources/java">
+                                    <include name="**/*.java" />
                                 </replace>
-                                <replace token="javax.activation." value="jakarta.activation."
-                                         dir="${basedir}/target/generated-sources/java">
-                                    <include name="**/*.java"/>
+                                <replace token="javax.activation." value="jakarta.activation." dir="${basedir}/target/generated-sources/java">
+                                    <include name="**/*.java" />
                                 </replace>
-                                <replace token="javax.mail." value="jakarta.mail."
-                                         dir="${basedir}/target/generated-test-sources/java">
-                                    <include name="**/*.java"/>
+                                <replace token="javax.mail." value="jakarta.mail." dir="${basedir}/target/generated-test-sources/java">
+                                    <include name="**/*.java" />
                                 </replace>
-                                <replace token="javax.activation." value="jakarta.activation."
-                                         dir="${basedir}/target/generated-test-sources/java">
-                                    <include name="**/*.java"/>
+                                <replace token="javax.activation." value="jakarta.activation." dir="${basedir}/target/generated-test-sources/java">
+                                    <include name="**/*.java" />
                                 </replace>
                             </target>
                         </configuration>
