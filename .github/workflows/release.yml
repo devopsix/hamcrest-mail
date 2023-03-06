@@ -53,6 +53,7 @@ jobs:
           "-Dtag=v${{ github.event.inputs.releaseVersion }}"
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          "-DrepoBaseUrl=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
           release:prepare
       - name: Perform release
         id: perform_release
@@ -61,9 +62,10 @@ jobs:
           --batch-mode
           "-Dgoals=deploy"
           "-DreleaseProfiles=release,-examples"
-          "-Darguments=-Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}"
+          "-Darguments=-Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} -DrepoBaseUrl=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          "-DrepoBaseUrl=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
           release:perform
       # Maven Release Plugin 3.0.0-M1 would automatically remove the tag, but unfortunately
       # it's unusable due to this bug: https://issues.apache.org/jira/browse/MRELEASE-1038
@@ -78,6 +80,7 @@ jobs:
           --batch-mode
           "-Dusername=${{ github.actor }}"
           "-Dpassword=${{ secrets.GITHUB_TOKEN }}"
+          "-DrepoBaseUrl=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
           release:rollback
       - name: Create GitHub release
         id: create_github_release
@@ -88,7 +91,7 @@ jobs:
           body: |-
             Release ${{ github.event.inputs.releaseVersion }} of hamcrest-mail
             
-            [Change log](https://github.com/devopsix/hamcrest-mail/blob/master/CHANGES.md)
+            [Change log](${{ github.server_url }}/${{ github.repository }}/blob/main/CHANGES.md)
           files: |
             ./target/checkout/hamcrest-mail/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}.jar
             ./target/checkout/hamcrest-mail/target/hamcrest-mail-${{ github.event.inputs.releaseVersion }}-javadoc.jar
