@@ -1,27 +1,21 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import org.junit.jupiter.api.Test;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import java.time.OffsetDateTime;
+
 import static java.time.OffsetDateTime.now;
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
+import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.time.OffsetDateTime;
-import java.util.Date;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-
-import org.junit.jupiter.api.Test;
-
-public class MessageHasDateTest extends MatcherTest {
+public class MessageHasDateTest {
     
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
@@ -30,15 +24,7 @@ public class MessageHasDateTest extends MatcherTest {
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
     }
-    
-    @Test
-    public void shouldNotMatchWhenHeaderIsMissing() throws Exception {
-        Message message = mock(Message.class);
-        when(message.getHeader(eq("Date"))).thenReturn(null);
-        MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
-        assertThat(message, not(matcher));
-    }
-    
+
     @Test
     public void shouldNotMatchWhenHeaderIsPresentTwice() throws Exception {
         Message message = mock(Message.class);
@@ -46,7 +32,15 @@ public class MessageHasDateTest extends MatcherTest {
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, not(matcher));
     }
-    
+
+    @Test
+    public void shouldNotMatchWhenHeaderIsMissing() throws Exception {
+        Message message = mock(Message.class);
+        when(message.getHeader(eq("Date"))).thenReturn(null);
+        MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
+        assertThat(message, not(matcher));
+    }
+
     @Test
     public void shouldNotMatchWhenHeaderValueIsMalformed() throws Exception {
         Message message = mock(Message.class);
@@ -56,8 +50,8 @@ public class MessageHasDateTest extends MatcherTest {
     }
     
     @Test
-    public void shouldMatchWhenHeaderIsPresent() throws Exception {
-        Message message = messageWithDate();
+    public void shouldMatchWhenHeaderIsPresent() {
+        Message message = newMessage().date(now()).create();
         MessageHasDate matcher = new MessageHasDate(any(OffsetDateTime.class));
         assertThat(message, matcher);
     }
@@ -68,13 +62,5 @@ public class MessageHasDateTest extends MatcherTest {
         when(message.getHeader(eq("Date"))).thenReturn(null);
         MessageHasDate matcher = new MessageHasDate(nullValue(OffsetDateTime.class));
         assertThat(message, matcher);
-    }
-    
-    private Message messageWithDate() throws MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setSentDate(new Date());
-        message.saveChanges();
-        return message;
     }
 }

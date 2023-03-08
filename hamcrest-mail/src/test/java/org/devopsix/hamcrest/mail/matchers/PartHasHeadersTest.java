@@ -4,18 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
 
 import static javax.mail.internet.MimeUtility.encodeText;
+import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PartHasHeadersTest extends MatcherTest {
+public class PartHasHeadersTest {
     
     @Test
     public void shouldNotMatchWhenHeadersCannotBeExtracted() throws Exception {
@@ -34,14 +32,16 @@ public class PartHasHeadersTest extends MatcherTest {
     }
     
     @Test
-    public void shouldMatchWhenOneHeaderIsPresent() throws Exception {
-        Message message = messageWithHeader("Received", "by foo (MTA) id abc123; Sun, 1 Dec 2019 12:27:39 +0100 (CET)");
+    public void shouldMatchWhenOneHeaderIsPresent() {
+        Message message = newMessage()
+            .header("Received", "by foo (MTA) id abc123; Sun, 1 Dec 2019 12:27:39 +0100 (CET)")
+            .create();
         PartHasHeaders matcher = new PartHasHeaders("Received", iterableWithSize(1));
         assertThat(message, matcher);
     }
     
     @Test
-    public void shouldMatchWhenTwoHeadersArePresent() throws Exception {
+    public void shouldMatchWhenTwoHeadersArePresent() {
         Message message = messageWithTwoHeaders("Received", "by foo (MTA) id abc123; Sun, 1 Dec 2019 12:27:39 +0100 (CET)",
             "by bar (MTA) id def456; Sun, 1 Dec 2019 12:27:51 +0100 (CET)");
         PartHasHeaders matcher = new PartHasHeaders("Received", iterableWithSize(2));
@@ -54,21 +54,11 @@ public class PartHasHeadersTest extends MatcherTest {
         PartHasHeaders matcher = new PartHasHeaders("Some-Header", hasItems(equalTo("ÄÖÜ"), equalTo("äüöß")));
         assertThat(message, matcher);
     }
-    
-    private Message messageWithHeader(String name, String value) throws MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setHeader(name, value);
-        message.saveChanges();
-        return message;
-    }
-    
-    private Message messageWithTwoHeaders(String name, String value1, String value2) throws MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setHeader(name, value1);
-        message.addHeader(name, value2);
-        message.saveChanges();
-        return message;
+
+    private Message messageWithTwoHeaders(String name, String value1, String value2) {
+        return newMessage()
+            .header(name, value1)
+            .header(name, value2)
+            .create();
     }
 }

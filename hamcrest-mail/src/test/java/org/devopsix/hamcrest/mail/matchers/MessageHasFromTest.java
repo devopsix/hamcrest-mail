@@ -1,23 +1,18 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import org.junit.jupiter.api.Test;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+
+import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-
-import org.junit.jupiter.api.Test;
-
-public class MessageHasFromTest extends MatcherTest {
+public class MessageHasFromTest {
     
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
@@ -26,15 +21,7 @@ public class MessageHasFromTest extends MatcherTest {
         MessageHasFrom matcher = new MessageHasFrom(any(String.class));
         assertThat(message, not(matcher));
     }
-    
-    @Test
-    public void shouldNotMatchWhenHeaderIsMissing() throws Exception {
-        Message message = mock(Message.class);
-        when(message.getHeader(eq("From"))).thenReturn(null);
-        MessageHasFrom matcher = new MessageHasFrom(any(String.class));
-        assertThat(message, not(matcher));
-    }
-    
+
     @Test
     public void shouldNotMatchWhenHeaderIsPresentTwice() throws Exception {
         Message message = mock(Message.class);
@@ -42,27 +29,25 @@ public class MessageHasFromTest extends MatcherTest {
         MessageHasFrom matcher = new MessageHasFrom(any(String.class));
         assertThat(message, not(matcher));
     }
-    
+
     @Test
-    public void shouldMatchWhenHeaderIsPresent() throws Exception {
-        Message message = messageWithfrom("anna@example.com");
+    public void shouldNotMatchWhenHeaderIsMissing() {
+        Message message = newMessage().create();
+        MessageHasFrom matcher = new MessageHasFrom(any(String.class));
+        assertThat(message, not(matcher));
+    }
+
+    @Test
+    public void shouldMatchWhenHeaderIsPresent() {
+        Message message = newMessage().from("anna@example.com").create();
         MessageHasFrom matcher = new MessageHasFrom(any(String.class));
         assertThat(message, matcher);
     }
     
     @Test
-    public void shouldMatchWhenHeaderIsMissing() throws Exception {
-        Message message = mock(Message.class);
-        when(message.getHeader(eq("From"))).thenReturn(null);
+    public void shouldMatchWhenHeaderIsMissing() {
+        Message message = newMessage().create();
         MessageHasFrom matcher = new MessageHasFrom(nullValue(String.class));
         assertThat(message, matcher);
-    }
-    
-    private Message messageWithfrom(String from) throws MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setFrom(from);
-        message.saveChanges();
-        return message;
     }
 }

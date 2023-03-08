@@ -1,25 +1,19 @@
 package org.devopsix.hamcrest.mail.matchers;
 
+import org.junit.jupiter.api.Test;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+
 import static javax.mail.internet.MimeUtility.encodeText;
+import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-
-import org.junit.jupiter.api.Test;
-
-public class PartHasHeaderTest extends MatcherTest {
+public class PartHasHeaderTest {
     
     @Test
     public void shouldNotMatchWhenHeaderCannotBeExtracted() throws Exception {
@@ -46,7 +40,7 @@ public class PartHasHeaderTest extends MatcherTest {
     }
     
     @Test
-    public void shouldMatchWhenHeaderIsPresent() throws Exception {
+    public void shouldMatchWhenHeaderIsPresent() {
         Message message = messageWithHeader("Message-ID", "abc123@example.com");
         PartHasHeader matcher = new PartHasHeader("Message-ID", any(String.class));
         assertThat(message, matcher);
@@ -74,11 +68,9 @@ public class PartHasHeaderTest extends MatcherTest {
         assertThat(message, matcher);
     }
     
-    private Message messageWithHeader(String name, String value) throws MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setHeader(name, value);
-        message.saveChanges();
-        return message;
+    private Message messageWithHeader(String name, String value) {
+        return newMessage()
+            .header(name, value)
+            .create();
     }
 }

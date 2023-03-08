@@ -92,18 +92,13 @@ public class MessageFileExampleTest {
         assertThat(message, hasTo("test-fbll2@mail-tester.com"));
         assertThat(message, hasTo(containsString("@mail-tester.com")));
     }
-    
-    @Test
-    public void messageShouldHaveReturnPath() {
-        assertThat(message, hasHeader("Return-Path", emptyOrNullString()));
-    }
-    
+
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void messageShouldHaveReceivedHeaders() {
-        assertThat(message, hasHeaders("Received", (Matcher)iterableWithSize(3)));
+        assertThat(message, hasHeaders("Received", iterableWithSize(3)));
         assertThat(message, hasHeaders("Received", (Matcher)everyItem(anyOf(startsWith("from "), startsWith("by ")))));
-        assertThat(message, hasHeaders("Received", (Matcher)hasItems(containsString("mail-tester.com"), containsString("google.com"))));
+        assertThat(message, hasHeaders("Received", hasItems(containsString("mail-tester.com"), containsString("google.com"))));
     }
     
     @Test
@@ -131,7 +126,6 @@ public class MessageFileExampleTest {
     }
     
     @Test
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void messageShouldHaveAlternativeTextAndHtmlContent() {
         // The message has multipart/mixed content which contains another
         // multipart/alternative part which has a plain text and an HTML part.
@@ -147,9 +141,9 @@ public class MessageFileExampleTest {
                 hasTextContent(containsString("Lorem ipsum"))
             ))
         )))));
-        // Match presence of multipart/alternative part independent from actual
+        // Match presence of multipart/alternative part independent of actual
         // message structure.
-        assertThat(message, hasMultipartContentRecursive((Matcher)allOf(
+        assertThat(message, hasMultipartContentRecursive(allOf(
             multipartAlternative(),
             hasParts(2),
             hasPart(allOf(

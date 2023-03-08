@@ -19,7 +19,7 @@ import javax.mail.internet.InternetAddress;
 
 import org.junit.jupiter.api.Test;
 
-public class MessageHasRecipientsTest extends MatcherTest {
+public class MessageHasRecipientsTest {
     
     @Test
     public void shouldNotMatchWhenRecipientsCannotBeExtracted() throws Exception {

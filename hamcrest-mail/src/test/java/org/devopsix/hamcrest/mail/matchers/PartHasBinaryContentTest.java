@@ -16,13 +16,13 @@ import javax.mail.Part;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 
-public class PartHasBinaryContentTest extends MatcherTest {
+public class PartHasBinaryContentTest {
     
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void shouldNotMatchWhenContentCannotBeExtracted() throws Exception {
         Part part = mock(Part.class);
-        when(part.getDataHandler()).thenThrow(new MessagingException("error decoding header"));
+        when(part.getDataHandler()).thenThrow(new MessagingException("error decoding content"));
         PartHasBinaryContent matcher = new PartHasBinaryContent((Matcher)anything());
         assertThat(part, not(matcher));
     }
