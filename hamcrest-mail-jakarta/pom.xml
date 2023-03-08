@@ -10,6 +10,15 @@
     <url>https://github.com/devopsix/hamcrest-mail</url>
     <description>Hamcrest jakarta.mail Matchers for Java</description>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <autoRelease>false</autoRelease>
+        <repoBaseUrl>https://github.com/devopsix/hamcrest-mail</repoBaseUrl>
+    </properties>
+
     <licenses>
         <license>
             <name>MIT</name>
@@ -30,9 +39,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/devopsix/hamcrest-mail.git</connection>
-        <developerConnection>scm:git:https://github.com/devopsix/hamcrest-mail.git</developerConnection>
-        <url>https://github.com/devopsix/hamcrest-mail</url>
+        <connection>scm:git:${repoBaseUrl}.git</connection>
+        <developerConnection>scm:git:${repoBaseUrl}.git</developerConnection>
+        <url>${repoBaseUrl}</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -42,14 +51,6 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -254,6 +255,17 @@
 
     <profiles>
         <profile>
+            <id>auto-release</id>
+            <activation>
+                <property>
+                    <name>env.AUTO_RELEASE</name>
+                </property>
+            </activation>
+            <properties>
+                <autoRelease>true</autoRelease>
+            </properties>
+        </profile>
+        <profile>
             <id>release</id>
             <properties>
                 <skipTests>true</skipTests>
@@ -306,7 +318,7 @@
                         <configuration>
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <autoReleaseAfterClose>${autoRelease}</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                 </plugins>

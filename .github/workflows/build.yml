@@ -18,10 +18,12 @@ jobs:
           mvn
           --batch-mode
           --activate-profiles=-examples
+          "-DrepoBaseUrl=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
           install
       - name: Run tests in hamcrest-mail-examples and hamcrest-mail-examples-jakarta
         run: >-
           mvn
           --batch-mode
           --projects examples,examples-jakarta
+          "-DrepoBaseUrl=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
           test
