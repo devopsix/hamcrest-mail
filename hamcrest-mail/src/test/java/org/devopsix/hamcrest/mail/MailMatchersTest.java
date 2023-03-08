@@ -1,50 +1,29 @@
 package org.devopsix.hamcrest.mail;
 
-import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
-import static java.time.temporal.ChronoUnit.SECONDS;
-import static java.util.Collections.singletonMap;
-import static javax.mail.Message.RecipientType.BCC;
-import static javax.mail.Message.RecipientType.CC;
-import static javax.mail.Message.RecipientType.TO;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.emptyArray;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.iterableWithSize;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
+import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Part;
+import javax.mail.internet.InternetAddress;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.time.OffsetDateTime;
 import java.util.Base64;
-import java.util.Date;
 import java.util.Map;
-import java.util.Properties;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.InternetHeaders;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-
-import org.apache.james.jdkim.DKIMSigner;
-import org.apache.james.jdkim.exceptions.FailException;
-import org.hamcrest.Matcher;
-import org.junit.jupiter.api.Test;
+import static java.time.temporal.ChronoUnit.SECONDS;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonMap;
+import static javax.mail.Message.RecipientType.TO;
+import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
+import static org.devopsix.hamcrest.mail.MultipartCreator.newMultipart;
+import static org.devopsix.hamcrest.mail.PartCreator.newPart;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class MailMatchersTest {
     
@@ -54,7 +33,7 @@ public class MailMatchersTest {
     private static final OffsetDateTime OTHER_DATE2 = now().plusMinutes(28);
     
     @Test
-    public void hasDateWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasDateWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasDate(any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
@@ -62,7 +41,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasDateWithValueShouldReturnMatcher() throws Exception {
+    public void hasDateWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasDate(SENT_DATE);
         assertThat(matcher, is(notNullValue()));
@@ -70,7 +49,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasFromWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasFromWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasFrom(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -78,7 +57,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasFromWithValueShouldReturnMatcher() throws Exception {
+    public void hasFromWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasFrom("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
@@ -86,7 +65,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasSenderWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasSenderWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasSender(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -94,7 +73,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasSenderWithValueShouldReturnMatcher() throws Exception {
+    public void hasSenderWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasSender("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
@@ -102,7 +81,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasReplyToWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasReplyToWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasReplyTo(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -110,7 +89,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasReplyToWithValueShouldReturnMatcher() throws Exception {
+    public void hasReplyToWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasReplyTo("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
@@ -118,7 +97,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasToWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasToWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasTo(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -126,7 +105,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasToWithValueShouldReturnMatcher() throws Exception {
+    public void hasToWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasTo("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
@@ -134,7 +113,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasCcWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasCcWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasCc(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -142,7 +121,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasCcWithValueShouldReturnMatcher() throws Exception {
+    public void hasCcWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasCc("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
@@ -150,7 +129,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasBccWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasBccWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasBcc(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -158,7 +137,7 @@ public class MailMatchersTest {
     }
 
     @Test
-    public void hasBccWithValueShouldReturnMatcher() throws Exception {
+    public void hasBccWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasBcc("joe.average@example.com");
         assertThat(matcher, is(notNullValue()));
@@ -166,7 +145,7 @@ public class MailMatchersTest {
     }
 
     @Test
-    public void hasRecipientsShouldReturnMatcher() throws Exception {
+    public void hasRecipientsShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasRecipients(iterableWithSize(3));
         assertThat(matcher, is(notNullValue()));
@@ -174,7 +153,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasRecipientsOfTypeShouldReturnMatcher() throws Exception {
+    public void hasRecipientsOfTypeShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasRecipients(TO, iterableWithSize(1));
         assertThat(matcher, is(notNullValue()));
@@ -198,7 +177,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasSubjectWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasSubjectWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasSubject(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -206,7 +185,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasSubjectWithValueShouldReturnMatcher() throws Exception {
+    public void hasSubjectWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Message> matcher = MailMatchers.hasSubject("Message from Joe");
         assertThat(matcher, is(notNullValue()));
@@ -214,7 +193,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasHeaderWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasHeaderWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -222,7 +201,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasHeaderWithValueShouldReturnMatcher() throws Exception {
+    public void hasHeaderWithValueShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasHeader("Message-ID", any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -230,7 +209,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasHeadersWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasHeadersWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasHeaders("Received", hasItems(any(String.class), any(String.class)));
         assertThat(matcher, is(notNullValue()));
@@ -238,7 +217,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasDateHeaderWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasDateHeaderWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasDateHeader("Resent-Date", any(OffsetDateTime.class));
         assertThat(matcher, is(notNullValue()));
@@ -246,7 +225,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasDateHeadersWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasDateHeadersWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasDateHeaders("Other-Date", hasItems(any(OffsetDateTime.class), any(OffsetDateTime.class)));
         assertThat(matcher, is(notNullValue()));
@@ -254,7 +233,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasValidDkimSignatureShouldReturnMatcher() throws Exception {
+    public void hasValidDkimSignatureShouldReturnMatcher() {
         Message message = createTextMessage();
         String publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", "k=rsa; p=" + publicKey);
@@ -264,7 +243,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasTextContentShouldReturnMatcher() throws Exception {
+    public void hasTextContentShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasTextContent();
         assertThat(matcher, is(notNullValue()));
@@ -272,7 +251,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasTextContentWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasTextContentWithMatcherShouldReturnMatcher() {
         Message message = createTextMessage();
         Matcher<Part> matcher = MailMatchers.hasTextContent(equalTo("Lorem ipsum"));
         assertThat(matcher, is(notNullValue()));
@@ -280,15 +259,15 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasBinaryContentWithMatcherShouldReturnMatcher() throws Exception {
-        Part part = createBinaryPart();
+    public void hasBinaryContentWithMatcherShouldReturnMatcher() {
+        Part part = newPart().content(new byte[] {1,2,3}).create();
         Matcher<Part> matcher = MailMatchers.hasBinaryContent(not(emptyArray()));
         assertThat(matcher, is(notNullValue()));
         assertThat(part, matcher);
     }
     
     @Test
-    public void hasMultipartContentShouldReturnMatcher() throws Exception {
+    public void hasMultipartContentShouldReturnMatcher() {
         Message message = createMultipartMessage();
         Matcher<Part> matcher = MailMatchers.hasMultipartContent();
         assertThat(matcher, is(notNullValue()));
@@ -297,7 +276,7 @@ public class MailMatchersTest {
     
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void hasMultipartContentWithMatcherShouldReturnMatcher() throws Exception {
+    public void hasMultipartContentWithMatcherShouldReturnMatcher() {
         Message message = createMultipartMessage();
         Matcher<Part> matcher = MailMatchers.hasMultipartContent((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
@@ -306,7 +285,7 @@ public class MailMatchersTest {
     
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void hasMultipartContentRecursiveShouldReturnMatcher() throws Exception {
+    public void hasMultipartContentRecursiveShouldReturnMatcher() {
         Message message = createMultipartMessage();
         Matcher<Part> matcher = MailMatchers.hasMultipartContentRecursive((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
@@ -314,7 +293,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void multipartMixedShouldReturnMatcher() throws Exception {
+    public void multipartMixedShouldReturnMatcher() {
         Multipart message = createMultipartMixed();
         Matcher<Multipart> matcher = MailMatchers.multipartMixed();
         assertThat(matcher, is(notNullValue()));
@@ -322,7 +301,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void multipartAlternativeShouldReturnMatcher() throws Exception {
+    public void multipartAlternativeShouldReturnMatcher() {
         Multipart message = createMultipartAlternative();
         Matcher<Multipart> matcher = MailMatchers.multipartAlternative();
         assertThat(matcher, is(notNullValue()));
@@ -330,7 +309,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void multipartRelatedShouldReturnMatcher() throws Exception {
+    public void multipartRelatedShouldReturnMatcher() {
         Multipart message = createMultipartRelated();
         Matcher<Multipart> matcher = MailMatchers.multipartRelated();
         assertThat(matcher, is(notNullValue()));
@@ -338,7 +317,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void multipartContentTypeShouldReturnMatcher() throws Exception {
+    public void multipartContentTypeShouldReturnMatcher() {
         Multipart message = createMultipartAlternative();
         Matcher<Multipart> matcher = MailMatchers.multipartContentType(any(String.class));
         assertThat(matcher, is(notNullValue()));
@@ -347,7 +326,7 @@ public class MailMatchersTest {
     
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void hasPartsShouldReturnMatcher() throws Exception {
+    public void hasPartsShouldReturnMatcher() {
         Multipart message = createMultipartMixed();
         Matcher<Multipart> matcher = MailMatchers.hasParts((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
@@ -356,7 +335,7 @@ public class MailMatchersTest {
     
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void hasPartShouldReturnMatcher() throws Exception {
+    public void hasPartShouldReturnMatcher() {
         Multipart message = createMultipartMixed();
         Matcher<Multipart> matcher = MailMatchers.hasPart((Matcher)anything());
         assertThat(matcher, is(notNullValue()));
@@ -364,7 +343,7 @@ public class MailMatchersTest {
     }
     
     @Test
-    public void hasPartsSizeShouldReturnMatcher() throws Exception {
+    public void hasPartsSizeShouldReturnMatcher() {
         Multipart message = createMultipartMixed();
         Matcher<Multipart> matcher = MailMatchers.hasParts(2);
         assertThat(matcher, is(notNullValue()));
@@ -382,68 +361,62 @@ public class MailMatchersTest {
         }
     }
     
-    private Message createTextMessage() throws IOException, FailException, MessagingException {
-        Message message = createMessage();
-        message.setText("Lorem ipsum");
-        signMessage(message);
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        message.writeTo(buffer);
-        return new MimeMessage(message.getSession(), new ByteArrayInputStream(buffer.toByteArray()));
+    private Message createTextMessage() {
+        return message()
+            .text("Lorem ipsum")
+            .dkimSignature(keyPair, "example.com", "foo",
+                asList("mime-version", "from", "date", "message-id", "subject", "to"))
+            .create();
     }
     
-    private Message createMultipartMessage() throws IOException, FailException, MessagingException {
-        Message message = createMessage();
-        message.setContent(new MimeMultipart(createBinaryPart()));
-        signMessage(message);
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        message.writeTo(buffer);
-        return new MimeMessage(message.getSession(), new ByteArrayInputStream(buffer.toByteArray()));
+    private Message createMultipartMessage() {
+        return message()
+            .multipart(newMultipart()
+                .bodyParts(newPart()
+                    .content(new byte[] {1,2,3}).create()
+                ).create())
+            .dkimSignature(keyPair, "example.com", "foo",
+                asList("mime-version", "from", "date", "message-id", "subject", "to"))
+            .create();
+    }
+
+    private Multipart createMultipartMixed() {
+        return newMultipart().subtype("mixed").bodyParts(
+            newPart().content(new byte[] {1,2,3}).create(),
+            newPart().content(new byte[] {1,2,3}).create()
+        ).create();
     }
     
-    private MimeBodyPart createBinaryPart() throws MessagingException {
-        InternetHeaders headers = new InternetHeaders();
-        headers.addHeader("Content-Type", "application/octet-stream");
-        return new MimeBodyPart(headers, new byte[] {1,2,3});
+    private Multipart createMultipartAlternative() {
+        return newMultipart().subtype("alternative").bodyParts(
+            newPart().content(new byte[] {1,2,3}).create(),
+            newPart().content(new byte[] {1,2,3}).create()
+        ).create();
     }
     
-    private Multipart createMultipartMixed() throws MessagingException {
-        return new MimeMultipart("mixed", createBinaryPart(), createBinaryPart());
+    private Multipart createMultipartRelated() {
+        return newMultipart().subtype("related").bodyParts(
+            newPart().content(new byte[] {1,2,3}).create(),
+            newPart().content(new byte[] {1,2,3}).create()
+        ).create();
     }
     
-    private Multipart createMultipartAlternative() throws MessagingException {
-        return new MimeMultipart("alternative", createBinaryPart(), createBinaryPart());
+    private MessageCreator message() {
+        return newMessage()
+            .date(SENT_DATE)
+            .from("joe.average@example.com")
+            .sender("joe.average@example.com")
+            .replyTo("joe.average@example.com")
+            .to("joe.average@example.com")
+            .cc("joe.average@example.com")
+            .bcc("joe.average@example.com")
+            .header("Resent-Date", RESENT_DATE)
+            .header("Other-Date", OTHER_DATE1)
+            .header("Other-Date", OTHER_DATE2)
+            .header("Received", "from foo by bar")
+            .subject("Message from Joe");
     }
-    
-    private Multipart createMultipartRelated() throws MessagingException {
-        return new MimeMultipart("related", createBinaryPart(), createBinaryPart());
-    }
-    
-    private MimeMessage createMessage() throws MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setSentDate(new Date(SENT_DATE.toInstant().toEpochMilli()));
-        message.setFrom("joe.average@example.com");
-        message.setSender(new InternetAddress("joe.average@example.com"));
-        message.setReplyTo(new Address[] {new InternetAddress("joe.average@example.com")});
-        message.setRecipient(TO, new InternetAddress("joe.average@example.com"));
-        message.setRecipient(CC, new InternetAddress("joe.average@example.com"));
-        message.setRecipient(BCC, new InternetAddress("joe.average@example.com"));
-        message.setHeader("Resent-Date", RESENT_DATE.format(RFC_1123_DATE_TIME));
-        message.addHeader("Other-Date", OTHER_DATE1.format(RFC_1123_DATE_TIME));
-        message.addHeader("Other-Date", OTHER_DATE2.format(RFC_1123_DATE_TIME));
-        message.addHeader("Received", "from foo by bar");
-        message.setSubject("Message from Joe");
-        return message;
-    }
-    
-    private void signMessage(Message message) throws IOException, FailException, MessagingException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        message.writeTo(buffer);
-        DKIMSigner signer = new DKIMSigner("v=1; a=rsa-sha256; d=example.com; s=foo; h=mime-version:from:date:message-id:subject:to; b=; bh=;", keyPair.getPrivate());
-        String dkimHeader = signer.sign(new ByteArrayInputStream(buffer.toByteArray()));
-        message.setHeader("DKIM-Signature", dkimHeader.substring("DKIM-Signature:".length()).trim());
-    }
-    
+
     private static OffsetDateTime now() {
         return OffsetDateTime.now().truncatedTo(SECONDS);
     }

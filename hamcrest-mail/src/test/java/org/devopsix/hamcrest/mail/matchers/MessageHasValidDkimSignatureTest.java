@@ -1,12 +1,14 @@
 package org.devopsix.hamcrest.mail.matchers;
 
-import static java.util.Collections.singletonMap;
-import static javax.mail.Message.RecipientType.TO;
-import static org.devopsix.hamcrest.mail.MailMatchers.hasValidDkimSignature;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import org.devopsix.hamcrest.mail.MailMatchers;
+import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,26 +17,24 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.util.Base64;
-import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import static java.time.OffsetDateTime.now;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonMap;
+import static javax.mail.Message.RecipientType.TO;
+import static org.devopsix.hamcrest.mail.MailMatchers.hasValidDkimSignature;
+import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
+import static org.devopsix.hamcrest.mail.MessageLoader.loadMessage;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
-import org.apache.james.jdkim.DKIMSigner;
-import org.apache.james.jdkim.exceptions.FailException;
-import org.devopsix.hamcrest.mail.MailMatchers;
-import org.hamcrest.Matcher;
-import org.junit.jupiter.api.Test;
-
-public class MessageHasValidDkimSignatureTest extends MatcherTest {
+public class MessageHasValidDkimSignatureTest {
     
     @Test
-    public void hasValidDkimSignatureShouldMatch() throws Exception {
+    public void hasValidDkimSignatureShouldMatch() {
         MimeMessage message = createMessage();
         String publicKey = "k=rsa; p=" + base64(keyPair.getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", publicKey);
@@ -43,7 +43,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
     }
     
     @Test
-    public void hasValidDkimSignatureShouldNotMatchWithWrongKey() throws Exception {
+    public void hasValidDkimSignatureShouldNotMatchWithWrongKey() {
         MimeMessage message = createMessage();
         String wrongPublicKey = "k=rsa; p=" + base64(generateKeyPair().getPublic());
         Map<String, String> publicKeys = singletonMap("foo._domainkey.example.com", wrongPublicKey);
@@ -88,7 +88,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
     }
     
     @Test
-    public void shouldValidateGmailMessageSignature() throws Exception {
+    public void shouldValidateGmailMessageSignature() {
         // This is the DKIM public key as published by Google for gmail.com at the time
         // the test message was recorded.
         final Map<String, String> gmailPublicKey = singletonMap("20161025._domainkey.gmail.com",
@@ -102,7 +102,7 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
     }
     
     @Test
-    public void shouldValidateOutlookMessageSignature() throws Exception {
+    public void shouldValidateOutlookMessageSignature() {
         // This is the DKIM public key as published by Microsoft for outlook.com at the time
         // the test message was recorded.
         final Map<String, String> msPublicKey = singletonMap("selector1._domainkey.outlook.com",
@@ -115,29 +115,21 @@ public class MessageHasValidDkimSignatureTest extends MatcherTest {
         MimeMessage message = loadMessage("message-outlook.txt");
         assertThat(message, hasValidDkimSignature(msPublicKey));
     }
-    
-    private MimeMessage createMessage() throws IOException, FailException, MessagingException {
-        Session session = Session.getDefaultInstance(new Properties());
-        MimeMessage message = new MimeMessage(session);
-        message.setSentDate(new Date());
-        message.setFrom("joe.average@example.com");
-        message.setRecipient(TO, new InternetAddress("joe.average@example.com"));
-        message.setSubject("Message from Joe");
-        message.setText("Lorem ipsum");
-        signMessage(message);
-        return writeAndReread(message);
-    }
-    
+
     private static final KeyPair keyPair = generateKeyPair();
-    
-    private void signMessage(MimeMessage message) throws IOException, FailException, MessagingException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        message.writeTo(buffer);
-        DKIMSigner signer = new DKIMSigner("v=1; a=rsa-sha256; d=example.com; s=foo; h=mime-version:from:date:message-id:subject:to; b=; bh=;", keyPair.getPrivate());
-        String dkimHeader = signer.sign(new ByteArrayInputStream(buffer.toByteArray()));
-        message.setHeader("DKIM-Signature", dkimHeader.substring("DKIM-Signature:".length()).trim());
+
+    private MimeMessage createMessage() {
+        return newMessage()
+            .date(now())
+            .from("joe.average@example.com")
+            .to("joe.average@example.com")
+            .subject("Message from Joe")
+            .text("Lorem ipsum")
+            .dkimSignature(keyPair, "example.com", "foo",
+                asList("mime-version", "from", "date", "message-id", "subject", "to"))
+            .create();
     }
-    
+
     private MimeMessage writeAndReread(Message message) throws IOException, MessagingException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         message.writeTo(buffer);
