@@ -8,7 +8,6 @@ import static org.hamcrest.Condition.notMatched;
 
 import javax.mail.MessagingException;
 import javax.mail.Part;
-
 import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -16,51 +15,49 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * Base class for header matchers.
- * 
- * @see Part
- * 
- * @author devopsix
  *
+ * @author devopsix
+ * @see Part
  */
-abstract class AbstractHeaderMatcher<P extends Part, T>  extends TypeSafeDiagnosingMatcher<P> {
-    
-    private final String header;
-    private final Matcher<T> matcher;
-    
-    protected AbstractHeaderMatcher(String header, Matcher<T> matcher) {
-        this.header = header;
-        this.matcher = matcher;
-    }
-    
-    @Override
-    public boolean matchesSafely(P part, Description mismatch) {
-        return value(part, mismatch).matching(matcher);
-    }
+abstract class AbstractHeaderMatcher<P extends Part, T> extends TypeSafeDiagnosingMatcher<P> {
 
-    @Override
-    public void describeTo(Description description) {
-        description.appendText(format("has a %s header which matches: ", header));
-        matcher.describeTo(description);
+  private final String header;
+  private final Matcher<T> matcher;
+
+  protected AbstractHeaderMatcher(String header, Matcher<T> matcher) {
+    this.header = header;
+    this.matcher = matcher;
+  }
+
+  @Override
+  public boolean matchesSafely(P part, Description mismatch) {
+    return value(part, mismatch).matching(matcher);
+  }
+
+  @Override
+  public void describeTo(Description description) {
+    description.appendText(format("has a %s header which matches: ", header));
+    matcher.describeTo(description);
+  }
+
+  protected abstract Condition<T> value(P part, Description mismatch);
+
+  protected Condition<String> headerValue(P part, Description mismatch) {
+    String[] values;
+    try {
+      values = part.getHeader(header);
+    } catch (MessagingException e) {
+      mismatch.appendText(format("failed to extract %s header: %s", header, e.getMessage()));
+      return notMatched();
     }
-    
-    protected abstract Condition<T> value(P part, Description mismatch);
-    
-    protected Condition<String> headerValue(P part, Description mismatch) {
-        String[] values;
-        try {
-            values = part.getHeader(header);
-        } catch (MessagingException e) {
-            mismatch.appendText(format("failed to extract %s header: %s", header, e.getMessage()));
-            return notMatched();
-        }
-        if (isEmpty(values)) {
-            return matched(null, mismatch);
-        }
-        if (values.length > 1) {
-            mismatch.appendText(format("has more than one %s header", header));
-            return notMatched();
-        }
-        String value = decodeHeader(values[0]);
-        return matched(value, mismatch);
+    if (isEmpty(values)) {
+      return matched(null, mismatch);
     }
+    if (values.length > 1) {
+      mismatch.appendText(format("has more than one %s header", header));
+      return notMatched();
+    }
+    String value = decodeHeader(values[0]);
+    return matched(value, mismatch);
+  }
 }
