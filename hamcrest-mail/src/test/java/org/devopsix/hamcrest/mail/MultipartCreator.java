@@ -6,7 +6,6 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeMultipart;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static java.util.Objects.nonNull;
 
 public class MultipartCreator {
@@ -26,7 +25,7 @@ public class MultipartCreator {
     }
 
     public MultipartCreator bodyParts(BodyPart... bodyParts) {
-        this.bodyParts = asList(bodyParts);
+        this.bodyParts = List.of(bodyParts);
         return this;
     }
 

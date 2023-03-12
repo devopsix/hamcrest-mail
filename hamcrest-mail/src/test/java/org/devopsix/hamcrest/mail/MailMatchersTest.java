@@ -13,10 +13,10 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.time.OffsetDateTime;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static javax.mail.Message.RecipientType.TO;
 import static org.devopsix.hamcrest.mail.MessageCreator.newMessage;
@@ -365,7 +365,7 @@ public class MailMatchersTest {
         return message()
             .text("Lorem ipsum")
             .dkimSignature(keyPair, "example.com", "foo",
-                asList("mime-version", "from", "date", "message-id", "subject", "to"))
+                List.of("mime-version", "from", "date", "message-id", "subject", "to"))
             .create();
     }
     
@@ -376,7 +376,7 @@ public class MailMatchersTest {
                     .content(new byte[] {1,2,3}).create()
                 ).create())
             .dkimSignature(keyPair, "example.com", "foo",
-                asList("mime-version", "from", "date", "message-id", "subject", "to"))
+                List.of("mime-version", "from", "date", "message-id", "subject", "to"))
             .create();
     }
 

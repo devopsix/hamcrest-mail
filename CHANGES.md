@@ -1,5 +1,9 @@
 # Hamcrest Mail Changes
 
+## Version 1.1.2 (8 March 2023)
+
+* Dependencies updated
+
 ## Version 1.1.1 (12 January 2023)
 
 * Add support for Jakarta EE 9+ / jakarta.mail package.
