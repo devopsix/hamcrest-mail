@@ -4,20 +4,21 @@ import static java.util.Objects.isNull;
 
 final class ArrayUtils {
 
-    private ArrayUtils() {}
-    
-    static boolean isEmpty(String[] array) {
-        return isNull(array) || array.length == 0;
+  private ArrayUtils() {
+  }
+
+  static boolean isEmpty(String[] array) {
+    return isNull(array) || array.length == 0;
+  }
+
+  static Byte[] toObject(byte[] array) {
+    if (isNull(array)) {
+      return null;
     }
-    
-    static Byte[] toObject(byte[] array) {
-        if (isNull(array)) {
-            return null;
-        }
-        Byte[] objectArray = new Byte[array.length];
-        for (int i = 0 ; i < array.length ; i++) {
-            objectArray[i] = array[i];
-        }
-        return objectArray;
+    Byte[] objectArray = new Byte[array.length];
+    for (int i = 0; i < array.length; i++) {
+      objectArray[i] = array[i];
     }
+    return objectArray;
+  }
 }

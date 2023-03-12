@@ -5,7 +5,7 @@
 # Hamcrest Mail
 
 Hamcrest Mail is an extension library for the [Java Hamcrest][] matcher library.
-It provides matchers for types from the javax.mail and jakarta.mail packages.
+It provides matchers for types from the `javax.mail` and `jakarta.mail` packages.
 
 The [assertj-mail][] sister project provides a set of AssertJ assertions with similar features.
 
