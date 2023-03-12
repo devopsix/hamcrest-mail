@@ -17,11 +17,11 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import static java.time.OffsetDateTime.now;
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static javax.mail.Message.RecipientType.TO;
 import static org.devopsix.hamcrest.mail.MailMatchers.hasValidDkimSignature;
@@ -126,7 +126,7 @@ public class MessageHasValidDkimSignatureTest {
             .subject("Message from Joe")
             .text("Lorem ipsum")
             .dkimSignature(keyPair, "example.com", "foo",
-                asList("mime-version", "from", "date", "message-id", "subject", "to"))
+                List.of("mime-version", "from", "date", "message-id", "subject", "to"))
             .create();
     }
 
