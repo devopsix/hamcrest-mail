@@ -1,5 +1,9 @@
 # Hamcrest Mail Changes
 
+## Version 2.0.2 (30 October 2023)
+
+* Dependencies updated
+
 ## Version 2.0.0 (12 March 2023)
 
 * Requires JDK 11
