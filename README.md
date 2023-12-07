@@ -17,14 +17,14 @@ To use Hamcrest Mail in a Maven project add a dependency on `org.devopsix:hamcre
 <dependency>
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.3</version>
     <scope>test</scope>
 </dependency>
 <!-- Maven coordinates for Jakarta EE 9+ / jakarta.mail -->
 <dependency>
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail-jakarta</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.3</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Assert.assertThat(message, MailMatchers.hasHeaders("Received", (Matcher)Matchers
         Matchers.containsString("host1"), Matchers.containsString("host2"))));
 ```
 
-More example can be found in the [examples](examples/) directory (for Java EE 8 / javax.mail) and in the [examples-jakarta](examples-jakarta/) directory (for Jakarta EE 9+ / jakarta.mail).
+More example can be found in the [examples](examples) directory (for Java EE 8 / javax.mail) and in the [examples-jakarta](examples-jakarta) directory (for Jakarta EE 9+ / jakarta.mail).
 
 ## Matchers
 
