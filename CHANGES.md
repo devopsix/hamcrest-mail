@@ -1,8 +1,12 @@
 # Hamcrest Mail Changes
 
-## Version 1.0.4 (22 January 2024)
+## Version 2.0.5 (24 January 2024)
 
 * Dependencies updated
+
+## Version 2.0.4 (22 January 2024)
+
+* Release skipped due to issues with Sonatype OSS
 
 ## Version 2.0.3 (7 December 2023)
 
