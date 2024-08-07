@@ -17,14 +17,14 @@ To use Hamcrest Mail in a Maven project add a dependency on `org.devopsix:hamcre
 <dependency>
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail</artifactId>
-    <version>2.0.6</version>
+    <version>2.0.7</version>
     <scope>test</scope>
 </dependency>
 <!-- Maven coordinates for Jakarta EE 9+ / jakarta.mail -->
 <dependency>
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail-jakarta</artifactId>
-    <version>2.0.6</version>
+    <version>2.0.7</version>
     <scope>test</scope>
 </dependency>
 ```
