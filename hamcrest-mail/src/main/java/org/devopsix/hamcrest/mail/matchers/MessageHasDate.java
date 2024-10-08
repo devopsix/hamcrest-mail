@@ -15,6 +15,11 @@ import org.hamcrest.Matcher;
  */
 public class MessageHasDate extends AbstractDateHeaderMatcher<Message> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Date matcher
+   */
   public MessageHasDate(Matcher<OffsetDateTime> matcher) {
     super(DATE, matcher);
   }

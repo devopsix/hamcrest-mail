@@ -11,6 +11,12 @@ import org.hamcrest.Matcher;
  */
 public class PartHasDateHeader extends AbstractDateHeaderMatcher<Part> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param header Header name
+   * @param matcher Header value matcher
+   */
   public PartHasDateHeader(String header, Matcher<OffsetDateTime> matcher) {
     super(header, matcher);
   }

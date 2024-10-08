@@ -32,6 +32,11 @@ public class MessageHasValidDkimSignature extends TypeSafeDiagnosingMatcher<Mess
 
   private final DKIMVerifier dkimVerifier;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param publicKeys Map of public keys as they would be published in DNS TXT records
+   */
   public MessageHasValidDkimSignature(Map<String, String> publicKeys) {
     this.dkimVerifier = new DKIMVerifier(new RecordRetriever(publicKeys));
   }

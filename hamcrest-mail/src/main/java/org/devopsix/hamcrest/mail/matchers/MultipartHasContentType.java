@@ -19,6 +19,11 @@ public class MultipartHasContentType extends TypeSafeDiagnosingMatcher<Multipart
 
   final Matcher<String> matcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Content type matcher
+   */
   public MultipartHasContentType(Matcher<String> matcher) {
     this.matcher = matcher;
   }

@@ -24,6 +24,11 @@ public class AddressHasAddress extends TypeSafeDiagnosingMatcher<Address> {
 
   private final Matcher<String> matcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Address matcher
+   */
   public AddressHasAddress(Matcher<String> matcher) {
     this.matcher = matcher;
   }
@@ -39,7 +44,7 @@ public class AddressHasAddress extends TypeSafeDiagnosingMatcher<Address> {
     matcher.describeTo(description);
   }
 
-  protected Condition<InternetAddress> internetAddress(Address address, Description mismatch) {
+  private Condition<InternetAddress> internetAddress(Address address, Description mismatch) {
     if (address instanceof InternetAddress) {
       return matched((InternetAddress) address, mismatch);
     } else {

@@ -13,6 +13,11 @@ import org.hamcrest.Matcher;
  */
 public class MessageHasCc extends AbstractStringHeaderMatcher<Message> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Cc matcher
+   */
   public MessageHasCc(Matcher<String> matcher) {
     super(CC, matcher);
   }

@@ -13,6 +13,11 @@ import org.hamcrest.Matcher;
  */
 public class MessageHasBcc extends AbstractStringHeaderMatcher<Message> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Bcc matcher
+   */
   public MessageHasBcc(Matcher<String> matcher) {
     super(BCC, matcher);
   }

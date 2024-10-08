@@ -13,6 +13,11 @@ import org.hamcrest.Matcher;
  */
 public class MessageHasReplyTo extends AbstractStringHeaderMatcher<Message> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Reply-To matcher
+   */
   public MessageHasReplyTo(Matcher<String> matcher) {
     super(REPLY_TO, matcher);
   }

@@ -27,11 +27,22 @@ public class MessageHasRecipients extends TypeSafeDiagnosingMatcher<Message> {
   private final RecipientType type;
   private final Matcher<Iterable<Address>> matcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Recipients matcher
+   */
   public MessageHasRecipients(Matcher<Iterable<Address>> matcher) {
     this.type = null;
     this.matcher = matcher;
   }
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param type Recipient type
+   * @param matcher Recipient matcher
+   */
   public MessageHasRecipients(RecipientType type, Matcher<Iterable<Address>> matcher) {
     this.type = type;
     this.matcher = matcher;
@@ -52,7 +63,7 @@ public class MessageHasRecipients extends TypeSafeDiagnosingMatcher<Message> {
     matcher.describeTo(description);
   }
 
-  protected Condition<Iterable<Address>> recipients(Message message, Description mismatch) {
+  private Condition<Iterable<Address>> recipients(Message message, Description mismatch) {
     Address[] recipients;
     try {
       if (allRecipientTypes()) {

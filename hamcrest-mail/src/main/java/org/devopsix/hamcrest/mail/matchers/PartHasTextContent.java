@@ -22,6 +22,11 @@ public class PartHasTextContent extends TypeSafeDiagnosingMatcher<Part> {
 
   final Matcher<String> matcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Content matcher
+   */
   public PartHasTextContent(Matcher<String> matcher) {
     this.matcher = matcher;
   }

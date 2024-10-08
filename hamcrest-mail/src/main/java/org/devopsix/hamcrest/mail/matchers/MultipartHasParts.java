@@ -22,6 +22,11 @@ public class MultipartHasParts extends TypeSafeDiagnosingMatcher<Multipart> {
 
   final Matcher<Iterable<Part>> matcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Parts matcher
+   */
   public MultipartHasParts(Matcher<Iterable<Part>> matcher) {
     this.matcher = matcher;
   }

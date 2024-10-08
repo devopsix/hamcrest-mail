@@ -28,6 +28,12 @@ public class PartHasMultipartContent extends TypeSafeDiagnosingMatcher<Part> {
 
   private final Matcher<Multipart> matcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param recursive Whether to traverse parts recursively
+   * @param matcher Multipart content matcher
+   */
   public PartHasMultipartContent(boolean recursive, Matcher<Multipart> matcher) {
     this.recursive = recursive;
     this.matcher = matcher;

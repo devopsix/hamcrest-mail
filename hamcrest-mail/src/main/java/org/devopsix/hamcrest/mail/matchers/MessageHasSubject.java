@@ -13,6 +13,11 @@ import org.hamcrest.Matcher;
  */
 public class MessageHasSubject extends AbstractStringHeaderMatcher<Message> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param matcher Subject matcher
+   */
   public MessageHasSubject(Matcher<String> matcher) {
     super(SUBJECT, matcher);
   }

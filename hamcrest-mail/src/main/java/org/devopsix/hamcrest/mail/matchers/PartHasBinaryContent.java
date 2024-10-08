@@ -25,6 +25,11 @@ public class PartHasBinaryContent extends TypeSafeDiagnosingMatcher<Part> {
 
   final Matcher<Byte[]> contentMatcher;
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param contentMatcher Content matcher
+   */
   public PartHasBinaryContent(Matcher<Byte[]> contentMatcher) {
     this.contentMatcher = contentMatcher;
   }

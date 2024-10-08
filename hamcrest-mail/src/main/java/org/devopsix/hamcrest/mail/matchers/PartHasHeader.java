@@ -10,6 +10,12 @@ import org.hamcrest.Matcher;
  */
 public class PartHasHeader extends AbstractStringHeaderMatcher<Part> {
 
+  /**
+   * <p>Creates a new instance.</p>
+   *
+   * @param header Header name
+   * @param matcher Header value matcher
+   */
   public PartHasHeader(String header, Matcher<String> matcher) {
     super(header, matcher);
   }
