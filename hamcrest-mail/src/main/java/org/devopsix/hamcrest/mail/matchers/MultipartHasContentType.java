@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher for multipart content type.</p>
+ * A matcher for multipart content type.
  *
  * @author devopsix
  */
@@ -20,7 +20,7 @@ public class MultipartHasContentType extends TypeSafeDiagnosingMatcher<Multipart
   final Matcher<String> matcher;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Content type matcher
    */

@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher for multipart parts.</p>
+ * A matcher for multipart parts.
  *
  * @author devopsix
  */
@@ -23,7 +23,7 @@ public class MultipartHasParts extends TypeSafeDiagnosingMatcher<Multipart> {
   final Matcher<Iterable<Part>> matcher;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Parts matcher
    */

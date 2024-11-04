@@ -7,7 +7,7 @@ import javax.mail.Message;
 import org.hamcrest.Matcher;
 
 /**
- * <p>A matcher for the "Date" header.</p>
+ * A matcher for the "Date" header.
  *
  * @author devopsix
  * @see OffsetDateTime
@@ -16,7 +16,7 @@ import org.hamcrest.Matcher;
 public class MessageHasDate extends AbstractDateHeaderMatcher<Message> {
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Date matcher
    */

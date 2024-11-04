@@ -6,7 +6,7 @@ import javax.mail.Message;
 import org.hamcrest.Matcher;
 
 /**
- * <p>A matcher for the "Cc" header.</p>
+ * A matcher for the "Cc" header.
  *
  * @author devopsix
  * @see Message
@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 public class MessageHasCc extends AbstractStringHeaderMatcher<Message> {
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Cc matcher
    */

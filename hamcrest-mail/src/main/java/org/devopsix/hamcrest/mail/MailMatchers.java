@@ -48,8 +48,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Date" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "Date" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -61,8 +61,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Date" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Date" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -74,8 +74,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "From" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "From" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -87,8 +87,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "From" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "From" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -100,8 +100,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Sender" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "Sender" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -113,8 +113,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Sender" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Sender" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -126,8 +126,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Reply-To" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "Reply-To" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -139,8 +139,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Reply-To" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Reply-To" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -152,8 +152,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "To" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "To" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -165,8 +165,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "To" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "To" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -178,8 +178,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Cc" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "Cc" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -191,8 +191,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Cc" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Cc" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -204,8 +204,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Bcc" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "Bcc" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -217,8 +217,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Bcc" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Bcc" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -230,8 +230,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has a list of recipients
-   * (To, Cc, Bcc) which matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has a list of recipients
+   * (To, Cc, Bcc) which matches the given matcher.
    *
    * @param matcher A matcher for the list of recipients
    * @return A matcher for a {@link Message}
@@ -243,8 +243,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has a list of recipients
-   * of the given type which matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has a list of recipients
+   * of the given type which matches the given matcher.
    *
    * @param type    Type of recipients
    * @param matcher A matcher for the recipients
@@ -258,8 +258,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given address is an {@code InternetAddress}
-   * with an {@code address} property that matches the given matcher.</p>
+   * Returns a matcher that matches when the given address is an {@code InternetAddress}
+   * with an {@code address} property that matches the given matcher.
    *
    * @param matcher A matcher for the address part
    * @return A matcher for an Address
@@ -272,8 +272,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matchers when the given address is an {@code InternetAddress}
-   * with an {@code personal} property that matches the given matcher.</p>
+   * Returns a matcher that matchers when the given address is an {@code InternetAddress}
+   * with an {@code personal} property that matches the given matcher.
    *
    * @param matcher A matcher for the personal part
    * @return A matcher for an Address
@@ -286,8 +286,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Subject" header
-   * and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one "Subject" header
+   * and this header matches the given matcher.
    *
    * @param matcher The value matcher
    * @return A matcher for a {@link Message}
@@ -299,8 +299,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Subject" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Subject" header
+   * and this header has the given value.
    *
    * @param value The expected header value
    * @return A matcher for a {@link Message}
@@ -312,8 +312,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message part has exactly one header with the
-   * given name and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message part has exactly one header with the
+   * given name and this header matches the given matcher.
    *
    * @param header  The header name
    * @param matcher The value matcher
@@ -328,8 +328,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one "Subject" header
-   * and this header has the given value.</p>
+   * Returns a matcher that matches when the given message has exactly one "Subject" header
+   * and this header has the given value.
    *
    * @param header The header name
    * @param value  The expected header value
@@ -344,8 +344,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has headers with the
-   * given name which match the given matcher.</p>
+   * Returns a matcher that matches when the given message has headers with the
+   * given name which match the given matcher.
    *
    * @param header  The header name
    * @param matcher The value matcher
@@ -360,8 +360,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has exactly one date header with the
-   * given name and this header matches the given matcher.</p>
+   * Returns a matcher that matches when the given message has exactly one date header with the
+   * given name and this header matches the given matcher.
    *
    * @param header  The header name
    * @param matcher The value matcher
@@ -376,8 +376,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has date headers with the
-   * given name which match the given matcher.</p>
+   * Returns a matcher that matches when the given message has date headers with the
+   * given name which match the given matcher.
    *
    * @param header  The header name
    * @param matcher The value matcher
@@ -393,8 +393,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given message has a valid DKIM signature
-   * that can be verified using the given public key.</p>
+   * Returns a matcher that matches when the given message has a valid DKIM signature
+   * that can be verified using the given public key.
    *
    * <p>DKIM public keys are distributed as DNS TXT records. As tests should not depend
    * on any real DNS records this method accepts a map of virtual TXT records. The map keys
@@ -414,8 +414,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given part has plain text content
-   * ({@code Content-Type: text/plain}) with any content.</p>
+   * Returns a matcher that matches when the given part has plain text content
+   * ({@code Content-Type: text/plain}) with any content.
    *
    * @return A matcher for a {@link Part}
    */
@@ -424,8 +424,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given part has plain text content
-   * ({@code Content-Type: text/plain}) which matches the given matcher.</p>
+   * Returns a matcher that matches when the given part has plain text content
+   * ({@code Content-Type: text/plain}) which matches the given matcher.
    *
    * @param matcher The content matcher
    * @return A matcher for a {@link Part}
@@ -437,8 +437,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given part has binary content
-   * which matches the given matcher.</p>
+   * Returns a matcher that matches when the given part has binary content
+   * which matches the given matcher.
    *
    * @param matcher The content matcher
    * @return A matcher for a {@link Part}
@@ -450,8 +450,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given part has multipart content
-   * ({@code Content-Type: multipart/*}).</p>
+   * Returns a matcher that matches when the given part has multipart content
+   * ({@code Content-Type: multipart/*}).
    *
    * @return A matcher for a {@link Part}
    */
@@ -461,8 +461,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given part has multipart content
-   * ({@code Content-Type: multipart/*}) which matches the given matcher.</p>
+   * Returns a matcher that matches when the given part has multipart content
+   * ({@code Content-Type: multipart/*}) which matches the given matcher.
    *
    * @param matcher The content matcher
    * @return A matcher for a {@link Part}
@@ -474,8 +474,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given part or any child part has multipart content
-   * ({@code Content-Type: multipart/*}) which matches the given matcher.</p>
+   * Returns a matcher that matches when the given part or any child part has multipart content
+   * ({@code Content-Type: multipart/*}) which matches the given matcher.
    *
    * @param matcher The multipart matcher
    * @return A matcher for a {@link Message}
@@ -487,8 +487,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart has
-   * {@code multipart/mixed} content type.</p>
+   * Returns a matcher that matches when the given multipart has
+   * {@code multipart/mixed} content type.
    *
    * @return A matcher for a {@link Multipart}
    */
@@ -497,8 +497,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart has
-   * {@code multipart/alternative} content type.</p>
+   * Returns a matcher that matches when the given multipart has
+   * {@code multipart/alternative} content type.
    *
    * @return A matcher for a {@link Multipart}
    */
@@ -507,8 +507,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart has
-   * {@code multipart/related} content type.</p>
+   * Returns a matcher that matches when the given multipart has
+   * {@code multipart/related} content type.
    *
    * @return A matcher for a {@link Multipart}
    */
@@ -517,8 +517,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart has a content type
-   * which matches the given matcher.</p>
+   * Returns a matcher that matches when the given multipart has a content type
+   * which matches the given matcher.
    *
    * <p>Mind that the content type string contains line breaks and the boundary,
    * e.g. {@code multipart/alternative; \r\n\tboundary="----=_Part_17_872522004.1577017605979"}.</p>
@@ -533,8 +533,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart has at least one part
-   * which matches the given matcher.</p>
+   * Returns a matcher that matches when the given multipart has at least one part
+   * which matches the given matcher.
    *
    * <p>Only immediate child parts of the given multipart are considered.</p>
    *
@@ -549,8 +549,8 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart's parts
-   * match the given matcher.</p>
+   * Returns a matcher that matches when the given multipart's parts
+   * match the given matcher.
    *
    * <p>Only immediate child parts of the given multipart are considered.</p>
    *
@@ -566,7 +566,7 @@ public final class MailMatchers {
   }
 
   /**
-   * <p>Returns a matcher that matches when the given multipart has the given number of parts.</p>
+   * Returns a matcher that matches when the given multipart has the given number of parts.
    *
    * @param size The number of parts
    * @return A matcher for a {@link Multipart}

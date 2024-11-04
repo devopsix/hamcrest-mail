@@ -13,8 +13,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher for the {@code personal} property of {@code javax.mail.internet.InternetAddress}
- * objects.</p>
+ * A matcher for the {@code personal} property of {@code javax.mail.internet.InternetAddress}
+ * objects.
  *
  * @author devopsix
  * @see InternetAddress#getPersonal()
@@ -25,7 +25,7 @@ public class AddressHasPersonal extends TypeSafeDiagnosingMatcher<Address> {
   private final Matcher<String> matcher;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Personal matcher
    */

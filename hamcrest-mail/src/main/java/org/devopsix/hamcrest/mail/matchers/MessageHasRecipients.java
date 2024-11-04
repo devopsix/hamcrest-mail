@@ -17,7 +17,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher for recipients (To, Cc, Bcc) of a message.</p>
+ * A matcher for recipients (To, Cc, Bcc) of a message.
  *
  * @author devopsix
  * @see Message
@@ -28,7 +28,7 @@ public class MessageHasRecipients extends TypeSafeDiagnosingMatcher<Message> {
   private final Matcher<Iterable<Address>> matcher;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Recipients matcher
    */
@@ -38,7 +38,7 @@ public class MessageHasRecipients extends TypeSafeDiagnosingMatcher<Message> {
   }
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param type Recipient type
    * @param matcher Recipient matcher

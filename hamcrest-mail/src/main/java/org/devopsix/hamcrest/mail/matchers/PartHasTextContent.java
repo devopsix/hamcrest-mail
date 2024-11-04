@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher for text content.</p>
+ * A matcher for text content.
  *
  * @author devopsix
  */
@@ -23,7 +23,7 @@ public class PartHasTextContent extends TypeSafeDiagnosingMatcher<Part> {
   final Matcher<String> matcher;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param matcher Content matcher
    */
