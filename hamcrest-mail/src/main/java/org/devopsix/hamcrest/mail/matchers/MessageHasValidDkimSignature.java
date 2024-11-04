@@ -23,7 +23,7 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher that verifies DKIM signatures.</p>
+ * A matcher that verifies DKIM signatures.
  *
  * @author devopsix
  * @see Message
@@ -33,7 +33,7 @@ public class MessageHasValidDkimSignature extends TypeSafeDiagnosingMatcher<Mess
   private final DKIMVerifier dkimVerifier;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param publicKeys Map of public keys as they would be published in DNS TXT records
    */

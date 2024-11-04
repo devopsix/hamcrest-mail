@@ -18,7 +18,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * <p>A matcher for multipart content.</p>
+ * A matcher for multipart content.
  *
  * @author devopsix
  */
@@ -29,7 +29,7 @@ public class PartHasMultipartContent extends TypeSafeDiagnosingMatcher<Part> {
   private final Matcher<Multipart> matcher;
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param recursive Whether to traverse parts recursively
    * @param matcher Multipart content matcher

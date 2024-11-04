@@ -4,14 +4,14 @@ import javax.mail.Part;
 import org.hamcrest.Matcher;
 
 /**
- * <p>A matcher for a named header which may be present multiple times.</p>
+ * A matcher for a named header which may be present multiple times.
  *
  * @author devopsix
  */
 public class PartHasHeaders extends AbstractStringMultiHeaderMatcher<Part> {
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param header Header name
    * @param matcher Header value matcher

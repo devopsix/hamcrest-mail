@@ -5,14 +5,14 @@ import javax.mail.Part;
 import org.hamcrest.Matcher;
 
 /**
- * <p>A matcher for a named date header.</p>
+ * A matcher for a named date header.
  *
  * @author devopsix
  */
 public class PartHasDateHeader extends AbstractDateHeaderMatcher<Part> {
 
   /**
-   * <p>Creates a new instance.</p>
+   * Creates a new instance.
    *
    * @param header Header name
    * @param matcher Header value matcher
