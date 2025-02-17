@@ -1,5 +1,9 @@
 # Hamcrest Mail Changes
 
+## Version 2.0.8 (18 February 2025)
+
+* Dependencies updated
+
 ## Version 2.0.7 (7 August 2024)
 
 * Update to Hamcrest 3.0
