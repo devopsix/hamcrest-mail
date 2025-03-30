@@ -1,6 +1,6 @@
 # Hamcrest Mail Changes
 
-## Version 2.0.8 (18 February 2025)
+## Version 2.0.8 (30 March 2025)
 
 * Dependencies updated
 
