@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.11](https://github.com/devopsix/hamcrest-mail/compare/v2.0.10...v2.0.11) (2026-05-06)
+
+
+### Dependencies
+
+* Bump actions/create-github-app-token from 3.0.0 to 3.1.1 ([#180](https://github.com/devopsix/hamcrest-mail/issues/180)) ([ab0cc31](https://github.com/devopsix/hamcrest-mail/commit/ab0cc312a8767bc9f906bb3ecf66c9bb8877b4cc))
+* Bump com.puppycrawl.tools:checkstyle from 13.4.0 to 13.4.1 ([#183](https://github.com/devopsix/hamcrest-mail/issues/183)) ([5c926b5](https://github.com/devopsix/hamcrest-mail/commit/5c926b591f1408e48295787c6e99359ef203f744))
+* Bump com.puppycrawl.tools:checkstyle from 13.4.1 to 13.4.2 ([#185](https://github.com/devopsix/hamcrest-mail/issues/185)) ([141e5d8](https://github.com/devopsix/hamcrest-mail/commit/141e5d88b221269c7d55628a2f7c24c5faf2a1b0))
+* Bump commons-io:commons-io from 2.21.0 to 2.22.0 ([#182](https://github.com/devopsix/hamcrest-mail/issues/182)) ([81b025a](https://github.com/devopsix/hamcrest-mail/commit/81b025abc6765ecde8f0972964665e02e64da949))
+* Bump dependabot/fetch-metadata from 2 to 3 ([#178](https://github.com/devopsix/hamcrest-mail/issues/178)) ([27ea18a](https://github.com/devopsix/hamcrest-mail/commit/27ea18a06e3d43deeaa77b3bf728a9eddd5ec5eb))
+* Bump googleapis/release-please-action from 4.4.0 to 5.0.0 ([#181](https://github.com/devopsix/hamcrest-mail/issues/181)) ([a148266](https://github.com/devopsix/hamcrest-mail/commit/a148266be917971b9ab92d08c22c144e0681d6b0))
+* Bump org.apache.james:apache-mime4j-core from 0.8.13 to 0.8.14 ([#184](https://github.com/devopsix/hamcrest-mail/issues/184)) ([003fd10](https://github.com/devopsix/hamcrest-mail/commit/003fd10478974b0add452fb6b9b72d3a8e6e4a49))
+
 ## [2.0.10](https://github.com/devopsix/hamcrest-mail/compare/v2.0.9...v2.0.10) (2026-03-30)
 
 
