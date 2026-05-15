@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.12](https://github.com/devopsix/hamcrest-mail/compare/v2.0.11...v2.0.12) (2026-05-15)
+
+
+### Dependencies
+
+* Bump actions/create-github-app-token from 3.1.1 to 3.2.0 ([#190](https://github.com/devopsix/hamcrest-mail/issues/190)) ([91dfce3](https://github.com/devopsix/hamcrest-mail/commit/91dfce31ec6ab07b4edc5e56afa86d6902f2b01e))
+* Bump com.sun.mail:jakarta.mail from 1.6.8 to 2.0.2 ([#189](https://github.com/devopsix/hamcrest-mail/issues/189)) ([0b8302e](https://github.com/devopsix/hamcrest-mail/commit/0b8302e3d73cb85a3d0af1f3ccfde05fe40e95c6))
+* Bump org.slf4j:slf4j-simple from 2.0.17 to 2.0.18 ([#191](https://github.com/devopsix/hamcrest-mail/issues/191)) ([a6ff374](https://github.com/devopsix/hamcrest-mail/commit/a6ff374597ecc7fc095129bb22c8edda2e8a11c8))
+
 ## [2.0.11](https://github.com/devopsix/hamcrest-mail/compare/v2.0.10...v2.0.11) (2026-05-06)
 
 
