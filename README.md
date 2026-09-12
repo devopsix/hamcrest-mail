@@ -12,22 +12,24 @@ The [assertj-mail][] sister project provides a set of AssertJ assertions with si
 ## Usage
 To use Hamcrest Mail in a Maven project add a dependency on `org.devopsix:hamcrest-mail` (for Java EE 8 / javax.mail) or `org.devopsix:hamcrest-mail-jakarta` (for Jakarta EE 9+ / jakarta.mail) to the pom.xml file.
 
+<!-- x-release-please-start-version -->
 ```xml
 <!-- Maven coordinates for Java EE 8 / javax.mail -->
 <dependency>
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail</artifactId>
-    <version>2.0.9</version>
+    <version>2.0.11</version>
     <scope>test</scope>
 </dependency>
 <!-- Maven coordinates for Jakarta EE 9+ / jakarta.mail -->
 <dependency>
     <groupId>org.devopsix</groupId>
     <artifactId>hamcrest-mail-jakarta</artifactId>
-    <version>2.0.9</version>
+    <version>2.0.11</version>
     <scope>test</scope>
 </dependency>
 ```
+<!-- x-release-please-end -->
 
 The matchers are available as static methods on the `MailMatchers` class.
 
