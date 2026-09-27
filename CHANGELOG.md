@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.13](https://github.com/devopsix/hamcrest-mail/compare/v2.0.12...v2.0.13) (2026-09-27)
+
+
+### Dependencies
+
+* Bump org.apache.maven.plugins:maven-deploy-plugin ([#225](https://github.com/devopsix/hamcrest-mail/issues/225)) ([0c03d0b](https://github.com/devopsix/hamcrest-mail/commit/0c03d0b30e06d9c6a263b8dfe238f93097e5940c))
+* Bump org.codehaus.mojo:build-helper-maven-plugin ([#224](https://github.com/devopsix/hamcrest-mail/issues/224)) ([57e9819](https://github.com/devopsix/hamcrest-mail/commit/57e98198f06be4ba34226277127f427f286ab64a))
+* Bump org.slf4j:slf4j-simple from 2.0.19 to 2.0.20 ([#226](https://github.com/devopsix/hamcrest-mail/issues/226)) ([42977a6](https://github.com/devopsix/hamcrest-mail/commit/42977a6de5f286ae90015c7fbf3a27d518992e02))
+
 ## [2.0.12](https://github.com/devopsix/hamcrest-mail/compare/v2.0.11...v2.0.12) (2026-09-12)
 
 
