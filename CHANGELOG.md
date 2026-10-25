@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.13](https://github.com/devopsix/hamcrest-mail/compare/v2.0.12...v2.0.13) (2026-10-25)
+
+
+### Dependencies
+
+* Bump actions/create-github-app-token from 3.2.0 to 3.3.0 ([#231](https://github.com/devopsix/hamcrest-mail/issues/231)) ([169b65f](https://github.com/devopsix/hamcrest-mail/commit/169b65f59124364c98f9a9d7b15c0b95b34c7217))
+* Bump com.github.spotbugs:spotbugs-maven-plugin ([#230](https://github.com/devopsix/hamcrest-mail/issues/230)) ([f11d1a1](https://github.com/devopsix/hamcrest-mail/commit/f11d1a1070465ce565ee3a5bfe70f22ad89d2416))
+* Bump com.puppycrawl.tools:checkstyle from 14.1.0 to 14.3.0 ([#229](https://github.com/devopsix/hamcrest-mail/issues/229)) ([6d7d4cc](https://github.com/devopsix/hamcrest-mail/commit/6d7d4cc72e9948d63c26bffb3144fc3c187a8b67))
+* Bump org.apache.maven.plugins:maven-deploy-plugin ([#225](https://github.com/devopsix/hamcrest-mail/issues/225)) ([0c03d0b](https://github.com/devopsix/hamcrest-mail/commit/0c03d0b30e06d9c6a263b8dfe238f93097e5940c))
+* Bump org.codehaus.mojo:build-helper-maven-plugin ([#224](https://github.com/devopsix/hamcrest-mail/issues/224)) ([57e9819](https://github.com/devopsix/hamcrest-mail/commit/57e98198f06be4ba34226277127f427f286ab64a))
+* Bump org.mockito:mockito-core from 5.23.0 to 5.24.0 ([#228](https://github.com/devopsix/hamcrest-mail/issues/228)) ([e417832](https://github.com/devopsix/hamcrest-mail/commit/e4178328cda15a31829908a0ff92b655aa0d1361))
+* Bump org.slf4j:slf4j-simple from 2.0.19 to 2.0.20 ([#226](https://github.com/devopsix/hamcrest-mail/issues/226)) ([42977a6](https://github.com/devopsix/hamcrest-mail/commit/42977a6de5f286ae90015c7fbf3a27d518992e02))
+* Bump org.sonatype.central:central-publishing-maven-plugin ([#232](https://github.com/devopsix/hamcrest-mail/issues/232)) ([b950a0c](https://github.com/devopsix/hamcrest-mail/commit/b950a0c01f71f82ecf3ab94f4b74895f16486439))
+
 ## [2.0.12](https://github.com/devopsix/hamcrest-mail/compare/v2.0.11...v2.0.12) (2026-09-12)
 
 
